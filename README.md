@@ -1,3 +1,6 @@
+# devUniversities
+Web development project repository using Angular for the visualization of university rankings, this information will be loaded from an admin role through an Excel file.
+
 # DevUniversities
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.
