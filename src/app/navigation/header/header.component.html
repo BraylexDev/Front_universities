@@ -5,10 +5,11 @@
         [opened]="false">
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list color="primary">
-        <a mat-list-item href="/home">Home</a>
-        <a mat-list-item href="/about">About Us</a>
-        <a mat-list-item href="/universities">Universities</a>
-        <a mat-list-item href="/contact">Contact Us</a>
+        <a mat-list-item routerLink="/home">Home</a>
+        <a mat-list-item routerLink="/about">About Us</a>
+        <a mat-list-item routerLink="/ranking">Rankings</a>
+        <a mat-list-item routerLink="/universities">Universities</a>
+        <a mat-list-item routerLink="/contact">Contact Us</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -22,23 +23,24 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <div class="uno">
-          <a href="">
+          <a routerLink="">
             <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="100px" style="cursor: hand;">
           </a>
         </div>
         <div class="dos" *ngIf="!(isHandset$ | async)">
           <ul>
-            <li><a [routerLink]="['home']" routerLinkActive="active" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" href="/home">Home</a></li>
-            <li><a [routerLink]="['about']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" href="/about">About Us</a></li>
-            <li><a [routerLink]="['universities']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" href="/universities">Universities</a></li>
-            <li><a [routerLink]="['contact']"      [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" href="/contact">Contact Us</a></li>
+            <li><a class="navb" [routerLink]="['home']" routerLinkActive="active" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Home</a></li>
+            <li><a class="navb" [routerLink]="['about']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >About Us</a></li>
+            <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Rankings</a></li>
+            <li><a class="navb" [routerLink]="['universities']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Universities</a></li>
+            <li><a class="navb" [routerLink]="['contact']"      [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Contact Us</a></li>
           </ul>
         </div>
         <div class="tres">
-          <mat-slide-toggle [(ngModel)]="isDarkTheme" labelPosition="before" (change)="storeThemeSelection()">
+          <!-- <mat-slide-toggle [(ngModel)]="isDarkTheme" labelPosition="before" (change)="storeThemeSelection()">
             <mat-icon *ngIf="isDarkTheme">bedtime</mat-icon>
             <mat-icon *ngIf="!isDarkTheme">light_mode</mat-icon>
-          </mat-slide-toggle>
+          </mat-slide-toggle> -->
           <div [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" class="line"></div>
           <button
             type="button"

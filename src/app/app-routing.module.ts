@@ -5,12 +5,14 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { UniversitiesComponent } from './universities/universities.component';
 import { ContactComponent } from './contact/contact.component';
+import { RankingComponent } from './ranking/ranking.component';
 
 const routes: Routes = [
-  { path: 'about', component: AboutComponent},
-  { path: 'home', component: HomeComponent},
-  { path: 'universities', component: UniversitiesComponent},
-  { path: 'contact', component: ContactComponent},
+  { path: 'about', component: AboutComponent, data: { breadcrumb: 'about' }},
+  { path: 'home', component: HomeComponent, data: { breadcrumb: 'home' }},
+  { path: 'ranking', component: RankingComponent, data: { breadcrumb: 'ranking' }},
+  { path: 'universities', component: UniversitiesComponent, data: { breadcrumb: 'universities' }},
+  { path: 'contact', component: ContactComponent, data: { breadcrumb: 'contact' }},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

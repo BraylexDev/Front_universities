@@ -1,37 +1,94 @@
-<div class="container">
-    <!--
-        Imagen
-    -->
-    <div class="containerImage">
-        <h1>RANKING OF UNIVERSITIES IN THE EMIRATES</h1>
-        <img src="../../assets/images/image6.jpeg" alt="image university">
+<section class="container">
+    <div class="main">
+        <div class="detail">
+            <h1>Academic <span style="color:#f9532d;">Ranking</span> of Arab Universities </h1>
+            <p>The Academic Ranking of World Universities (ARWU) is recognized as the precursor of global university rankings and the most trustworthy one. ARWU presents the world's 
+                top 1000 research universities annually based on transparent methodology and objective third-party data.
+            </p>
+        </div>
+        <div class="img-sec">
+            <div class="images">
+                <img src="../../assets/images/ranking.jpeg" alt="" class="img-w">
+            </div>
+        </div>
     </div>
-    <!--
-        Buscador por universidad
-    -->
-    <div class="searcher">
-        <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>University</mat-label>
-                <input matInput
-                    aria-label="State"
-                    [matAutocomplete]="auto"
-                    [formControl]="stateCtrl">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-                        <img alt="Flag Country" class="example-option-img" [src]="state.flag" height="25">
-                        <span>{{state.name}}</span> |
-                        <small>Students: {{state.population}}</small>
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </form>
-        <button matSuffix mat-button color="accent" style="background-color: black; height: 55px; z-index: 0;"><mat-icon style="font-size: 20px;">search</mat-icon>Search</button>
+</section>
+<div class="line"></div>
+<section class="infoRanking">
+    <div class="title">
+        <span class="pre">Ranking</span>
+        <h1>Top 10 Universities</h1>
     </div>
-    <!--
-        Tarjetas de informacion sobre la página
-    -->
-    <div>
-        
+    <div class="tableRanking">
+        <div class="r">
+            <p>This is this year's top 10 universities:</p>
+        </div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <!-- Position Column -->
+            <ng-container matColumnDef="demo-position">
+                <th mat-header-cell *matHeaderCellDef> Position </th>
+                <td mat-cell *matCellDef="let element"
+                    [ngClass] = "{'gold': element.position == '1', 'plate': element.position == '2', 'bronze': element.position == '3' }"> {{element.position}}</td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="demo-name">
+                <th mat-header-cell *matHeaderCellDef> Institution </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            
+            <!-- Weight Column -->
+            <ng-container matColumnDef="demo-weight">
+                <th mat-header-cell *matHeaderCellDef> Country </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+            </ng-container>
+            
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="demo-symbol">
+                <th mat-header-cell *matHeaderCellDef> Score </th>
+                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;"
+            ></tr>
+        </table>
     </div>
-</div>
+    <div class="moreRanking">
+        <a routerLink="/ranking">View Complete Ranking ></a>
+    </div>
+</section>
+<div class="line"></div>
+<section class=" news">
+    <div class="title">
+        <span class="pre">Recent News</span>
+    </div>
+    <div class="card">
+        <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions" [circular]="true">
+            <ng-template let-product pTemplate="item">
+                <div class="product-item">
+                    <div class="product-item-content">
+                        <div class="mb-3">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="product-image" />
+                        </div>
+                        <div>
+                            <p class="mb-1">{{ product.name }}</p>
+                            <!-- <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6> -->
+                            <a routerLink="">
+                                <div>
+                                    View More
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+    <div></div>
+</section>
+<div class="line"></div>

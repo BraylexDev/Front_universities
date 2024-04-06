@@ -16,7 +16,7 @@
 //Define a Light Theme
 $DevUniversities-primary: mat.define-palette(mat.$gray-palette, 300);
 $DevUniversities-accent: mat.define-palette(mat.$orange-palette, A200, A100, A400);
-$DevUniversities-warn: mat.define-palette(mat.$red-palette);
+$DevUniversities-warn: mat.define-palette(mat.$grey-palette);
 
 $DevUniversities-theme: mat.define-light-theme((
   color: (

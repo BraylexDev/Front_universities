@@ -1,0 +1,41 @@
+.line{
+    border-top: 1px solid gray ;
+    opacity: .3;;
+}
+
+.info1{
+    font-family: 'Outfit', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 0 8.4rem;
+}
+.info1 h1{
+    font-size: 2rem;
+    color: #f9532d;
+    margin-bottom: 0;
+}
+.info1 p{
+    line-height: 1.5;
+    font-size: 1.15rem;
+}
+
+.title{
+    background: rgb(199,199,199);
+    background: linear-gradient(0deg, rgba(199,199,199,1) 7%, rgba(255,255,255,0.7679446778711485) 82%);
+    padding-bottom: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+    .info1{
+        padding: 0 4.4rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .info1{
+        padding: 0 1.6rem;
+    }
+}
+
+@media screen and (max-width:600px) {
+
+}
