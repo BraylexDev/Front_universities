@@ -95,13 +95,14 @@ export class RankingComponent {
         {
         next:(test2: any) => {
           this.test = test2;
-          console.log(this.test)
+          /* console.log(this.test) */
+          this.loading=false;
         },
         error: (err: any) => {
           console.error(err);
         },
         complete: () => {
-          console.log("Completed")
+          /* console.log("Completed") */
         }
       }
     );
@@ -110,11 +111,11 @@ export class RankingComponent {
     this.breadcrumbs = this.breadcrumbService.breadcrumbs;
 
     //table
-    this.getRankings(2023);
+    /* this.getRankings(2023);
 
     this.rankingService.getYear(2023).subscribe(
       data => this.rankings = data
-    );
+    ); */
 
     this.categories = [
       { label: 'Information & Communication Technologies', value: 'Information & Communication Technologies' },
@@ -128,12 +129,12 @@ export class RankingComponent {
     ];
   }
 
-  getRankings(year: number): any{
+  /* getRankings(year: number): any{
     this.rankingService.getRankingLarge(year);
     this.loading = false;
   }
 
   clear(table: Table) {
     table.clear();
-  }
+  } */
 }

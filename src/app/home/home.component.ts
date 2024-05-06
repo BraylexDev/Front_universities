@@ -128,13 +128,13 @@ export class HomeComponent {
     this.testService.getRanking()
       .subscribe(res => {
         this.test = Object.values(res).slice(0,10);
-        console.log(this.test);
+        /* console.log(this.test); */
         this.loading = false;
       })
 
-    this.rankingService.getTop(2023).subscribe(
+    /* this.rankingService.getTop(2023).subscribe(
       data => this.rankings = data
-    )
+    ) */
 
       this.productService.getProductsSmall().then((products) => {
           this.products = products;
