@@ -40,16 +40,15 @@ nav{
 
 
 /* table Rankings  */
-:host ::ng-deep {
-    .p-progressbar {
-        height: .5rem;
-        background-color: #D8DADC;
-    
-        .p-progressbar-value {
-            background-color: #607D8B;
-        }
-    }
+/*:host ::ng-deep {*/
+.p-progressbar {
+    height: .5rem;
+    background-color: #D8DADC;
 }
+.p-progressbar-value {
+    background-color: #607D8B;
+}
+
 td{
     color: black;
     cursor: default;

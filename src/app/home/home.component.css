@@ -247,28 +247,26 @@ a{
   border-radius: 10px;
   /* margin-bottom: 30px; */
 }
-:host ::ng-deep {
-  .product-item {
-      .product-item-content {
-          border: 1px solid var(--surface-d);
-          border-radius: 3px;
-          margin: 1rem;
-          text-align: center;
-          transition: all 600ms ease;
-          cursor: pointer;
-          /* padding: 2rem 0; */
-      }
-  
-      .product-image {
-          width: 100%;
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-      }
-  }
-  .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-    background-color: #f9532d;
-  }
-    
+/*ng-deep*/
+/*.product-item {*/
+.product-item-content {
+    border: 1px solid var(--surface-d);
+    border-radius: 3px;
+    margin: 1rem;
+    text-align: center;
+    transition: all 600ms ease;
+    cursor: pointer;
 }
+
+.product-image {
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: #f9532d;
+}  
+/*End ng-depp*/
 
 .product-item-content p{
   line-height: 1.5;
