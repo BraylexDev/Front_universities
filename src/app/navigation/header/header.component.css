@@ -69,6 +69,7 @@ a{
 .dos > ul > li > a{
   display: inline-flex;
   font-size: 18px;
+  cursor: pointer;
 }
 
 .tres{
@@ -98,3 +99,20 @@ a{
   color: rgb(255, 0, 0);
   border-bottom: 3px solid red;
 }
+
+/* language */
+
+.container_lang{
+  display: flex;
+  direction: row;
+  align-items: center;
+
+}
+
+.lang:focus{
+  border: transparent;
+  outline: 0;
+  box-shadow: none;
+}
+
+/* end language */

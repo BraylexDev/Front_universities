@@ -8,12 +8,6 @@ import { ContactComponent } from './contact/contact.component';
 import { RankingComponent } from './ranking/ranking.component';
 
 const routes: Routes = [
-  { path: 'about', component: AboutComponent, data: { breadcrumb: 'about' }},
-  { path: 'home', component: HomeComponent, data: { breadcrumb: 'home' }},
-  { path: 'ranking', component: RankingComponent, data: { breadcrumb: 'ranking' }},
-  { path: 'universities', component: UniversitiesComponent, data: { breadcrumb: 'universities' }},
-  { path: 'contact', component: ContactComponent, data: { breadcrumb: 'contact' }},
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -43,8 +43,6 @@ import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 
 import { ButtonModule } from 'primeng/button';
-import { ScrollToTopComponent } from './navigation/scroll-to-top/scroll-to-top.component';
-import { UniversityComponent } from './universities/university/university.component';
 import { RankingYearComponent } from './ranking/ranking-year/ranking-year.component';
 import { NewsComponent } from './news/news/news.component';
 import { DetailNewComponent } from './news/detail-new/detail-new.component';
@@ -55,11 +53,25 @@ import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { SliderModule } from 'primeng/slider';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CustomerserviceService } from './service/customer/customerservice.service';
 import { ProductService } from './service/product.service';
 import { InputTextModule } from 'primeng/inputtext';
 
+/* Scroll Top */
+import { ScrollTopModule } from 'primeng/scrolltop';
+
+
+/* Translate */
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AdminComponent } from './admin/admin.component';
+import { AdminRoutingModule } from './admin/admin-routing.module';
+import { ClientRoutingModule } from './navigation/header/client-routing.module';
+
+
+/* admin */
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -71,15 +83,16 @@ import { InputTextModule } from 'primeng/inputtext';
     ContactComponent,
     FooterComponent,
     RankingComponent,
-    ScrollToTopComponent,
-    UniversityComponent,
     RankingYearComponent,
     NewsComponent,
-    DetailNewComponent
+    DetailNewComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AdminRoutingModule,
+    ClientRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
@@ -105,9 +118,22 @@ import { InputTextModule } from 'primeng/inputtext';
     DropdownModule,
     SliderModule,
     HttpClientModule,
-    InputTextModule
+    InputTextModule,
+    ScrollTopModule,
+    SidebarModule,
+
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    })
   ],
   providers: [ CustomerserviceService, ProductService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

@@ -1,103 +1,143 @@
-<!-- <nav>
-  <ng-container *ngFor="let breadcrumb of breadcrumbs; let last = last">
-    <ng-container *ngIf="!last">
-      <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> &gt;
-    </ng-container>
-    <ng-container *ngIf="last">
-      {{ breadcrumb.label }}
-    </ng-container>
-  </ng-container>
-</nav> -->
-<div class="line"></div>
-<section class="detail">
-  <div class="title">
-    <h1>Arab Ranking For Universities</h1>
-    <p>The Academic Ranking of World Universities (ARWU) was 
-      first published in June 2003 by the Center for World-Class Universities (CWCU), Graduate School 
-      of Education (formerly the Institute of Higher Education) of Shanghai Jiao Tong University, China, and 
-      updated on an annual basis. Since 2009 the Academic Ranking of World Universities (ARWU) has been 
-      published and copyrighted by ShanghaiRanking Consultancy. ShanghaiRanking Consultancy is a fully 
-      independent organization on higher education intelligence and not legally subordinated to any 
-      universities or government agencies. ARWU uses six objective indicators to rank world universities,
-      including the number of alumni and staff winning Nobel Prizes and Fields Medals, number of highly 
-      cited researchers selected by Clarivate, number of articles published in journals of Nature and Science,
-      number of articles indexed in Science Citation Index Expanded™ and Social Sciences Citation Index™ in
-      the Web of Science™, and per capita performance of a university. More than 2500 universities are
-      actually ranked by ARWU every year and the best 1000 are published.</p>
-  </div>
+<section dir="auto" class="detail">
+    <div class="title">
+        <h1>{{'ranking_title' | translate}}</h1>
+    </div>
 </section>
 <div class="line"></div>
-<section class="rankings">
-  <div class="card">
-    <p-table
-        #dt1
-        [value]="customers"
-        dataKey="id"
-        [rows]="10"
-        [showCurrentPageReport]="true"
-        [rowsPerPageOptions]="[10, 25, 50]"
-        [loading]="loading"
-        [paginator]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-        >
-        <ng-template pTemplate="caption" let-state>
-            <div class="flex head">
-                <span>List of Universities</span>
-                <span class="p-input-icon-right ml-auto">
-                    <i class="pi pi-search"></i>
-                    <input class="s" pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')" placeholder="Search a University" />
-                </span>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="min-width:15rem">
-                    <div class="flex align-items-center">
-                        Position
-                    </div>
-                </th>
-                <th style="min-width:15rem">
-                    <div class="flex align-items-center">
-                        Institution
-                    </div>
-                </th>
-                <th style="min-width:15rem">
-                    <div class="flex align-items-center">
-                        Country
-                    </div>
-                </th>
-                <th style="min-width:10rem">
-                    <div class="flex align-items-center">
-                        Score
-                    </div>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-customer>
-            <tr>
-                <td>
-                    {{ customer.name }}
-                </td>
-                <td>
-                    <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" style="width: 20px" />
-                    <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span>
-                </td>
-                <td>
-                    <img [alt]="customer.representative.name" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}" width="32" style="vertical-align: middle" />
-                    <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span>
-                </td>
-                <td>
-                    {{ customer.date | date: 'MM/dd/yyyy' }}
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="7">No customers found.</td>
-            </tr>
-        </ng-template>
-    </p-table>
-  </div>
+<section dir="auto" class="rankings">
+    <div>
+        <p>{{'ranking_parag' | translate}}
+        </p>
+    </div>
+    <div class="card">
+        <p-table dir="auto" #dt1 [value]="test" dataKey="id" [rows]="20" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[20, 50, 100]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}"
+            [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'subcategory2', 'country', 'score']">
+            <ng-template pTemplate="caption" let-state>
+                <div class="flex head">
+                    <!-- <span>{{'ranking_table_description2' | translate}}</span> -->
+                    <p-columnFilter field="category" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="categories" (onChange)="filter($event.value)" placeholder="Search a Category" [showClear]="true">
+                                <ng-template let-option pTemplate="item">
+                                    {{option.value}}
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
+                </div>
+                <!-- <span>_______________________</span> -->
+                <div class="flex head">
+                    <span>{{'ranking_table_description' | translate}}</span>
+                    <span class="p-input-icon-right ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input class="s" pInputText type="text"
+                            (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                            placeholder="{{'ranking_table_search' | translate}}" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="position" style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_position' | translate}}
+                            <p-sortIcon field="position"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th style="min-width:5rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_name' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:5rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_institution' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:8rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_category' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:8rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_subcategory' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:8rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_subcategory2' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:5rem; text-align: center;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_country' | translate}}
+                        </div>
+                    </th>
+                    <th pSortableColumn="score" style="min-width:5rem; text-align: center; padding-inline: 0;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_score' | translate}}
+                            <p-sortIcon field="score"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th style="min-width:5rem; text-align: center; padding-inline: 0;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_profile' | translate}}
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rankingTest>
+                <tr>
+                    <td style="text-align: center; border-right: 1px solid currentColor;">
+                        <img [ngClass] = "{'gold': rankingTest.position == '1'}" src=""
+                            alt="">  
+                        <img [ngClass] = "{'plate': rankingTest.position == '2'}" src=""
+                            alt="">  
+                        <img [ngClass] = "{'bronze': rankingTest.position == '3'}" src=""
+                            alt="">  
+                        <span [ngClass] = "{'number': rankingTest.position == '1' || rankingTest.position == '2'
+                            || rankingTest.position == '3' }">
+                            {{rankingTest.position}}
+                        </span>
+                    </td>
+                    <td>
+                        {{ rankingTest.name }}
+                    </td>
+                    <td class="name">
+                        {{ rankingTest.university }}
+                    </td>
+                    <td>
+                        {{rankingTest.category}}
+                    </td>
+                    <td>
+                        {{rankingTest.subcategory}}
+                    </td>
+                    <td>
+                        {{rankingTest.subcategory2}}
+                    </td>
+                    <td style="text-align: center;">
+                        <span [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="font-size: 2rem"></span>
+                        <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                            [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="width: 20px" /> -->
+                        <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.country }}</span>
+                    </td>
+                    <td style="text-align: center;">
+                        {{ rankingTest.score }}
+                    </td>
+                    <td>
+                        <a target="_blank" href= {{rankingTest.profile}}>View Profile</a>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">{{'ranking_no_found' | translate}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
 </section>
 <div class="line"></div>

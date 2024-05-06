@@ -1,9 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 
 import { ProductService } from '../service/product.service';
 import { Product } from '../domain/product';
+import { Ranking } from '../domain/ranking';
+import { RankingserviceService } from '../service/ranking/rankingservice.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Scroller } from 'primeng/scroller';
+import { TestServiceService } from '../service/testRanking/test-service.service';
+import { RankingTest } from '../domain/rankingTest';
 
 export interface State {
   flag: string;
@@ -12,23 +18,25 @@ export interface State {
 }
 /* info tabla */
 export interface PeriodicElement {
-  name: string;
+  category: string;
+  subcategory: string;
+  university: string;
   position: number;
-  weight: number;
-  symbol: string;
+  country: string;
+  score: number;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen Helium saafsf sdadadasda', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {position: 1, university: 'Suspendisse Aliquet Institute', category: 'Information & Communication on Technologies',  subcategory:'Artificial Intelligence', country: 'Togo', score: 256},
+  {position: 2, university: 'Aenean Eget Metus Corp', category: 'Economics and Business',  subcategory:'', country: 'uzbekistán', score: 230},
+  {position: 3, university: 'Molestie Dapibus Ligula Foundation', category: 'Social Sciences',  subcategory:'',country: 'Irán', score: 222},
+  {position: 4, university: 'Non Luctus Sit Incorporated', category: 'Physics',  subcategory:'Applied Mathematics',country: 'Bulgaria', score: 210},
+  {position: 5, university: 'Ullamcorper Velit In Institute', category: 'Neuroscience',  subcategory:'',country: 'Bulgaria', score: 203},
+  {position: 6, university: 'Ut Odio LLC', category:'Geosciences',  subcategory:' ',country: 'Brunei', score: 170},
+  {position: 7, university: 'Cursus LLP', category: 'Clinical Medicine',  subcategory:' ',country: 'Laos', score: 156},
+  {position: 8, university: 'Ut Sem LLP', category: 'Physics',  subcategory:'Applied Mathematics',country: 'Togo', score: 106},
+  {position: 9, university: 'Scelerisque Consulting', category: 'Information & Communication on Technologies',  subcategory:'Artificial Intelligence',country: 'Togo', score: 96},
+  {position: 10, university: 'Morbi Metus Ltd', category: 'Information & Communication on Technologies',  subcategory:'Artificial Intelligence', country: 'Falkland Islands', score: 86},
 ];
 
 @Component({
@@ -76,15 +84,28 @@ export class HomeComponent {
 
 /* Info tabla  */
 
-  displayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol'];
+  test: RankingTest[] = [];
+  loading: boolean = true;
+
+  rankings: Ranking[] = [];
+
+  displayedColumns: string[] = ['position', 'university', 'category', 'subcategory', 'country', 'score'];
   dataSource = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
 
-  constructor( private productService: ProductService ) {
+  currentLanguage = 'en';
+  constructor( private productService: ProductService, private rankingService: RankingserviceService,  public translate: TranslateService, private testService: TestServiceService) {
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
       startWith(''),
       map(state => (state ? this._filterStates(state) : this.states.slice())),
     );
+    translate.addLangs(['en', 'ar']);
+    const storedLang = localStorage.getItem('language');
+    const defaultLang = storedLang || 'en';
+    translate.setDefaultLang(defaultLang);
+    translate.use(defaultLang);
+    localStorage.setItem('language', defaultLang);
+    this.currentLanguage = defaultLang;
   }
 
   private _filterStates(value: string): State[] {
@@ -92,13 +113,29 @@ export class HomeComponent {
 
     return this.states.filter(state => state.name.toLowerCase().includes(filterValue));
   }
+  /* For table top 10 */
+
+
 
   //for carousel of news
   products: Product[] = [];
 
   responsiveOptions: any[] = [];
+  public stocklist: any;
 
   ngOnInit() {
+    //test
+    this.testService.getRanking()
+      .subscribe(res => {
+        this.test = Object.values(res).slice(0,10);
+        console.log(this.test);
+        this.loading = false;
+      })
+
+    this.rankingService.getTop(2023).subscribe(
+      data => this.rankings = data
+    )
+
       this.productService.getProductsSmall().then((products) => {
           this.products = products;
       });
@@ -120,6 +157,10 @@ export class HomeComponent {
               numScroll: 1
           }
       ];
+  }
+
+  goToProfile(){
+    
   }
   
 }

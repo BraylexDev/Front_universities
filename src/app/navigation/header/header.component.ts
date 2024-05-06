@@ -1,6 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
+/* translate */
+import { TranslateService } from '@ngx-translate/core';
+import { Scroller } from 'primeng/scroller';
+
 
 @Component({
   selector: 'app-header',
@@ -8,25 +13,66 @@ import { Observable, map, shareReplay } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
+
+  @ViewChild('sc')
+  sc!: Scroller;
+
   isDarkTheme: boolean = false;
-  themeActivate: any = this.isDarkTheme === true ? "bedtime": "light_mode";
-  
+  themeActivate: any = this.isDarkTheme === true ? "bedtime" : "light_mode";
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
+  
+  currentLanguage = 'en';
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
-
-  ngOnInit(){
-    this.isDarkTheme = localStorage.getItem('theme') === "Dark" ? true: false;
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, public translate: TranslateService) {
+    translate.addLangs(['en', 'ar']);
+    const storedLang = localStorage.getItem('language');
+    const defaultLang = storedLang || 'en';
+    translate.setDefaultLang(defaultLang);
+    translate.use(defaultLang);
+    localStorage.setItem('language', defaultLang);
+    this.currentLanguage = defaultLang;
   }
 
-  storeThemeSelection(){
-    localStorage.setItem('theme', this.isDarkTheme ? "Dark":"Light");
-  } 
+  ngOnInit() {
+    this.isDarkTheme = localStorage.getItem('theme') === "Dark" ? true : false;
+  }
+
+  storeThemeSelection() {
+    localStorage.setItem('theme', this.isDarkTheme ? "Dark" : "Light");
+  }
+
+  /* changeRoute(evt: MouseEvent, name: string) {
+    evt.preventDefault();
+
+    let navcfg = [{ outlets: { secondary: name } }];
+
+    this.router.navigate(navcfg, {
+      skipLocationChange: true,
+    });
+  } */
+
+  goContacts(){
+    this.router.navigate(['/','contact']);
+  }
+
+  /* Change language */
+  switchLanguage(language: string) {
+    this.translate.use(language);
+    localStorage.setItem('language', language);
+    /* this.common.lang = language; */
+    this.currentLanguage = language;
+  }
+
+  
+  reset() {
+    this.sc.scrollToIndex(0, 'smooth');
+  }
 }
 
 

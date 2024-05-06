@@ -1,10 +1,9 @@
-<section class="container">
+<section dir="auto" class="container">
     <div class="main">
         <div class="detail">
-            <h1>Academic <span style="color:#f9532d;">Ranking</span> of Arab Universities </h1>
-            <p>The Academic Ranking of World Universities (ARWU) is recognized as the precursor of global university rankings and the most trustworthy one. ARWU presents the world's 
-                top 1000 research universities annually based on transparent methodology and objective third-party data.
-            </p>
+            <h1>{{'home_title' | translate}}</h1>
+            <!-- <h1>Academic <span style="color:#f9532d;">Ranking</span> of Arab Universities </h1> -->
+            <p>{{'home_parag' | translate}}</p>
         </div>
         <div class="img-sec">
             <div class="images">
@@ -14,58 +13,132 @@
     </div>
 </section>
 <div class="line"></div>
-<section class="infoRanking">
+<section dir="auto" class="infoRanking">
     <div class="title">
-        <span class="pre">Ranking</span>
-        <h1>Top 10 Universities</h1>
+        <span class="pre">{{'home_title_section_one' | translate}}</span>
+        <h1>{{'home_subtitle_section_one' | translate}}</h1>
     </div>
-    <div class="tableRanking">
-        <div class="r">
-            <p>This is this year's top 10 universities:</p>
-        </div>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-            <!-- Position Column -->
-            <ng-container matColumnDef="demo-position">
-                <th mat-header-cell *matHeaderCellDef> Position </th>
-                <td mat-cell *matCellDef="let element"
-                    [ngClass] = "{'gold': element.position == '1', 'plate': element.position == '2', 'bronze': element.position == '3' }"> {{element.position}}</td>
-            </ng-container>
-            
-            <!-- Name Column -->
-            <ng-container matColumnDef="demo-name">
-                <th mat-header-cell *matHeaderCellDef> Institution </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-            
-            <!-- Weight Column -->
-            <ng-container matColumnDef="demo-weight">
-                <th mat-header-cell *matHeaderCellDef> Country </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-            </ng-container>
-            
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="demo-symbol">
-                <th mat-header-cell *matHeaderCellDef> Score </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-            </ng-container>
-            
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr
-                mat-row
-                (click)="clickedRows.add(row)"
-                [class.demo-row-is-clicked]="clickedRows.has(row)"
-                *matRowDef="let row; columns: displayedColumns;"
-            ></tr>
-        </table>
+
+    <div class="card">
+        <p-table dir="auto" #dt1 [value]="test" dataKey="id" [showCurrentPageReport]="true"
+            [loading]="loading"
+            currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}"
+            [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'subcategory2', 'country', 'score']">
+            <ng-template pTemplate="caption" let-state>
+                <p>{{'home_parag_section_one' | translate}}</p>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="position" style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_position' | translate}}
+                            <p-sortIcon field="position"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th style="min-width:5rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_name' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:5rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_institution' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:8rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_category' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:8rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_subcategory' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:8rem;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_subcategory2' | translate}}
+                        </div>
+                    </th>
+                    <th style="min-width:5rem; text-align: center;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_country' | translate}}
+                        </div>
+                    </th>
+                    <th pSortableColumn="score" style="min-width:5rem; text-align: center; padding-inline: 0;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_score' | translate}}
+                            <p-sortIcon field="score"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th style="min-width:5rem; text-align: center; padding-inline: 0;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_profile' | translate}}
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rankingTest>
+                <tr>
+                    <td style="text-align: center; border-right: 1px solid currentColor;">
+                        <img [ngClass] = "{'gold': rankingTest.position == '1'}" src=""
+                            alt="">  
+                        <img [ngClass] = "{'plate': rankingTest.position == '2'}" src=""
+                            alt="">  
+                        <img [ngClass] = "{'bronze': rankingTest.position == '3'}" src=""
+                            alt="">  
+                        <span [ngClass] = "{'number': rankingTest.position == '1' || rankingTest.position == '2'
+                            || rankingTest.position == '3' }">
+                            {{rankingTest.position}}
+                        </span>
+                    </td>
+                    <td>
+                        {{ rankingTest.name }}
+                    </td>
+                    <td class="name">
+                        {{ rankingTest.university }}
+                    </td>
+                    <td>
+                        {{rankingTest.category}}
+                    </td>
+                    <td>
+                        {{rankingTest.subcategory}}
+                    </td>
+                    <td>
+                        {{rankingTest.subcategory2}}
+                    </td>
+                    <td style="text-align: center;">
+                        <span [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="font-size: 2rem"></span>
+                        <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                            [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="width: 20px" /> -->
+                        <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.country }}</span>
+                    </td>
+                    <td style="text-align: center;">
+                        {{ rankingTest.score }}
+                    </td>
+                    <td>
+                        <a target="_blank" href= {{rankingTest.profile}}>View Profile</a>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">{{'ranking_no_found' | translate}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
     <div class="moreRanking">
-        <a routerLink="/ranking">View Complete Ranking ></a>
+        <a routerLink="/ranking">{{'home_table_rank_more' | translate}}</a>
+        <!-- 
+            {{'' | translate}} 
+        -->
     </div>
 </section>
 <div class="line"></div>
 <section class=" news">
     <div class="title">
-        <span class="pre">Recent News</span>
+        <span class="pre">{{'home_title_section_two' | translate}} </span>
     </div>
     <div class="card">
         <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions" [circular]="true">
@@ -80,7 +153,7 @@
                             <!-- <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6> -->
                             <a routerLink="">
                                 <div>
-                                    View More
+                                    {{'home_news_option_view_more' | translate}}
                                 </div>
                             </a>
                         </div>

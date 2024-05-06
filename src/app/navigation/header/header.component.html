@@ -3,17 +3,17 @@
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'over'"
         [opened]="false">
-      <mat-toolbar>Menu</mat-toolbar>
+      <mat-toolbar>{{'nav_menu' | translate}}</mat-toolbar>
       <mat-nav-list color="primary">
-        <a mat-list-item routerLink="/home">Home</a>
-        <a mat-list-item routerLink="/about">About Us</a>
-        <a mat-list-item routerLink="/ranking">Rankings</a>
-        <a mat-list-item routerLink="/universities">Universities</a>
-        <a mat-list-item routerLink="/contact">Contact Us</a>
+        <a mat-list-item routerLink="/home">{{'nav_home' | translate}}</a>
+        <a mat-list-item routerLink="/about">{{'nav_about' | translate}}</a>
+        <a mat-list-item routerLink="/ranking">{{'nav_rankings' | translate}}</a>
+        <a mat-list-item routerLink="/universities">{{'nav_universities' | translate}}</a>
+        <a mat-list-item routerLink="/contact">{{'nav_contact' | translate}}</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <mat-toolbar class="n" color="primary">
+      <mat-toolbar dir="auto" class="n" color="primary">
         <button
           type="button"
           aria-label="Toggle sidenav"
@@ -24,16 +24,17 @@
         </button>
         <div class="uno">
           <a routerLink="">
-            <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="100px" style="cursor: hand;">
+            <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="100px" style="cursor: hand; filter:contrast(3)">
           </a>
         </div>
         <div class="dos" *ngIf="!(isHandset$ | async)">
           <ul>
-            <li><a class="navb" [routerLink]="['home']" routerLinkActive="active" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Home</a></li>
-            <li><a class="navb" [routerLink]="['about']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >About Us</a></li>
-            <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Rankings</a></li>
-            <li><a class="navb" [routerLink]="['universities']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Universities</a></li>
-            <li><a class="navb" [routerLink]="['contact']"      [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Contact Us</a></li>
+            <li><a class="navb" [routerLink]="['home']" routerLinkActive="active" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_home' | translate}}</a></li>
+            <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_rankings' | translate}}</a></li>
+            <li><a class="navb" [routerLink]="['about']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_about' | translate}}</a></li>
+            <!-- <li><a class="navb" [routerLink]="['universities']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_news' | translate}}</a></li> -->
+            <!-- <li><a class="navb" [routerLink]="['contact']"      [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Contact Us</a></li> -->
+            <li><a class="navb" [routerLink]="['contact']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_contact' | translate}}</a></li>
           </ul>
         </div>
         <div class="tres">
@@ -41,17 +42,37 @@
             <mat-icon *ngIf="isDarkTheme">bedtime</mat-icon>
             <mat-icon *ngIf="!isDarkTheme">light_mode</mat-icon>
           </mat-slide-toggle> -->
-          <div [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" class="line"></div>
-          <button
+          <div [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" class="line"> </div>
+          <!-- <button
             type="button"
             mat-icon-button>
             <mat-icon aria-label="Change language">language</mat-icon>
-          </button>
+          </button> -->
+          <p> </p>
+          <div class="container_lang" style="padding-inline: 20px;">
+            <!-- <span [ngClass]="{'fi fi-us': translate.currentLang == 'en'}"></span>
+            <span [ngClass]="{'fi fi-ae': translate.currentLang == 'ar'}"></span> -->
+            <mat-icon aria-label="Change language">language</mat-icon>
+            <select name="" id="" class="lang" 
+              style="border: transparent; background-color: transparent;"
+              #selectedLang
+              (change)="switchLanguage(selectedLang.value)">
+              <option *ngFor="let language of translate.getLangs()"
+              [value]="language"
+              [selected]="language === translate.currentLang">
+                <span *ngIf="language == 'en'">English</span>
+                <span *ngIf="language == 'ar'">العربية</span>
+              <!-- <span [ngClass]="{'eng': language =='en'}">English</span>
+              <span [ngClass]="{'arab': language =='ar'}">العربية</span> -->
+              </option>
+            </select>
+          </div>
         </div>
       </mat-toolbar>
       <!-- Add Content Here -->
       <router-outlet></router-outlet>
       <app-footer *ngIf="!(isHandset$ | async)"></app-footer>
+      <p-scrollTop target="parent"></p-scrollTop>
     </mat-sidenav-content>
 </mat-sidenav-container>
   

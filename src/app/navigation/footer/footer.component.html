@@ -1,32 +1,33 @@
-<div class="footer">
+<div dir="auto" class="footer">
     
     <div class="top_container">
         <ul>
-            <h3>Site Map</h3>
-            <li routerLink="/home">Home</li>
-            <li routerLink="/about">About Us</li>
-            <li routerLink="/ranking">Rankings</li>
-            <li routerLink="/universities">Universities</li>
-            <li routerLink="/contact">Contact Us</li>
+            <h3>{{'foot_site_map' | translate}}</h3>
+            <li routerLink="/home">{{'nav_home' | translate}}</li>
+            <li routerLink="/about">{{'nav_about' | translate}}</li>
+            <li routerLink="/ranking">{{'nav_rankings' | translate}}</li>
+            <li routerLink="/universities">{{'nav_universities' | translate}}</li>
+            <li routerLink="/contact">{{'nav_contact' | translate}}</li>
         </ul>
         <div class="line"></div>
         <ul>
-            <h3>Contact Us</h3>
-            <li>FAQs</li>
-            <li>Facebook</li>
-            <li>Instagram</li>
+            <h3>{{'nav_contact' | translate}}</h3>
+            <li>{{'foot_faqs' | translate}}</li>
+            <li>{{'foot_facebook' | translate}}</li>
+            <li>{{'foot_instagram' | translate}}</li>
         </ul>
         <div class="line"></div>
         <ul>
-            <h3>Config</h3>
+            <h3>{{'foot_config' | translate}}</h3>
             <li class="lang">
                 <mat-icon aria-label="Change language">language</mat-icon>
-                <span>English (US)</span>
+                <span *ngIf="translate.currentLang == 'en'">English (EN)</span>
+                <span *ngIf="translate.currentLang == 'ar'">العربية (AE)</span>
             </li>
         </ul>
     </div>
     <div class="line2"></div>
     <div class="bottom">
-        <h5>Copyright © 2024. All Rights Reserved.</h5>
+        <h5>{{'foot_copyright' | translate}}</h5>
     </div>
 </div>
