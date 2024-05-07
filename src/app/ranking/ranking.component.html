@@ -6,11 +6,14 @@
 <div class="line"></div>
 <section dir="auto" class="rankings">
     <div>
-        <p>{{'ranking_parag' | translate}}
-        </p>
+        <p>{{'ranking_parag' | translate}}</p>
+    </div>
+    <div  class="methodology">
+        <a class="goMethodology" routerLink="/methodology"> {{'ranking_methodology' | translate}}</a>
+        <span style="padding-inline: 1rem;">></span>
     </div>
     <div class="card">
-        <p-table dir="auto" #dt1 [value]="test" dataKey="id" [rows]="20" [showCurrentPageReport]="true"
+        <p-table #dt1 [value]="test" dataKey="id" [rows]="20" [showCurrentPageReport]="true"
             [rowsPerPageOptions]="[20, 50, 100]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}"
             [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'subcategory2', 'country', 'score']">

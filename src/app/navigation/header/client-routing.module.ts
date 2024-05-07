@@ -7,6 +7,7 @@ import { UniversitiesComponent } from 'src/app/universities/universities.compone
 import { ContactComponent } from 'src/app/contact/contact.component'; 
 import { RankingComponent } from 'src/app/ranking/ranking.component'; 
 import { HeaderComponent } from './header.component';
+import { MethodologyComponent } from 'src/app/ranking/methodology/methodology.component';
 
 const routes: Routes = [
   { path: '', component: HeaderComponent, 
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent, data: { breadcrumb: 'about' }},
       { path: '', component: HomeComponent, data: { breadcrumb: 'home' }},
       { path: 'ranking', component: RankingComponent, data: { breadcrumb: 'ranking' }},
+      { path: 'methodology', component: MethodologyComponent},
       { path: 'universities', component: UniversitiesComponent, data: { breadcrumb: 'universities' }},
       { path: 'contact', component: ContactComponent, data: { breadcrumb: 'contact' }},
     ]

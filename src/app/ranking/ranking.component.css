@@ -38,6 +38,28 @@ nav{
     align-items: center;
 }
 
+[dir='rtl'] .methodology{
+    text-align: left;
+}
+
+.methodology{
+    background-color: white;
+    padding: 1rem;
+    text-align: right;
+    font-weight: bold;
+}
+
+.goMethodology:hover{
+    color: #f9532d;
+}
+
+a:link, a:visited{
+    color: inherit;
+}
+
+a{
+    text-decoration: none;
+}
 
 /* table Rankings  */
 /*:host ::ng-deep {*/
@@ -68,6 +90,7 @@ td{
 .rankings p{
     font-size: 1.15rem;
     line-height:1.5;
+    text-align: justify;
 }
 
 .s{

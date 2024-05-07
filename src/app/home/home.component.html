@@ -1,8 +1,7 @@
 <section dir="auto" class="container">
     <div class="main">
         <div class="detail">
-            <h1>{{'home_title' | translate}}</h1>
-            <!-- <h1>Academic <span style="color:#f9532d;">Ranking</span> of Arab Universities </h1> -->
+            <h1><span class="first_word">{{'home_title1'|translate}} </span>{{'home_title2' | translate}}</h1>
             <p>{{'home_parag' | translate}}</p>
         </div>
         <div class="img-sec">
@@ -19,7 +18,7 @@
         <h1>{{'home_subtitle_section_one' | translate}}</h1>
     </div>
 
-    <div class="card">
+    <div class="card2">
         <p-table dir="auto" #dt1 [value]="test" dataKey="id" [showCurrentPageReport]="true"
             [loading]="loading"
             currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}"

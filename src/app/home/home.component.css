@@ -3,7 +3,9 @@
  */
 a{
   text-decoration: none;
+  color: black;
 }
+
 
 /*Buscador*/
 .searcher{
@@ -51,6 +53,11 @@ a{
   padding: 0 8.4rem;
 }
 
+.first_word{
+  color: #f9532d;
+  font-size: 5rem;
+}
+
 .img-w {
   width: 100%;
   border-radius: 20%;
@@ -61,16 +68,19 @@ a{
   grid-template-columns: repeat(auto-fit, minmax(277px, 1fr));
   row-gap: 2rem;
   align-items: center;
+  margin: 0;
 }
 
 .main h1 {
   font-size: 4rem;
-  font-weight: 600;
+  font-weight: bold;
+  margin-top: 0;
 }
 
 .main p {
   line-height: 1.5;
   font-size: 1.15rem;
+  text-align: justify;
 }
 
 .images::before {
@@ -92,7 +102,7 @@ a{
 .images {
   margin-block: 15%;
   width: 80%;
-  margin-left: auto;
+  margin-inline: auto;
   position: relative;
   z-index: -1;
 }
@@ -101,6 +111,12 @@ a{
 .line{
   border-top: 1px solid gray ;
   opacity: .3;;
+}
+.card2{
+  color: black;
+}
+td{
+  color: black;
 }
 
 .infoRanking{
@@ -114,6 +130,7 @@ a{
   /* background-color: rgb(240, 240, 240); */
   align-items: center;
   cursor: default;
+  color: black;
 }
 
 .title{
@@ -134,63 +151,12 @@ a{
   font-size: 2rem;
 }
 
-
-/* tabla */
-
-.tableRanking{
-  width: 100%;
-}
-
-.r p{
-  font-size: 1.15rem;
-}
-/* PAra dar click a la celda */
-.mat-mdc-row .mat-mdc-cell {
-  /* border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent; */
-  cursor: default;
-}
-
-/* .mat-mdc-row:hover .mat-mdc-cell {
-   border-color: currentColor; 
-} */
-
-/* .demo-row-is-clicked {
-  font-weight: bold;
-} */
-/*FIn  PAra dar click a la celda */
-
-
-.demo-table {
-  width: 100%;
-  margin-top:  20px;
-}
-
-.mat-column-position {
-  width: 32px;
-  border-right: 1px solid currentColor;
-  padding-right: 24px;
-  text-align: center;
-}
-
-.mat-column-university {
-  padding-left: 16px;
-}
-
 .nameu:hover{
   color: #f9532d;
   cursor: pointer;
 }
 
-.mat-column-country {
-  font-style: italic;
-}
 
-.mat-column-score {
-  width: 32px;
-  text-align: center;
-  font-weight: bold;
-}
 .gold{
   content: url("../../assets/images/medals/gold.png");
   height: 2rem;
@@ -221,9 +187,6 @@ a{
   text-align: end;
 }
 
-.moreRanking a{
-  color: black;
-}
 .moreRanking a:hover{
   color: #f9532d;
 }

@@ -1,0 +1,139 @@
+<div class="container">
+    <div class="breadcrumb">
+        <div class="breadcrumb-item">
+            <a routerLink="/ranking">Ranking</a>
+        </div>
+        <div class="breadcrumb-icon">
+            <span>></span>
+        </div>
+        <div class="breadcrumb-item">
+            <span>Methodology</span>
+        </div>
+    </div>
+    <div class="main">
+        <h2 class="title">TOP Arab Minds Ranking</h2>
+        <p>
+            The methodology employed for ranking researchers in the Arab World region involves a comprehensive data extraction from Elsevier Scopus. This ranking system specifically targets authors whose initial publications are linked to countries in the MENA region. Furthermore, eligibility for inclusion in the ranking requires authors to have a predominant affiliation with a MENA-based academic institution at the start of their career and also at the time of their latest publication within the designated period.
+        </p>
+        <p>
+            The criteria for inclusion in the rankings are meticulously defined to ensure both relevance and academic rigor:
+        </p>
+        <ol>
+            <li>
+                <p>
+                    Field-Weighted Citation Impact (25%): This indicator accounts for a quarter of the total score and measures the share of an author's papers that fall within the top 10% globally, based on the Field-Weighted Citation Index (FWCI) for that specific year. This metric highlights authors whose work has achieved significant citation impact relative to the global standards in their field.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Corresponding Author Share (5%): This measures the percentage of papers where the author has taken the lead as the corresponding author, signifying a primary role in the research and the communication of its results. This role often reflects the author's central involvement in the project.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Topical Relevance (5%): This assesses the proportion of an author's publications that align with the top 20 global prominent research topics, indicating the relevance and contemporaneity of their research interests and contributions.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Weighted Collaboration Share (20%): This metric might look complex, but it is needed to take into account collaboration from an integrity point of view. It calculates the sum of weights assigned based on the type of collaboration, divided by the total number of papers. Each paper can contribute a maximum weight of 1.0, ensuring that the score reflects effective and balanced collaborative efforts.
+                </p>
+                <ol type="a">
+                    <li >
+                        <p>If the author is affiliated with a MENA region country on a paper:</p>
+                        <ul>
+                            <li>
+                                <p>
+                                    National Collaboration (within the same country): Weight of 0.2 
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Regional Collaboration (with another MENA country): Weight of 0.5
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    International Collaboration (with a country outside MENA): Full weight of 1.0
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>If the author is not affiliated with a MENA country on a paper:</p>
+                        <ul>
+                            <li>
+                                <p>National Collaboration: Weight of 0.5</p>
+                            </li>
+                            <li>
+                                <p>International Collaboration: Full weight of 1.0</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+        <p>
+            The Combined Weighted Author indicator (CWA) is structured to gauge both the influence and the collaborative dimensions of scholarly work. The latter half of the indicators (from 5 to 9) delve into specific metrics that offer insights into the citations, global engagement, mentorship, and institutional loyalty of the authors. Each of these metrics is assigned a corresponding weight that reflects its importance in assessing the comprehensive academic footprint of an author. Here's a more detailed and expanded explanation of these indicators:
+        </p>
+        <ol start="5">
+            <li>
+                <p>
+                    Co-Author Weighted Citation Count (CWCC) (10%): This metric evaluates the cumulative citation impact of an author's papers, with each citation assigned a differential weight based on the relationship of the citing authors to the cited author:
+                </p>
+                <ul style="list-style: disc;">
+                    <li>
+                        <p>for self-citations where the citation comes from a paper authored by any of the authors of the target paper.</p>
+                    </li>
+                    <li>
+                        <p>
+                            0.5 for indirect citations coming from a co-author of one of the authors, provided these co-authors have collaborated on at least three papers and the papers involved do not exceed 15 authors in total.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            for citations from completely external authors, enhancing the score by demonstrating broader scholarly recognition.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    Field Citation Ratio (5%): This indicator measures the proportion of total citations that originate from publications within the same primary field as the author. It reflects the author's impact and relevance within their specific academic discipline.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Publications in the Top Global 10% by GeoScore (10%): This metric assesses the global impact of an author's publications based on their citation footprint across different countries. The GeoScore combines:
+                </p>
+                <ul style="list-style: disc;">
+                    <li>
+                        <p>
+                            Weighted Geographical Citation Diffusion (WGCD): Looks at the diversity of countries citing the paper.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Citation Spread (CS): Evaluates how evenly citations are distributed across these countries.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    Adjustments are made for publication year, document type, and subject to ensure fairness and accuracy in the ranking.
+                </p>
+            </li>
+            
+            <li>
+                <p>
+                    Tree Index (15%): This indicator measures an author's mentorship role by considering the publications of their mentees. The tree index is a normalized measure that is only applicable to authors who qualify based on their seniority in the academic community. If an author does not have a significant mentorship record (i.e., no tree index), this component is not included in their overall CWAI score.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Affiliation Stability (5%): This final metric examines the consistency of an author's affiliation with their last known institution over the assessment period. It is calculated by dividing the number of years the author published with this institution by the total number of years they published during the designated timeframe. For example, if an author published in three out of five years and two of those years were with the specified institution, the stability rate would be 67%.
+                </p>
+            </li>
+        </ol>
+
+    </div>
+</div>
