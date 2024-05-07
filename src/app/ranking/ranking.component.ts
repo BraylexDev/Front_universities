@@ -71,6 +71,7 @@ export class RankingComponent {
 
   test: RankingTest[] = [];
   categories: any[] = [];
+  countries: any[] = [];
 
   //miga de pan
   breadcrumbs: Array<{ label: string, url: string }> = [];
@@ -126,6 +127,26 @@ export class RankingComponent {
       { label: 'Clinical Medicine', value: 'Clinical Medicine' },
       { label: 'Mathematics & Statistics', value: 'Mathematics & Statistics' },
       { label: 'Agriculture, Fisheries & Forestry', value: 'Agriculture, Fisheries & Forestry' }
+    ];
+
+    this.countries = [
+      { label:'Algeria', value:'Algeria' },
+      { label:'Egypt', value:'Egypt' },
+      { label:'Iraq', value:'Iraq' },
+      { label:'Jordan', value:'Jordan' },
+      { label:'Kuwait', value:'Kuwait' },
+      { label:'Lebanon', value:'Lebanon' },
+      { label:'Libya', value:'Libya' },
+      { label:'Morocco', value:'Morocco' },
+      { label:'Oman', value:'Oman' },
+      { label:'Palestine', value:'Palestine' },
+      { label:'Qatar', value:'Qatar' },
+      { label:'Saudi Arabia', value:'Saudi Arabia' },
+      { label:'Sudan', value:'Sudan' },
+      { label:'Syria', value:'Syria' },
+      { label:'Tunisia', value:'Tunisia' },
+      { label:'United Arab Emirates', value:'United Arab Emirates' },
+      { label:'Yemen', value:'Yemen' }
     ];
   }
 

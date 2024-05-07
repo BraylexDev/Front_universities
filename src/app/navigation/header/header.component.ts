@@ -14,7 +14,9 @@ import { Scroller } from 'primeng/scroller';
 })
 
 export class HeaderComponent implements OnInit {
-
+  
+  opened: boolean;
+  
   @ViewChild('sc')
   sc!: Scroller;
 
@@ -30,6 +32,7 @@ export class HeaderComponent implements OnInit {
   currentLanguage = 'en';
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, public translate: TranslateService) {
+    this.opened = false;
     translate.addLangs(['en', 'ar']);
     const storedLang = localStorage.getItem('language');
     const defaultLang = storedLang || 'en';
@@ -47,16 +50,6 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem('theme', this.isDarkTheme ? "Dark" : "Light");
   }
 
-  /* changeRoute(evt: MouseEvent, name: string) {
-    evt.preventDefault();
-
-    let navcfg = [{ outlets: { secondary: name } }];
-
-    this.router.navigate(navcfg, {
-      skipLocationChange: true,
-    });
-  } */
-
   goContacts(){
     this.router.navigate(['/','contact']);
   }
@@ -69,6 +62,10 @@ export class HeaderComponent implements OnInit {
     this.currentLanguage = language;
   }
 
+  close() {
+    this.opened = !this.opened;
+    console.log(this.opened);
+  }
   
   reset() {
     this.sc.scrollToIndex(0, 'smooth');

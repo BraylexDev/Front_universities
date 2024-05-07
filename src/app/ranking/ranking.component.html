@@ -3,7 +3,6 @@
         <h1>{{'ranking_title' | translate}}</h1>
     </div>
 </section>
-<div class="line"></div>
 <section dir="auto" class="rankings">
     <div>
         <p>{{'ranking_parag' | translate}}</p>
@@ -19,10 +18,19 @@
             [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'subcategory2', 'country', 'score']">
             <ng-template pTemplate="caption" let-state>
                 <div class="flex head">
-                    <!-- <span>{{'ranking_table_description2' | translate}}</span> -->
                     <p-columnFilter field="category" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [ngModel]="value" [options]="categories" (onChange)="filter($event.value)" placeholder="Search a Category" [showClear]="true">
+                            <p-dropdown [ngModel]="value" [options]="categories" (onChange)="filter($event.value)" placeholder="{{'ranking_table_search1' | translate}}" [showClear]="true">
+                                <ng-template let-option pTemplate="item">
+                                    {{option.value}}
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
+                    
+                    <p-columnFilter field="country" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="countries" (onChange)="filter($event.value)" placeholder="{{'ranking_table_search3' | translate}}" [showClear]="true">
                                 <ng-template let-option pTemplate="item">
                                     {{option.value}}
                                 </ng-template>
@@ -30,14 +38,14 @@
                         </ng-template>
                     </p-columnFilter>
                 </div>
-                <!-- <span>_______________________</span> -->
+                <div class="line"></div>
                 <div class="flex head">
-                    <span>{{'ranking_table_description' | translate}}</span>
+                    <span class="text_search">{{'ranking_table_description' | translate}}</span>
                     <span class="p-input-icon-right ml-auto">
                         <i class="pi pi-search"></i>
                         <input class="s" pInputText type="text"
                             (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                            placeholder="{{'ranking_table_search' | translate}}" />
+                            placeholder="{{'ranking_table_search2' | translate}}" />
                     </span>
                 </div>
             </ng-template>

@@ -1,12 +1,7 @@
 .line{
     border-top: 1px solid gray ;
     opacity: .3;;
-}
-nav{
-    margin-top: 10px;
-    font-family: 'Outfit', sans-serif;
-    transition: background-color 0.3s, color 0.3s;
-    padding: 0 8.4rem;
+    margin-block: 10px;
 }
 
 .detail{
@@ -36,10 +31,6 @@ nav{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-[dir='rtl'] .methodology{
-    text-align: left;
 }
 
 .methodology{
@@ -121,9 +112,6 @@ td{
 
 
 @media screen and (max-width: 1024px) {
-    nav{
-        padding: 0 4.4rem;
-    }
     .detail{
         padding: 0 4.4rem;
     }
@@ -136,9 +124,6 @@ td{
 }
 
 @media screen and (max-width: 768px) {
-    nav{
-        padding: 0 1.6rem;
-    }
     .detail{
         padding: 0 1.6rem;
     }
@@ -151,6 +136,8 @@ td{
 }
 
 @media screen and (max-width:600px) {
-
+    .text_search{
+        display: none;
+    }
 }
 

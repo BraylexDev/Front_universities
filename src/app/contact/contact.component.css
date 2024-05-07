@@ -169,7 +169,7 @@
   background: #FFF;
   color: #f9532d;
 }
-
+/* 
 @media (max-width: 991px) {
   section {
     padding-top: 50px;
@@ -188,4 +188,38 @@
   .contact-form {
     width: 100%;
   }
+} */
+
+@media screen and (max-width: 1024px) {
+  .info1, .detail{
+    padding: 0 4.4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .info1, .detail{
+    padding: 0 1.6rem;
+  }
+  section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .contact-info {
+    margin-bottom: 40px;
+    width: 100%;
+    background-color: whitesmoke;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width:600px) {
+ 
 }

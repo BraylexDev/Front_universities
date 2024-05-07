@@ -1,6 +1,7 @@
 .line {
     border-top: 1px solid gray;
     opacity: .3;
+    margin-block: 10px;
 }
 
 .info1 {
@@ -17,12 +18,6 @@
     font-size: 3rem;
     color: #f9532d;
 }
-
-/* .title {
-    padding-bottom: 5%;
-    width: 100%;
-}
- */
 
 /*Mission*/
 .info2{
@@ -89,4 +84,16 @@
     }
 }
 
-@media screen and (max-width:600px) {}
+@media screen and (max-width:600px) {
+    
+    .img-sec{
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        order: 2;
+    }
+    .images{
+        padding: 0;
+        margin: 0;
+    }
+}

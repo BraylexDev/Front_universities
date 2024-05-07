@@ -1,15 +1,25 @@
-<mat-sidenav-container class="sidenav-container mat-app-background"  [ngClass]="{'dark_theme-mode': isDarkTheme}">
+<mat-sidenav-container class="sidenav-container mat-app-background">
     <mat-sidenav #drawer class="sidenav" fixedInViewport
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'over'"
-        [opened]="false">
-      <mat-toolbar>{{'nav_menu' | translate}}</mat-toolbar>
+        [(opened)]="opened">
+      <mat-toolbar style="display: flex; justify-content: space-between;">
+        {{'nav_menu' | translate}}
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)=close()
+          *ngIf="(isHandset$ | async) === true" >
+          <mat-icon aria-label="X">close</mat-icon>
+        </button>
+      </mat-toolbar>
       <mat-nav-list color="primary">
-        <a mat-list-item routerLink="/home">{{'nav_home' | translate}}</a>
-        <a mat-list-item routerLink="/about">{{'nav_about' | translate}}</a>
-        <a mat-list-item routerLink="/ranking">{{'nav_rankings' | translate}}</a>
-        <a mat-list-item routerLink="/universities">{{'nav_universities' | translate}}</a>
-        <a mat-list-item routerLink="/contact">{{'nav_contact' | translate}}</a>
+        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['home']" [routerLinkActive]="['act']" >{{'nav_home' | translate}}</a>
+        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['ranking']" [routerLinkActive]="['act']">{{'nav_rankings' | translate}}</a>
+        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['about']" [routerLinkActive]="['act']">{{'nav_about' | translate}}</a>
+        <!-- <a mat-list-item routerLink="/universities">{{'nav_universities' | translate}}</a> -->
+        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['contact']" [routerLinkActive]="['act']">{{'nav_contact' | translate}}</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -18,7 +28,7 @@
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
-          (click)="drawer.toggle()"
+          (click)=close()
           *ngIf="(isHandset$ | async) === true" >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
@@ -38,20 +48,8 @@
           </ul>
         </div>
         <div class="tres">
-          <!-- <mat-slide-toggle [(ngModel)]="isDarkTheme" labelPosition="before" (change)="storeThemeSelection()">
-            <mat-icon *ngIf="isDarkTheme">bedtime</mat-icon>
-            <mat-icon *ngIf="!isDarkTheme">light_mode</mat-icon>
-          </mat-slide-toggle> -->
-          <div [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" class="line"> </div>
-          <!-- <button
-            type="button"
-            mat-icon-button>
-            <mat-icon aria-label="Change language">language</mat-icon>
-          </button> -->
-          <p> </p>
+          <div class="line"> </div>
           <div class="container_lang" style="padding-inline: 20px;">
-            <!-- <span [ngClass]="{'fi fi-us': translate.currentLang == 'en'}"></span>
-            <span [ngClass]="{'fi fi-ae': translate.currentLang == 'ar'}"></span> -->
             <mat-icon aria-label="Change language">language</mat-icon>
             <select name="" id="" class="lang" 
               style="border: transparent; background-color: transparent;"
@@ -62,8 +60,6 @@
               [selected]="language === translate.currentLang">
                 <span *ngIf="language == 'en'">English</span>
                 <span *ngIf="language == 'ar'">العربية</span>
-              <!-- <span [ngClass]="{'eng': language =='en'}">English</span>
-              <span [ngClass]="{'arab': language =='ar'}">العربية</span> -->
               </option>
             </select>
           </div>

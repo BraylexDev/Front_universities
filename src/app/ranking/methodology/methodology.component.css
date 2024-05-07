@@ -1,5 +1,6 @@
 .container{
     background-color: whitesmoke;
+    padding: 0 8.4rem;
 }
 
 .breadcrumb{
@@ -8,7 +9,6 @@
     align-items: center;
     overflow: hidden;
     height: 50px;
-    padding: 0 8.4rem;
     /* background: linear-gradient(0deg, rgba(199,199,199,1) 7%, rgba(255,255,255,0.7679446778711485) 82%); */
 }
 a:link, a:visited{
@@ -29,7 +29,6 @@ a{
 
 .main{
     font-family: 'Outfit', sans-serif;
-    margin: 0 8.4rem;
     padding: 2rem 5rem;
     background-color: white;
 }
@@ -50,3 +49,21 @@ ol li {
     text-align: justify;
 }
 
+@media screen and (max-width: 1024px) {
+    .container{
+        padding: 0 4.4rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+        padding: 0 1.6rem;
+    }
+    .main{
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width:600px) {
+   
+}
