@@ -2,14 +2,16 @@
   border-top: 1px solid gray;
   opacity: .3;
 }
+.all{
+  background: white;
+}
 
 .info1 {
   font-family: 'Outfit', sans-serif;
   transition: background-color 0.3s, color 0.3s;
   padding: 0 8.4rem;
   background: rgb(199, 199, 199);
-  background: linear-gradient(0deg, rgba(199, 199, 199, 1) 7%, rgba(255, 255, 255, 0.7679446778711485) 82%);
-  height: 200px;
+  background: linear-gradient(0deg, white 7%, #e0e0e0 35%);
   align-content: center;
 }
 
@@ -17,11 +19,6 @@
   font-size: 3rem;
   color: #f9532d;
 }
-
-/* .title {
-    padding-bottom: 5%;
-    width: 100%;
-} */
 
 /* info contact*/
 .img {
@@ -169,26 +166,6 @@
   background: #FFF;
   color: #f9532d;
 }
-/* 
-@media (max-width: 991px) {
-  section {
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
-
-  .row {
-    flex-direction: column;
-  }
-
-  .contact-info {
-    margin-bottom: 40px;
-    width: 100%;
-  }
-
-  .contact-form {
-    width: 100%;
-  }
-} */
 
 @media screen and (max-width: 1024px) {
   .info1, .detail{

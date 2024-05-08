@@ -1,22 +1,45 @@
 <div class="container">
-    <div class="breadcrumb">
+    <div dir="auto" class="breadcrumb">
         <div class="breadcrumb-item">
-            <a routerLink="/ranking">Ranking</a>
+            <a routerLink="/ranking">{{'methodology_breadcrumb_ranking' | translate}}</a>
         </div>
         <div class="breadcrumb-icon">
             <span>></span>
         </div>
         <div class="breadcrumb-item">
-            <span>Methodology</span>
+            <span>{{'methodology_breadcrumb_methodology' | translate}}</span>
         </div>
     </div>
     <div class="main">
         <h2 class="title">TOP Arab Minds Ranking</h2>
         <p>
-            The methodology employed for ranking researchers in the Arab World region involves a comprehensive data extraction from Elsevier Scopus. This ranking system specifically targets authors whose initial publications are linked to countries in the MENA region. Furthermore, eligibility for inclusion in the ranking requires authors to have a predominant affiliation with a MENA-based academic institution at the start of their career and also at the time of their latest publication within the designated period.
+            The methodology employed for ranking researchers in the Arab World region involves a comprehensive data extraction from Elsevier Scopus. This ranking system specifically targets authors whose initial publications are linked to countries in the ARAB region. Furthermore, eligibility for inclusion in the ranking requires authors to have a predominant affiliation with a ARAB-based academic institution at the start of their career and also at the time of their latest publication within the designated period.
         </p>
         <p>
             The criteria for inclusion in the rankings are meticulously defined to ensure both relevance and academic rigor:
+        </p>
+        <ol>
+            <li>
+                <p>
+                    Authors must have authored at least five scholarly outputs. Outputs can be any of the following types: articles, conference papers, or reviews, throughout their career. This criterion holds regardless of the author's age, the number of co-authors, or the variety of their affiliations.
+                </p>
+            </li>
+            <li>
+                <p>
+                    The analysis considers papers where an author has a maximum of 15 affiliations, to focus on those more actively engaged with fewer institutions and therefore potentially contributing more significantly to each.
+                </p>
+            </li>
+            <li>
+                <p>
+                    A minimum of five publications of any type, within a five-year timeframe is required, for an author to be considered active and relevant for the current ranking.
+                </p>
+            </li>
+        </ol>
+        <p>
+            The cornerstone of the ranking methodology for authors in the ARAB region is the Combined Weighted Author indicator (CWA), which integrates eight distinct metrics, each assigned a specific weight to reflect its importance in assessing academic influence and collaborative strength. These metrics are carefully selected to reflect the specificities around research activities in the ARAB region and are calibrated to offer a holistic view of an author's contributions and standing within the global academic community.
+        </p>
+        <p>
+            The expanded and detailed description of the eight indicators comprising the CWA:
         </p>
         <ol>
             <li>
@@ -40,7 +63,7 @@
                 </p>
                 <ol type="a">
                     <li >
-                        <p>If the author is affiliated with a MENA region country on a paper:</p>
+                        <p>If the author is affiliated with a ARAB region country on a paper:</p>
                         <ul>
                             <li>
                                 <p>
@@ -49,18 +72,18 @@
                             </li>
                             <li>
                                 <p>
-                                    Regional Collaboration (with another MENA country): Weight of 0.5
+                                    Regional Collaboration (with another ARAB country): Weight of 0.5
                                 </p>
                             </li>
                             <li>
                                 <p>
-                                    International Collaboration (with a country outside MENA): Full weight of 1.0
+                                    International Collaboration (with a country outside ARAB): Full weight of 1.0
                                 </p>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <p>If the author is not affiliated with a MENA country on a paper:</p>
+                        <p>If the author is not affiliated with a ARAB country on a paper:</p>
                         <ul>
                             <li>
                                 <p>National Collaboration: Weight of 0.5</p>
@@ -134,6 +157,14 @@
                 </p>
             </li>
         </ol>
-
+        <p>
+            In our methodology, we employ a systematic approach to evaluate the performance of authors, wherein each metric undergoes conversion into a standardized score. This transformation is achieved utilizing the z-score cumulative normal distribution, ensuring equitable assessment across the entire spectrum of authors under consideration, as outlined in the aforementioned criteria.
+        </p>
+        <p>
+            Following this rigorous evaluation, our final selection process focuses on identifying authors positioned within the upper classes of excellence, specifically those ranking within the top 5% percentile among the Arab author population within their respective subfields. To delineate these subfields, we adopt the Science-Metrix classification system, assigning authors to the subfield in which their publications exhibit the largest proportional representation.
+        </p>
+        <p>
+            This meticulous methodology ensures not only the recognition of outstanding scholarly contributions but also maintains a nuanced understanding of the diverse and specialized domains within the academic landscape.
+        </p>
     </div>
 </div>

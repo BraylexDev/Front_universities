@@ -4,7 +4,7 @@
         [mode]="(isHandset$ | async) ? 'over' : 'over'"
         [(opened)]="opened">
       <mat-toolbar style="display: flex; justify-content: space-between;">
-        {{'nav_menu' | translate}}
+        <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="100px" style="cursor: hand; filter:contrast(3)">
         <button
           type="button"
           aria-label="Toggle sidenav"
@@ -14,11 +14,11 @@
           <mat-icon aria-label="X">close</mat-icon>
         </button>
       </mat-toolbar>
-      <mat-nav-list color="primary">
+      <mat-nav-list dir="auto" color="primary">
         <a (click)="drawer.toggle()" mat-list-item [routerLink]="['home']" [routerLinkActive]="['act']" >{{'nav_home' | translate}}</a>
         <a (click)="drawer.toggle()" mat-list-item [routerLink]="['ranking']" [routerLinkActive]="['act']">{{'nav_rankings' | translate}}</a>
+        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['methodology']" [routerLinkActive]="['act']">{{'nav_methodology' | translate}}</a>
         <a (click)="drawer.toggle()" mat-list-item [routerLink]="['about']" [routerLinkActive]="['act']">{{'nav_about' | translate}}</a>
-        <!-- <a mat-list-item routerLink="/universities">{{'nav_universities' | translate}}</a> -->
         <a (click)="drawer.toggle()" mat-list-item [routerLink]="['contact']" [routerLinkActive]="['act']">{{'nav_contact' | translate}}</a>
       </mat-nav-list>
     </mat-sidenav>
@@ -41,8 +41,8 @@
           <ul>
             <li><a class="navb" [routerLink]="['home']" routerLinkActive="active" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_home' | translate}}</a></li>
             <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_rankings' | translate}}</a></li>
+            <li><a class="navb" [routerLink]="['methodology']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_methodology' | translate}}</a></li>
             <li><a class="navb" [routerLink]="['about']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_about' | translate}}</a></li>
-            <!-- <li><a class="navb" [routerLink]="['universities']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_news' | translate}}</a></li> -->
             <!-- <li><a class="navb" [routerLink]="['contact']"      [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Contact Us</a></li> -->
             <li><a class="navb" [routerLink]="['contact']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_contact' | translate}}</a></li>
           </ul>

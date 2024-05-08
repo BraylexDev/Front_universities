@@ -1,11 +1,12 @@
 {
     "nav_home" :"Home",
     "nav_about" :"About Us",
-    "nav_rankings" :"Rankings",
+    "nav_rankings" :"Ranking",
     "nav_universities" :"Universities",
     "nav_contact" :"Contact Us",
     "nav_menu": "Menu",
     "nav_news": "News",
+    "nav_methodology": "Methodology",
 
     "foot_site_map": "Site Map",
     "foot_config": "Configuration",
@@ -20,8 +21,8 @@
     "home_parag2": "Inspired Educational Services (IES) in collaboration with Elsevier – a global leader in research publishing and information analytics – worked extensively with the research community to ensure a better understanding of the research culture in the Arab world and how rankings could be contextualized to reflect this culture.",
 
     "home_title_section_one": "Ranking",
-    "home_subtitle_section_one":"Top 10 Universities",
-    "home_parag_section_one": "These are this year's top 10 universities:",
+    "home_subtitle_section_one":"Top 10 Researchers",
+    "home_parag_section_one": "These are this year's top 10 researchers:",
 
     "home_table_rank_position": "Rank",
     "home_table_rank_institution": "Institution",
@@ -49,16 +50,19 @@
     "ranking_title": "TOP Arab Researchers Ranking",
     "ranking_parag": "Developed through a symbiotic collaboration between Prof. Fardoun’s expert insights and Elsevier's vast reservoirs of data, the ranking methodology is comprehensive, inclusive, transparent, and adaptive. It considers a wide array of measurement indicators, from citation impact to collaborative ventures, ensuring a multifaceted evaluation of scholarly work. The selected indicators reflect the specificities of research in the Arab world.",
     "ranking_methodology": "Methodology - Top Arab Researchers",
-    "ranking_table_description": "List of Universities",
+    "ranking_table_description": "List of Researchers",
     "ranking_table_description2": "Category",
     "ranking_table_search1": "Search a Category",
-    "ranking_table_search2": "Search a University",
+    "ranking_table_search2": "Search...",
     "ranking_table_search3": "Search a Country",
     "ranking_no_found": "No Ranking found.",
     "ranking_table_pagination_showing": "Showing",
     "ranking_table_pagination_to": "to",
     "ranking_table_pagination_of": "of",
     "ranking_table_pagination_entries": "entries",
+
+    "methodology_breadcrumb_ranking": "Ranking",
+    "methodology_breadcrumb_methodology": "Mehodology",
 
     "contact_title": "Contact Us",
     "contact_subtitle_get": "Get in touch",

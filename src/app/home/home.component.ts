@@ -158,9 +158,5 @@ export class HomeComponent {
           }
       ];
   }
-
-  goToProfile(){
-    
-  }
   
 }

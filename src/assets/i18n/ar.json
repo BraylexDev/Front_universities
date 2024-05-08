@@ -1,11 +1,12 @@
 {
     "nav_home" :"المنزل",
     "nav_about" :"نبذة عنا",
-    "nav_rankings" :"التصنيفات",
+    "nav_rankings" :"التصنيف",
     "nav_universities" :"الجامعات",
     "nav_contact" :"اتصل بنا",
     "nav_menu": "القائمة",
     "nav_news": "الأخبار",
+    "nav_methodology": "المنهجية",
 
     "foot_site_map": "خريطة الموقع",
     "foot_config": "التكوين",
@@ -19,8 +20,8 @@
     "home_parag": "نحن في تصنيف أفضل الباحثين العرب مدفوعين برؤية واحدة: الاحتفاء بالتميز الأكاديمي في العالم العربي والارتقاء به. وتتمثل مهمتنا في تقديم منصة تصنيف شاملة وديناميكية لا تكتفي بعرض الإسهامات الفكرية للباحثين العرب فحسب، بل ترعى أيضاً الإسهامات الفكرية للباحثين العرب. ",
 
     "home_title_section_one": "الترتيب",
-    "home_subtitle_section_one": "أفضل 10 جامعات",
-    "home_parag_section_one": ":هذه هي أفضل 10 جامعات لهذا العام",
+    "home_subtitle_section_one": "أفضل 10 باحثين",
+    "home_parag_section_one": ":هؤلاء هم أفضل 10 باحثين لهذا العام",
 
     "home_table_rank_position": "الرتبة",
     "home_table_rank_institution": "المؤسسة",
@@ -48,14 +49,18 @@
     "ranking_title": "التصنيف العربي للجامعات العربية",
     "ranking_parag": ".تم تطوير منهجية التصنيف من خلال التعاون التكافلي بين رؤى البروفيسور فردون الخبيرة وخزانات إلسيفير الهائلة من البيانات، وهي منهجية شاملة وجامعة وشفافة وقابلة للتكيف. وهي تأخذ في الاعتبار مجموعة واسعة من مؤشرات القياس، من تأثير الاقتباس إلى المشاريع التعاونية، مما يضمن تقييمًا متعدد الأوجه للعمل العلمي. تعكس المؤشرات المختارة خصوصيات البحث العلمي في العالم العربي",
     "ranking_methodology": "المنهجية - كبار الباحثين العرب",
-    "ranking_table_description": "قائمة الجامعات",
+    "ranking_table_description": "قائمة الباحثين",
     "ranking_table_search1": "البحث عن فئة",
-    "ranking_table_search2": "البحث عن جامعة",
+    "ranking_table_search2": "...بحث",
+    "ranking_table_search3": "ابحث عن بلد",
     "ranking_no_found": "لم يتم العثور على أي ترتيب.",
     "ranking_table_pagination_showing": "عرض",
     "ranking_table_pagination_to": "إلى",
     "ranking_table_pagination_of": "من",
     "ranking_table_pagination_entries": "المدخلات",
+
+    "methodology_breadcrumb_ranking": "التصنيف",
+    "methodology_breadcrumb_methodology": "ميهودولوجيا",
 
     "contact_title": "اتصل بنا",
     "contact_subtitle_get": "تواصل معنا",

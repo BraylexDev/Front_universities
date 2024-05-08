@@ -9,8 +9,8 @@
     transition: background-color 0.3s, color 0.3s;
     padding: 0 8.4rem;
     background: rgb(199, 199, 199);
-    background: linear-gradient(0deg, rgba(199, 199, 199, 1) 7%, rgba(255, 255, 255, 0.7679446778711485) 82%);
-    height: 200px;
+    background: linear-gradient(0deg, white 7%, #e0e0e0 35%);
+    
     align-content: center;
 }
 
@@ -23,12 +23,21 @@
 .info2{
     font-family: 'Outfit', sans-serif;
     transition: background-color 0.3s, color 0.3s;
-    padding: 0 8.4rem;
+    padding: 1rem 8.4rem;
     
     display: flex;
     justify-content: center;
     flex-direction: column;
     cursor: default;
+    background: linear-gradient(0deg, #e0e0e0 3%, white 15%);
+}
+
+.info3{
+    background: linear-gradient(0deg, white 3%, #e0e0e0 15%);
+}
+
+.info4{
+    background: white;
 }
 
 .img-sec{
@@ -60,11 +69,9 @@
 }
 
 .images {
-    margin-block: 15%;
+    margin-block: 5%;
     width: 80%;
     margin-left: auto;
-    position: relative;
-    z-index: -1;
 }
 
 .detail {
