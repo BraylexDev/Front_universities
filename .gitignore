@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+#File with URL of local server
+/src/app/service/apiServer.ts
+
 # Compiled output
 /dist
 /tmp

@@ -39,12 +39,25 @@
         </div>
         <div class="dos" *ngIf="!(isHandset$ | async)">
           <ul>
-            <li><a class="navb" [routerLink]="['home']" routerLinkActive="active" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_home' | translate}}</a></li>
-            <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_rankings' | translate}}</a></li>
-            <li><a class="navb" [routerLink]="['methodology']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_methodology' | translate}}</a></li>
-            <li><a class="navb" [routerLink]="['about']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_about' | translate}}</a></li>
-            <!-- <li><a class="navb" [routerLink]="['contact']"      [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >Contact Us</a></li> -->
-            <li><a class="navb" [routerLink]="['contact']" [routerLinkActive]="['active']" [ngClass]="isDarkTheme === true ? 'themeDark':'themeLight'" >{{'nav_contact' | translate}}</a></li>
+            <li><a class="navb" [routerLink]="['home']" routerLinkActive="active"  >{{'nav_home' | translate}}</a></li>
+            <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']"  >{{'nav_rankings' | translate}}</a></li>
+            <li>
+              <div class="dropdown">
+                <button class="dropbtn">
+                  <a class="navb"[routerLink]="['methodology']" [routerLinkActive]="['active']"  >
+                    {{'nav_methodology' | translate}}
+                    <i class="pi pi-angle-down"></i>
+                  </a>
+                </button>
+                <div class="dropdown-content">
+                  <a [routerLink]="['committee']">{{'nav_methodology_advisory' | translate}}</a>
+                </div>
+              </div> 
+            </li>
+            <!-- <li><a class="navb" [routerLink]="['methodology']" [routerLinkActive]="['active']"  >{{'nav_methodology' | translate}}</a></li> -->
+            <li><a class="navb" [routerLink]="['about']" [routerLinkActive]="['active']"  >{{'nav_about' | translate}}</a></li>
+            <!-- <li><a class="navb" [routerLink]="['contact']"      [routerLinkActive]="['active']"  >Contact Us</a></li> -->
+            <li><a class="navb" [routerLink]="['contact']" [routerLinkActive]="['active']"  >{{'nav_contact' | translate}}</a></li>
           </ul>
         </div>
         <div class="tres">
@@ -58,7 +71,7 @@
               <option *ngFor="let language of translate.getLangs()"
               [value]="language"
               [selected]="language === translate.currentLang">
-                <span *ngIf="language == 'en'">English</span>
+                <span *ngIf="language == 'en'" style="font-size: 2rem;">English</span>
                 <span *ngIf="language == 'ar'">العربية</span>
               </option>
             </select>

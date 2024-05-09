@@ -2,6 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Roboto:wght@100;300;400&display=swap');
 
  */
+
+a{
+  text-decoration: none;
+}
+
+a:link, a:active{
+  color: inherit;
+}
+
+a:-webkit-any-link{
+  color: black;
+}
+
 .sidenav-container {
   height: 100%;
   font-family: 'Outfit', sans-serif;
@@ -11,6 +24,57 @@
 .sidenav {
   width: 200px;
 }
+
+/*CSS for SubMenu*/
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  background-color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.dropdown .dropbtn a{
+  display: inline-flex;
+  line-height: 60px;
+  align-items: center;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding-inline: 12px;
+  padding-block: 0;
+  margin: 0;
+  text-decoration: none;
+  display: block;
+  line-height: 45px;
+}
+
+.dropdown-content a:hover {
+  color: darkred;
+  border-top: 4px solid darkred;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/*End CSS for SubMenu*/
 
 .act{
   background: #e0e0e0;
@@ -65,11 +129,6 @@
   justify-items: center;
 }
 
-a{
-  text-decoration: none;
-}
-
-
 .dos > ul > li > a{
   display: inline-flex;
   cursor: pointer;
@@ -78,10 +137,6 @@ a{
 .tres{
   display: flex;
   align-items: center;
-}
-
-.tres > a{
-  font-size: 14px;
 }
 
 .themeDark{

@@ -73,6 +73,7 @@ import { ClientRoutingModule } from './navigation/header/client-routing.module';
 /* admin */
 import { SidebarModule } from 'primeng/sidebar';
 import { MethodologyComponent } from './ranking/methodology/methodology.component';
+import { CommitteeComponent } from './ranking/committee/committee.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { MethodologyComponent } from './ranking/methodology/methodology.componen
     NewsComponent,
     DetailNewComponent,
     AdminComponent,
-    MethodologyComponent
+    MethodologyComponent,
+    CommitteeComponent
   ],
   imports: [
     BrowserModule,

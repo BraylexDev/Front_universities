@@ -7,6 +7,7 @@
     "nav_menu": "القائمة",
     "nav_news": "الأخبار",
     "nav_methodology": "المنهجية",
+    "nav_methodology_advisory": "اللجنة الاستشارية",
 
     "foot_site_map": "خريطة الموقع",
     "foot_config": "التكوين",
@@ -61,6 +62,9 @@
 
     "methodology_breadcrumb_ranking": "التصنيف",
     "methodology_breadcrumb_methodology": "ميهودولوجيا",
+
+    "methodology_breadcrumb_advisory": "اللجنة الاستشارية",
+    "advisory_title":"...أعضاء لجنتنا الاستشارية",
 
     "contact_title": "اتصل بنا",
     "contact_subtitle_get": "تواصل معنا",
