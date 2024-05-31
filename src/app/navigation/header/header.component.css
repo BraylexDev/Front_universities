@@ -22,7 +22,23 @@ a:-webkit-any-link{
 }
   
 .sidenav {
-  width: 200px;
+  width: 250px;
+}
+
+.pi {
+  font-size: 16px;
+  margin-inline: 5px;
+}
+
+
+.mat-list-item{
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.mat-expansion-panel-header{
+  padding-inline: 16px !important;
 }
 
 /*CSS for SubMenu*/
@@ -78,7 +94,7 @@ a:-webkit-any-link{
 
 .act{
   background: #e0e0e0;
-  color: white;
+  color: black;
 }
 .sidenav .mat-toolbar {
   background: inherit;
@@ -132,6 +148,7 @@ a:-webkit-any-link{
 .dos > ul > li > a{
   display: inline-flex;
   cursor: pointer;
+  align-items: center;
 }
 
 .tres{

@@ -15,11 +15,19 @@
         </button>
       </mat-toolbar>
       <mat-nav-list dir="auto" color="primary">
-        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['home']" [routerLinkActive]="['act']" >{{'nav_home' | translate}}</a>
-        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['ranking']" [routerLinkActive]="['act']">{{'nav_rankings' | translate}}</a>
-        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['methodology']" [routerLinkActive]="['act']">{{'nav_methodology' | translate}}</a>
-        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['about']" [routerLinkActive]="['act']">{{'nav_about' | translate}}</a>
-        <a (click)="drawer.toggle()" mat-list-item [routerLink]="['contact']" [routerLinkActive]="['act']">{{'nav_contact' | translate}}</a>
+        <mat-list-item (click)="drawer.toggle()" [routerLink]="['home']" [routerLinkActive]="['act']"><i class="pi pi-home"></i><span>{{'nav_home' | translate}}</span></mat-list-item>
+        <mat-list-item (click)="drawer.toggle()" [routerLink]="['ranking']" [routerLinkActive]="['act']"><i class="pi pi-chart-bar"></i>{{'nav_rankings' | translate}}</mat-list-item>
+        <mat-expansion-panel [class.mat-elevation-z0]="true" dense (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header (click)="drawer.toggle()" [routerLink]="['methodology']" [routerLinkActive]="['act']">
+              <i class="pi pi-box"></i>
+              {{'nav_methodology' | translate}}
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+                <a mat-list-item (click)="drawer.toggle()" [routerLink]="['committee']" [routerLinkActive]="['act']"><i class="pi pi-users"></i>{{'nav_methodology_advisory' | translate}}</a>
+            </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-list-item (click)="drawer.toggle()" [routerLink]="['about']" [routerLinkActive]="['act']"><i class="pi pi-info-circle"></i>{{'nav_about' | translate}}</mat-list-item>
+        <mat-list-item (click)="drawer.toggle()" [routerLink]="['contact']" [routerLinkActive]="['act']"><i class="pi pi-phone"></i>{{'nav_contact' | translate}}</mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -39,7 +47,9 @@
         </div>
         <div class="dos" *ngIf="!(isHandset$ | async)">
           <ul>
-            <li><a class="navb" [routerLink]="['home']" routerLinkActive="active"  >{{'nav_home' | translate}}</a></li>
+            <li><a class="navb" [routerLink]="['home']" routerLinkActive="active"  >
+              <i class="pi pi-home"></i>
+              {{'nav_home' | translate}}</a></li>
             <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']"  >{{'nav_rankings' | translate}}</a></li>
             <li>
               <div class="dropdown">

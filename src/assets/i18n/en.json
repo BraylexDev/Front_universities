@@ -39,6 +39,8 @@
     "home_title_section_two": "Recent News",
     "home_news_option_view_more": "View More",
 
+    "home_collab":"Collaborations",
+
     "about_title":"About Us",
     "about_mission_title":"Independent and Evolving...",
     "about_mission_parag":"TOP Arab Researchers Ranking is an independent association, autonomous in its governance, with a core mandate to impartially assess and rank research output. The independence is fundamental to be able to provide unbiased insights into the research ecosystem of the Arab world.",
@@ -75,7 +77,7 @@
     "contact_address": "Address",
     "contact_phone": "Phone",
     "contact_email": "Email",
-    "contact_send_message": "Send Message",
+    "contact_send_message": "Send Us a Message",
     "contact_full_name": "Full Name",
     "contact_type": "Type your Message",
     "contact_send": "Send"

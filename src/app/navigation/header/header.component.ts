@@ -14,7 +14,8 @@ import { Scroller } from 'primeng/scroller';
 })
 
 export class HeaderComponent implements OnInit {
-  
+
+  panelOpenState = false;
   opened: boolean;
   
   @ViewChild('sc')

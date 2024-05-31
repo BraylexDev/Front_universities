@@ -4,14 +4,38 @@
     margin-block: 10px;
 }
 
+
 .info1 {
     font-family: 'Outfit', sans-serif;
     transition: background-color 0.3s, color 0.3s;
     padding: 0 8.4rem;
     background: rgb(199, 199, 199);
-    background: linear-gradient(0deg, white 7%, #e0e0e0 35%);
+    /* background: linear-gradient(0deg, white 7%, #e0e0e0 50%); */
     
     align-content: center;
+}
+
+
+.info1{
+    background-image: linear-gradient(
+      to bottom,
+      hsl(0, 0%, 88%) 0%,
+      hsl(0, 0%, 88.15%) 14.9%,
+      hsl(0, 0%, 88.58%) 27.3%,
+      hsl(0, 0%, 89.25%) 37.5%,
+      hsl(0, 0%, 90.1%) 45.8%,
+      hsl(0, 0%, 91.11%) 52.6%,
+      hsl(0, 0%, 92.22%) 58.1%,
+      hsl(0, 0%, 93.4%) 62.6%,
+      hsl(0, 0%, 94.6%) 66.5%,
+      hsl(0, 0%, 95.78%) 70%,
+      hsl(0, 0%, 96.89%) 73.4%,
+      hsl(0, 0%, 97.9%) 77.1%,
+      hsl(0, 0%, 98.75%) 81.2%,
+      hsl(0, 0%, 99.42%) 86.3%,
+      hsl(0, 0%, 99.85%) 92.4%,
+      hsl(0, 0%, 100%) 100%
+    );
 }
 
 .info1 h1 {
@@ -24,12 +48,12 @@
     font-family: 'Outfit', sans-serif;
     transition: background-color 0.3s, color 0.3s;
     padding: 1rem 8.4rem;
-    
     display: flex;
     justify-content: center;
     flex-direction: column;
     cursor: default;
     background: linear-gradient(0deg, #e0e0e0 3%, white 15%);
+    padding-bottom: 100px;
 }
 
 .info3{
@@ -46,7 +70,7 @@
 }
 
 .img-w {
-    width: 100%;
+    width: 60%;
     border-radius: 20%;
 }
 

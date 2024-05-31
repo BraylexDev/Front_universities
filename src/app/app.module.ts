@@ -23,6 +23,9 @@ import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './navigation/header/header.component';
 import { MatTabsModule } from '@angular/material/tabs';
 
+//sidenav
+import {MatExpansionModule} from '@angular/material/expansion';
+
 //For Change Theme Dark/Light
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,6 +77,7 @@ import { ClientRoutingModule } from './navigation/header/client-routing.module';
 import { SidebarModule } from 'primeng/sidebar';
 import { MethodologyComponent } from './ranking/methodology/methodology.component';
 import { CommitteeComponent } from './ranking/committee/committee.component';
+import { FaqsComponent } from './faqs/faqs.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +94,8 @@ import { CommitteeComponent } from './ranking/committee/committee.component';
     DetailNewComponent,
     AdminComponent,
     MethodologyComponent,
-    CommitteeComponent
+    CommitteeComponent,
+    FaqsComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +130,8 @@ import { CommitteeComponent } from './ranking/committee/committee.component';
     InputTextModule,
     ScrollTopModule,
     SidebarModule,
-
+    MatExpansionModule,
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
