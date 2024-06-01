@@ -36,6 +36,11 @@
       hsl(0, 0%, 100%) 100%
     );
 }
+
+.select{
+    margin-inline: 1rem;
+}
+
 .title h1 {
     /* margin-top: 10px; */
     font-size: 3rem;
@@ -47,6 +52,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+.head2 {
+    display: flex;
+    flex-direction: row;
+    
 }
 
 .methodology {

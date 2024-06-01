@@ -12,6 +12,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { RankingTest } from '../domain/rankingTest';
 import { TestServiceService } from '../service/testRanking/test-service.service';
+import { FormControl, FormGroup } from '@angular/forms';
+
+/* fields table */
+interface Colm{
+  label: string;
+}
 
 /* info tabla */
 export interface PeriodicElement {
@@ -69,9 +75,16 @@ const ELEMENT_DATA2: PeriodicElement2[] = [
 })
 export class RankingComponent {
 
+  formGroup: FormGroup;
+
   test: RankingTest[] = [];
   categories: any[] = [];
   countries: any[] = [];
+  /* cols: Colm[] = []; */
+  cols: string[] = [];
+  selectedCol: string = "";
+  clearField: string = "";
+  clearField2: string = "";
 
   //miga de pan
   breadcrumbs: Array<{ label: string, url: string }> = [];
@@ -87,9 +100,22 @@ export class RankingComponent {
   activityValues: number[] = [0, 100];
 
 
-  constructor(private breadcrumbService: BreadcrumbService, private customerService: CustomerserviceService, private rankingService: RankingserviceService, private translate: TranslateService, private testService: TestServiceService) {}
+  constructor(private breadcrumbService: BreadcrumbService, private customerService: CustomerserviceService, private rankingService: RankingserviceService, private translate: TranslateService, private testService: TestServiceService) {
+    this.formGroup = new FormGroup({
+      city: new FormControl<any | null>(null)
+    });
+  }
 
   ngOnInit(): void {
+    this.cols = ['Name', 'University', 'home_table_rank_category','SubCategory', 'Country'];
+    this.selectedCol='Name'
+   /*  this.cols=[
+      { label: 'Full Name' },
+      { label: 'Category' },
+      { label: 'SubCategory' },
+      { label: 'Country' },
+    ]; */
+
     //test
     this.testService.getRanking()
       .subscribe(
@@ -117,7 +143,6 @@ export class RankingComponent {
     this.rankingService.getYear(2023).subscribe(
       data => this.rankings = data
     ); */
-
     this.categories = [
       { label: 'Information & Communication Technologies', value: 'Information & Communication Technologies' },
       { label: 'Enabling & Strategic Technologies', value: 'Enabling & Strategic Technologies' },
@@ -150,12 +175,18 @@ export class RankingComponent {
     ];
   }
 
+  chOpt($event:any) {
+    console.log($event.target.value);
+  }
+
   /* getRankings(year: number): any{
     this.rankingService.getRankingLarge(year);
     this.loading = false;
-  }
+  }*/
 
   clear(table: Table) {
-    table.clear();
-  } */
+      table.clear();
+      this.clearField ="";
+      this.clearField2 ="";
+  }
 }
