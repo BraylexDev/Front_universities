@@ -30,11 +30,10 @@ a:active {
   cursor: default;
   font-family: 'Outfit', sans-serif;
   transition: background-color 0.3s, color 0.3s;
-  background: linear-gradient(0deg, #e0e0e0 3%, white 15%);
-  /* background-color: #f9832d1a; */
-  /* background-image: radial-gradient(circle farthest-side at 10% 50%, #f9832d33 50%, white 0%, white 50%); */
-  /* background-image: radial-gradient(ellipse farthest-corner at 10px 100px , #fff 50%, rgba(0, 255, 0, 0) 0%, gray 50%); */
-  /* padding: 0 8.4rem; */
+  /* background: linear-gradient(0deg, #e0e0e0 3%, white 15%); */
+  /* background: #e0e0e0; */
+  /* background: rgb(199, 199, 199); */
+  background: linear-gradient(0deg, #e0e0e0 0%, white 13%, white 90%, #e0e0e0 100%);
 }
 
 .first_word {

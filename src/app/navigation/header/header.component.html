@@ -4,7 +4,7 @@
         [mode]="(isHandset$ | async) ? 'over' : 'over'"
         [(opened)]="opened">
       <mat-toolbar style="display: flex; justify-content: space-between;">
-        <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="100px" style="cursor: hand; filter:contrast(3)">
+        <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="150px" style="cursor: hand;">
         <button
           type="button"
           aria-label="Toggle sidenav"
@@ -42,13 +42,13 @@
         </button>
         <div class="uno">
           <a routerLink="">
-            <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="100px" style="cursor: hand; filter:contrast(3)">
+            <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="150px" style="cursor: hand;">
           </a>
         </div>
         <div class="dos" *ngIf="!(isHandset$ | async)">
           <ul>
             <li><a class="navb" [routerLink]="['home']" routerLinkActive="active"  >
-              <i class="pi pi-home"></i>
+              <!-- <i class="pi pi-home"></i> -->
               {{'nav_home' | translate}}</a></li>
             <li><a class="navb" [routerLink]="['ranking']" [routerLinkActive]="['active']"  >{{'nav_rankings' | translate}}</a></li>
             <li>
@@ -89,9 +89,13 @@
         </div>
       </mat-toolbar>
       <!-- Add Content Here -->
-      <router-outlet></router-outlet>
-      <app-footer *ngIf="!(isHandset$ | async)"></app-footer>
-      <p-scrollTop target="parent"></p-scrollTop>
-    </mat-sidenav-content>
+      <div class="content">
+        <router-outlet></router-outlet>
+        <app-footer *ngIf="!(isHandset$ | async)"></app-footer>
+      </div>
+      <!-- <p-scrollTop></p-scrollTop> -->
+      
+    </mat-sidenav-content> 
 </mat-sidenav-container>
-  
+  <!-- <p-scrollTop></p-scrollTop> -->
+<!-- </div> -->

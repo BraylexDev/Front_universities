@@ -5,18 +5,18 @@
             <h3>{{'foot_site_map' | translate}}</h3>
             <li routerLink="/home">{{'nav_home' | translate}}</li>
             <li routerLink="/ranking">{{'nav_rankings' | translate}}</li>
-            
+            <li routerLink="/methodology">{{'nav_methodology' | translate }}</li>
             <li routerLink="/about">{{'nav_about' | translate}}</li>
             <li routerLink="/contact">{{'nav_contact' | translate}}</li>
         </ul>
-        <div class="line"></div>
+        <!-- <div class="line"></div> -->
         <ul>
             <h3>{{'nav_contact' | translate}}</h3>
             <li>{{'foot_faqs' | translate}}</li>
             <li>{{'foot_facebook' | translate}}</li>
             <li>{{'foot_instagram' | translate}}</li>
         </ul>
-        <div class="line"></div>
+        <!-- <div class="line"></div> -->
         <ul>
             <h3>{{'foot_config' | translate}}</h3>
             <li class="lang">
@@ -24,6 +24,9 @@
                 <span *ngIf="translate.currentLang == 'en'">English (EN)</span>
                 <span *ngIf="translate.currentLang == 'ar'">العربية (AE)</span>
             </li>
+            <li>{{'foot_terms'  | translate}}</li>
+            <li>{{'foot_privacy'| translate}}</li>
+            <li>{{'foot_cookie' | translate}}</li>
         </ul>
     </div>
     <div class="line2"></div>

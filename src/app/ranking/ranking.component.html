@@ -15,19 +15,65 @@
         <p-table #dt1 [value]="test" dataKey="id" [rows]="20" [showCurrentPageReport]="true"
             [rowsPerPageOptions]="[20, 50, 100]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}"
-            [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'subcategory2', 'country', 'score']">
+            [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'country', 'score']">
+            <ng-template pTemplate="paginatorleft" let-state>  </ng-template> 
             <ng-template pTemplate="caption" let-state>
                 <div class="flex head2">
-                    <form [formGroup]="formGroup">
-                        <p-dropdown [(ngModel)]="selectedCol" formControlName="city" [options]="cols" ></p-dropdown>
-                    </form>
-                    <span class="p-input-icon-right ml-auto select">
-                        <i class="pi pi-search"></i>
-                        <input class="s" pInputText type="text" [(ngModel)]="clearField"
-                            (input)="dt1.filter($any($event.target).value, selectedCol.toLowerCase() ,'contains')"
-                            placeholder="{{'ranking_table_search2' | translate}}" />
-                    </span>
-                    <button pButton label="{{'home_table_clear' | translate}}" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                    <!-- filter modal -->
+                    <p-button (click)="showDialog()" icon="pi pi-external-link" label="Filters"></p-button>
+                    <p-dialog header="Filter" [(visible)]="visible" [modal]="true" [closeOnEscape]="true" [breakpoints]="{ '960px': '90vw' }" [style]="{ width: '50vw'}" [draggable]="false" [resizable]="false">
+                        <p-panel header="Select Country" [toggleable]="true">
+                            <p-dropdown appendTo="body" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="flex align-items-center gap-2" *ngIf="selectedCountry" style="display: flex;">
+                                        <span [class]="'fi fi-' + selectedCountry.code | lowercase" style="width: 18px; margin-inline: 10px;"></span>
+                                        <div>{{ selectedCountry.name }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-country pTemplate="item">
+                                    <div class="flex align-items-center gap-2" style="display: flex;">
+                                        <span [class]="'fi fi-' + country.code | lowercase" style="width: 18px; margin-inline: 10px;"></span>
+                                        <div>{{ country.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </p-panel>
+                        <p-panel header="Select Category" [toggleable]="true">
+                            <p-dropdown appendTo="body" [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
+                                <ng-template pTemplate="selectedItem">
+                                    <div *ngIf="selectedCategory" style="display: flex; ">
+                                        <div>{{ selectedCategory.name }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-category pTemplate="item">
+                                    <div style="display: flex;">
+                                        <div>{{ category.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </p-panel>
+                        <p-panel header="Select SubCategory" [toggleable]="true" *ngIf="selectedCategory">
+                            <p-dropdown appendTo="body" [options]="selectedCategory.subcategory" [(ngModel)]="selectedSubcategory" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="flex align-items-center gap-2" *ngIf="selectedSubcategory" style="display: flex; ">
+                                        <div>{{ selectedSubcategory }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-subcategory pTemplate="item">
+                                    <div class="flex align-items-center gap-2" style="display: flex;">
+                                        <div>{{ subcategory }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </p-panel>
+                        <ng-template pTemplate="footer">
+                            <p-button *ngIf="selectedCategory && selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals'); dt1.filter(selectedCategory.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>
+                            <p-button *ngIf="selectedCountry && !selectedCategory" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals')" label="Apply" styleClass="p-button-text"></p-button>
+                            <p-button *ngIf="!selectedCountry && !selectedCategory" icon="pi pi-check" (click)="visible = false;" label="Apply" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                    </p-dialog>
+                    <!-- End filter modal -->
+                    <button pButton label="{{'home_table_clear' | translate}}" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)" style="margin-inline: 30px;"></button>
                 </div>
                 <div class="line"></div>
                 <div class="flex head">

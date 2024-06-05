@@ -10,7 +10,7 @@
   font-family: 'Outfit', sans-serif;
   transition: background-color 0.3s, color 0.3s;
   padding: 0 8.4rem;
-  background: rgb(199, 199, 199);
+  /* background: rgb(199, 199, 199); */
   /* background: linear-gradient(0deg, white 7%, #e0e0e0 100%); */
   align-content: center;
 }
@@ -65,10 +65,12 @@
   display: flex;
   text-align: center;
   justify-content: center;
+  background: white;
 }
 
 .detail h3 {
   font-size: 2rem;
+  margin: 0;
 }
 
 .detail p {
@@ -76,6 +78,9 @@
   line-height: 1.5;
 }
 
+.detailInfo{
+  padding-inline: 15%;
+}
 
 .container {
   padding-block: 1%;
@@ -101,6 +106,7 @@
   display: flex;
   margin-bottom: 30px;
   align-items: center;
+  padding-inline: 15%;
 }
 
 .contact-info-icon {

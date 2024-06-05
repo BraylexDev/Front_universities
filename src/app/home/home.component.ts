@@ -124,6 +124,8 @@ export class HomeComponent {
   public stocklist: any;
 
   ngOnInit() {
+    this.onScrollToTop();
+
     //test
     this.testService.getRanking()
       .subscribe(res => {

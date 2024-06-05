@@ -64,6 +64,12 @@ import { InputTextModule } from 'primeng/inputtext';
 /* Scroll Top */
 import { ScrollTopModule } from 'primeng/scrolltop';
 
+/* Modal filter */
+import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ToastModule } from 'primeng/toast';
+import { AccordionModule } from 'primeng/accordion';
+import { PanelModule } from 'primeng/panel';
 
 /* Translate */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -131,6 +137,11 @@ import { FaqsComponent } from './faqs/faqs.component';
     ScrollTopModule,
     SidebarModule,
     MatExpansionModule,
+    DialogModule,
+    DynamicDialogModule,
+    ToastModule,
+    AccordionModule,
+    PanelModule,
     
     TranslateModule.forRoot({
       loader: {

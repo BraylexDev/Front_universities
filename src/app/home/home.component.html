@@ -57,11 +57,6 @@
                             {{'home_table_rank_subcategory' | translate}}
                         </div>
                     </th>
-                    <th style="min-width:8rem;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_subcategory2' | translate}}
-                        </div>
-                    </th>
                     <th style="min-width:5rem; text-align: center;">
                         <div class="flex align-items-center">
                             {{'home_table_rank_country' | translate}}
@@ -106,9 +101,6 @@
                     <td>
                         {{rankingTest.subcategory}}
                     </td>
-                    <td>
-                        {{rankingTest.subcategory2}}
-                    </td>
                     <td style="text-align: center;">
                         <span [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="font-size: 2rem"></span>
                         <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
@@ -146,7 +138,7 @@
 <section class=" news">
     
     <div class="card">
-        <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions" [circular]="true">
+        <p-carousel [value]="products" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions" [circular]="true">
             <ng-template let-product pTemplate="item">
                 <div class="product-item">
                     <div class="product-item-content">

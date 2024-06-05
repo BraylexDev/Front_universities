@@ -15,6 +15,9 @@
     "foot_facebook": "Facebook",
     "foot_instagram": "Instagram",
     "foot_copyright": "Copyright © 2024. All Rights Reserved.",
+    "foot_terms": "Terms And Conditions",
+    "foot_privacy": "Privacy Policy",
+    "foot_cookie": "Cookie Setting",    
 
     "home_title1": "TOP",
     "home_title2": "Arab Researchers Ranking",
@@ -41,7 +44,7 @@
     "home_title_section_two": "Recent News",
     "home_news_option_view_more": "View More",
 
-    "home_collab":"Collaborations",
+    "home_collab":"Partners",
 
     "about_title":"About Us",
     "about_mission_title":"Independent and Evolving...",
@@ -53,7 +56,7 @@
     "about_strategy_parag2":"Welcome to a community where excellence is not just recognized—it is celebrated and cultivated. Welcome to TOP Arab Researchers Ranking.",
 
     "ranking_title": "TOP Arab Researchers Ranking",
-    "ranking_parag": "Developed through a symbiotic collaboration between Prof. Fardoun’s expert insights and Elsevier's vast reservoirs of data, the ranking methodology is comprehensive, inclusive, transparent, and adaptive. It considers a wide array of measurement indicators, from citation impact to collaborative ventures, ensuring a multifaceted evaluation of scholarly work. The selected indicators reflect the specificities of research in the Arab world.",
+    "ranking_parag": "Developed through a symbiotic collaboration between expert insights and Elsevier's vast reservoirs of data, the ranking methodology is comprehensive, inclusive, transparent, and adaptive. It considers a wide array of measurement indicators, from citation impact to collaborative ventures, ensuring a multifaceted evaluation of scholarly work. The selected indicators reflect the specificities of research in the Arab world.",
     "ranking_methodology": "Methodology - Top Arab Researchers",
     "ranking_table_description": "List of Researchers",
     "ranking_table_description2": "Category",
