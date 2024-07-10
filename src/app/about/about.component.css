@@ -2,6 +2,13 @@
     border-top: 1px solid gray;
     opacity: .3;
     margin-block: 10px;
+    background: #e0e0e0;
+}
+
+.line2 {
+    display: flex;
+    flex-direction: column;
+    background: #e0e0e0;
 }
 
 
@@ -62,6 +69,9 @@
 .info3{
     background: linear-gradient(0deg, white 3%, #e0e0e0 15%);
 }
+.info5{
+    background: #e0e0e0;
+}
 
 .info4{
     background: white;
@@ -73,7 +83,7 @@
 }
 
 .img-w {
-    width: 30%;
+    width: 50vh;
 }
 
 .main {

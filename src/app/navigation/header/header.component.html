@@ -4,7 +4,7 @@
         [mode]="(isHandset$ | async) ? 'over' : 'over'"
         [(opened)]="opened">
       <mat-toolbar style="display: flex; justify-content: space-between;">
-        <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="150px" style="cursor: hand;">
+        <img src="../../assets/images/logo.png" alt="Logo" height="30px" width="120px" style="cursor: hand;">
         <button
           type="button"
           aria-label="Toggle sidenav"
@@ -42,7 +42,7 @@
         </button>
         <div class="uno">
           <a routerLink="">
-            <img src="../../assets/images/logo.png" alt="Logo" height="40px" width="150px" style="cursor: hand;">
+            <img src="../../assets/images/logo.png" alt="Logo" height="30px" width="120px" style="cursor: hand;">
           </a>
         </div>
         <div class="dos" *ngIf="!(isHandset$ | async)">

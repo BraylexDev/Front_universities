@@ -21,7 +21,7 @@
 
     "home_title1": "TOP",
     "home_title2": "Arab Researchers Ranking",
-    "home_parag": "At TOP Arab Researchers Ranking, we are driven by a singular vision: to celebrate and advance the frontiers of academic excellence in the Arab world. Our mission is to offer a comprehensive and dynamic ranking platform that not only showcases but also nurtures the intellectual contributions of Arab scholars. ",
+    "home_parag": "TOP Arab Researchers Ranking is an independent and dynamic platform dedicated to celebrating and advancing academic excellence in the Arab world. In collaboration with Elsevier, we offer a comprehensive and transparent assessment of the intellectual contributions of Arab researchers, considering everything from citation impact to scholarly collaborations. Join us in this community committed to a future rich in knowledge and academic excellence.",
     "home_parag2": "Inspired Educational Services (IES) in collaboration with Elsevier – a global leader in research publishing and information analytics – worked extensively with the research community to ensure a better understanding of the research culture in the Arab world and how rankings could be contextualized to reflect this culture.",
 
     "home_title_section_one": "Ranking",
@@ -79,9 +79,10 @@
     "contact_title": "Contact Us",
     "contact_subtitle_get": "Get in touch",
     "contact_parag": "We value the connections and conversations that move academia forward. Whether you’re a researcher seeking more information, an academic institution wanting to collaborate, or just have general inquiries, we’re here to help.",
-    "contact_address": "Address",
-    "contact_phone": "Phone",
-    "contact_email": "Email",
+    "contact_address": "General Inquiries",
+    "contact_phone": "Support",
+    "contact_email": "Collaboration",
+    "contact_press": "Press",
     "contact_send_message": "Send Us a Message",
     "contact_full_name": "Full Name",
     "contact_type": "Type your Message",
