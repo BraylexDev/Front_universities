@@ -144,11 +144,18 @@ export class RankingComponent implements OnInit {
     this.selectedCol = 'Name'
 
     //test
+    /* this.testService.getRanking()
+      .subscribe(
+        data => {
+          this.test = data.slice(0,1000);
+        }
+      ); */
     this.testService.getRanking()
       .subscribe(
         {
           next: (test2: any) => {
-            this.test = test2;
+
+            this.test = test2.slice(0,1000);
             /* console.log(this.test) */
             this.loading = false;
           },
@@ -200,12 +207,14 @@ export class RankingComponent implements OnInit {
       { name: 'Kuwait', code: 'KW' },
       { name: 'Lebanon', code: 'LB' },
       { name: 'Libya', code: 'LY' },
+      { name: 'Mauritania', code: 'MR'},
       { name: 'Morocco', code: 'MA' },
       { name: 'Oman', code: 'OM' },
       { name: 'Palestine', code: 'PS' },
       { name: 'Qatar', code: 'QA' },
       { name: 'Saudi Arabia', code: 'SA' },
       { name: 'Sudan', code: 'SS' },
+      { name: 'Somalia', code: 'SO'},
       { name: 'Syria', code: 'SY' },
       { name: 'Tunisia', code: 'TN' },
       { name: 'United Arab Emirates', code: 'AE' },

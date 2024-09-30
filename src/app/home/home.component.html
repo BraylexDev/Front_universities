@@ -138,11 +138,11 @@
 <section class=" news">
     
     <div class="card">
-        <p-carousel [value]="products" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions" [circular]="true">
+        <p-carousel [value]="products" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions" [circular]="false">
             <ng-template let-product pTemplate="item">
                 <div class="product-item">
                     <div class="product-item-content">
-                        <div class="mb-3">
+                        <div class="mb-3" style="height: 50%;">
                             <img src="../../assets/images/news/{{ product.image }}" [alt]="product.name" class="product-image" />
                         </div>
                         <div>

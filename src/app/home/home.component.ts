@@ -150,7 +150,7 @@ export class HomeComponent {
           },
           {
               breakpoint: '768px',
-              numVisible: 2,
+              numVisible: 1,
               numScroll: 2
           },
           {
