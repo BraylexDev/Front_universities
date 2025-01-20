@@ -24,8 +24,7 @@
     <div class="card2">
         <p-table dir="auto" #dt1 [value]="test" dataKey="id" [showCurrentPageReport]="true"
             [loading]="loading"
-            currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}"
-            [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'subcategory2', 'country', 'score']">
+            currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}">
             <ng-template pTemplate="caption" let-state>
                 <p>{{'home_parag_section_one' | translate}}</p>
             </ng-template>
@@ -37,12 +36,12 @@
                             <p-sortIcon field="position"></p-sortIcon>
                         </div>
                     </th>
-                    <th style="min-width:5rem;">
+                    <th style="min-width:5rem;" title="Name of the author">
                         <div class="flex align-items-center">
                             {{'home_table_rank_name' | translate}}
                         </div>
                     </th>
-                    <th style="min-width:5rem;">
+                    <th style="min-width:5rem;" title="Main institution in first year of publication">
                         <div class="flex align-items-center">
                             {{'home_table_rank_institution' | translate}}
                         </div>
@@ -57,12 +56,17 @@
                             {{'home_table_rank_subcategory' | translate}}
                         </div>
                     </th>
-                    <th style="min-width:5rem; text-align: center;">
+                    <th style="min-width:5rem; text-align: center;" title="Country of main institution in first year of publication">
                         <div class="flex align-items-center">
                             {{'home_table_rank_country' | translate}}
                         </div>
                     </th>
-                    <th pSortableColumn="score" style="min-width:5rem; text-align: center; padding-inline: 0;">
+                    <th style="min-width:5rem; text-align: center;" title="Country of main institution in last year of publication">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_country_work' | translate}}
+                        </div>
+                    </th>
+                    <th pSortableColumn="score" style="min-width:5rem; text-align: center; padding-inline: 0;" title="Combined weighted author indicator">
                         <div class="flex align-items-center">
                             {{'home_table_rank_score' | translate}}
                             <p-sortIcon field="score"></p-sortIcon>
@@ -103,9 +107,12 @@
                     </td>
                     <td style="text-align: center;">
                         <span [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="font-size: 2rem"></span>
-                        <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                            [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="width: 20px" /> -->
                         <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.country }}</span>
+                    </td>
+                    <td style="text-align: center; ">
+                        <span  [class]="'fi fi-' + rankingTest.codeWorking | lowercase" style="font-size: 2rem; border-style: ridge ; border-width: 0px 0.1px; border-color: rgb(175, 175, 175);"
+                            [title]="rankingTest.working"></span>
+                        <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.working }}</span>
                     </td>
                     <td style="text-align: center;">
                         {{ rankingTest.score }}

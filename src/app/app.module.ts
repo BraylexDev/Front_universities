@@ -107,7 +107,7 @@ import { FaqsComponent } from './faqs/faqs.component';
     BrowserModule,
     AppRoutingModule,
     AdminRoutingModule,
-    ClientRoutingModule,
+    /* ClientRoutingModule, */
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,

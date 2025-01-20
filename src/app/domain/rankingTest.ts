@@ -9,5 +9,7 @@ export interface RankingTest {
     university?: string;
     country?: string;
     codeCountry?: string;
+    working?: string;
+    codeWorking?: string;
     profile?:string
   }

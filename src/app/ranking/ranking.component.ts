@@ -89,6 +89,7 @@ const ELEMENT_DATA2: PeriodicElement2[] = [
 export class RankingComponent implements OnInit {
   @Input() filters: { [s: string]: FilterMetadata | FilterMetadata[] | undefined } = {};
 
+  selectedLastCountry: Country | undefined;
   selectedCountry: Country | undefined;
   selectedCategory: Category | undefined;
   selectedSubcategory: string = '';
@@ -138,7 +139,7 @@ export class RankingComponent implements OnInit {
 
     this.onScrollToTop();
 
-    this.cols = ['Name', 'University', 'Category', 'SubCategory', 'Country'];
+    this.cols = ['Name', 'University', 'Category', 'SubCategory', 'Country', 'LastCountry'];
     this.cats = ['Agriculture, Fisheries & Forestry', 'Biology', 'Biomedical Research', 'Built Environment & Design', 'Chemistry', 'Clinical Medicine', 'Communication & Textual Studies', 'Earth & Environmental Sciences', 'Economics & Business', 'Enabling & Strategic Technologies', 'Engineering', 'Historical Studies', 'Information & Communication Technologies', 'Mathematics & Statistics', 'Physics & Astronomy', 'Psychology & Cognitive Sciences', 'Public Health & Health Services', 'Social Sciences'];
 
     this.selectedCol = 'Name'
@@ -155,7 +156,7 @@ export class RankingComponent implements OnInit {
         {
           next: (test2: any) => {
 
-            this.test = test2.slice(0,1000);
+            this.test = test2.slice(0, 1000);
             /* console.log(this.test) */
             this.loading = false;
           },
@@ -200,6 +201,66 @@ export class RankingComponent implements OnInit {
     ]
 
     this.countries = [
+      {name:"Algeria",code:"dz"},
+      {name:"Australia",code:"au"},
+      {name:"Austria",code:"at"},
+      {name:"Bangladesh",code:"bd"},
+      {name:"Belarus",code:"by"},
+      {name:"Belgium",code:"be"},
+      {name:"Bosnia and Herzegovina",code:"ba"},
+      {name:"Brazil",code:"br"},
+      {name:"Bulgaria",code:"bg"},
+      {name:"Canada",code:"ca"},
+      {name:"China",code:"cn"},
+      {name:"Cyprus",code:"cy"},
+      {name:"Czech Republic",code:"cz"},
+      {name:"Egypt",code:"eg"},
+      {name:"Finland",code:"fi"},
+      {name:"France",code:"fr"},
+      {name:"Germany",code:"de"},
+      {name:"Greece",code:"gr"},
+      {name:"Hungary",code:"hu"},
+      {name:"India",code:"in"},
+      {name:"Iran",code:"ir"},
+      {name:"Iraq",code:"iq"},
+      {name:"Ireland",code:"ie"},
+      {name:"Italy",code:"it"},
+      {name:"Japan",code:"jp"},
+      {name:"Jordan",code:"jo"},
+      {name:"Kazakhstan",code:"kz"},
+      {name:"Kuwait",code:"kw"},
+      {name:"Lebanon",code:"lb"},
+      {name:"Libya",code:"ly"},
+      {name:"Malaysia",code:"my"},
+      {name:"Mauritania",code:"mr"},
+      {name:"Morocco",code:"ma"},
+      {name:"Netherlands",code:"nl"},
+      {name:"New Zealand ",code:"nz"},
+      {name:"Oman",code:"om"},
+      {name:"Pakistan",code:"pk"},
+      {name:"Palestine",code:"ps"},
+      {name:"Portugal",code:"pt"},
+      {name:"Qatar",code:"qa"},
+      {name:"Saudi Arabia",code:"sa"},
+      {name:"Singapore",code:"sg"},
+      {name:"Somalia",code:"so"},
+      {name:"South Africa",code:"za"},
+      {name:"South Korea",code:"kr"},
+      {name:"Spain",code:"es"},
+      {name:"Sudan",code:"sd"},
+      {name:"Sweden",code:"se"},
+      {name:"Switzerland",code:"ch"},
+      {name:"Syria",code:"sy"},
+      {name:"Thailand",code:"th"},
+      {name:"Tunisia",code:"tn"},
+      {name:"Türkiye",code:"tr"},
+      {name:"United Arab Emirates",code:"ae"},
+      {name:"United Kingdom",code:"gb"},
+      {name:"United States of America",code:"us"},
+      {name:"Yemen",code:"ye"}
+    ]
+
+    /* this.countries = [
       { name: 'Algeria', code: 'DZ' },
       { name: 'Egypt', code: 'EG' },
       { name: 'Iraq', code: 'IQ' },
@@ -207,19 +268,19 @@ export class RankingComponent implements OnInit {
       { name: 'Kuwait', code: 'KW' },
       { name: 'Lebanon', code: 'LB' },
       { name: 'Libya', code: 'LY' },
-      { name: 'Mauritania', code: 'MR'},
+      { name: 'Mauritania', code: 'MR' },
       { name: 'Morocco', code: 'MA' },
       { name: 'Oman', code: 'OM' },
       { name: 'Palestine', code: 'PS' },
       { name: 'Qatar', code: 'QA' },
       { name: 'Saudi Arabia', code: 'SA' },
       { name: 'Sudan', code: 'SS' },
-      { name: 'Somalia', code: 'SO'},
+      { name: 'Somalia', code: 'SO' },
       { name: 'Syria', code: 'SY' },
       { name: 'Tunisia', code: 'TN' },
       { name: 'United Arab Emirates', code: 'AE' },
       { name: 'Yemen', code: 'YE' }
-    ];
+    ]; */
   }
 
   /* getRankings(year: number): any{
@@ -229,9 +290,11 @@ export class RankingComponent implements OnInit {
 
   clear(table: Table) {
     table.clear();
+    table.filter('', 'working', 'equals');
     table.filter('', 'country', 'equals');
     table.filter('', 'category', 'equals');
     table.filter('', 'subcategory', 'equals');
+    this.selectedLastCountry = undefined;
     this.selectedCountry = undefined;
     this.selectedCategory = undefined;
     this.selectedSubcategory = '';

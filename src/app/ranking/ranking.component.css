@@ -104,6 +104,10 @@ td {
     cursor: default;
 }
 
+th{
+    cursor: default;
+}
+
 .name:hover {
     color: #f9532d;
     cursor: pointer;
