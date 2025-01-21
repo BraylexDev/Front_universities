@@ -193,15 +193,17 @@ a {
     .container {
         padding: 0 4.4rem;
     }
+    .detailTitle{
+        padding: 0 4.4rem;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .container {
         padding: 0 1.6rem;
     }
-
-    .main {
-        padding: 1rem;
+    .detailTitle{
+        padding: 0 1.6rem;
     }
 }
 
