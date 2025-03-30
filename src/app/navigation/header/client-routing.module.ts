@@ -9,6 +9,7 @@ import { RankingComponent } from 'src/app/ranking/ranking.component';
 import { HeaderComponent } from './header.component';
 import { MethodologyComponent } from 'src/app/ranking/methodology/methodology.component';
 import { CommitteeComponent } from 'src/app/ranking/committee/committee.component';
+import { NotfoundComponent } from 'src/app/notFound/notfound/notfound.component';
 
 const routes: Routes = [
   { path: '', component: HeaderComponent, 
@@ -22,7 +23,8 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent, data: { breadcrumb: 'contact' }},
     ]
   },
-  { path: 'home', redirectTo:''}
+  { path: 'home', redirectTo:''},
+  { path: '**', pathMatch: 'full', component: NotfoundComponent }
 ];
 
 @NgModule({

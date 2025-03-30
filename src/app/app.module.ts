@@ -84,6 +84,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MethodologyComponent } from './ranking/methodology/methodology.component';
 import { CommitteeComponent } from './ranking/committee/committee.component';
 import { FaqsComponent } from './faqs/faqs.component';
+import { NotfoundComponent } from './notFound/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -101,13 +102,14 @@ import { FaqsComponent } from './faqs/faqs.component';
     AdminComponent,
     MethodologyComponent,
     CommitteeComponent,
-    FaqsComponent
+    FaqsComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+   /*  AppRoutingModule, */
     AdminRoutingModule,
-    /* ClientRoutingModule, */
+    ClientRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,

@@ -22,7 +22,7 @@
                     <!-- filter modal -->
                     <p-button (click)="showDialog()" icon="pi pi-external-link" label="Filters"></p-button>
                     <p-dialog header="Filter" [(visible)]="visible" [modal]="true" [closeOnEscape]="true" [breakpoints]="{ '960px': '90vw' }" [style]="{ width: '50vw'}" [draggable]="false" [resizable]="false">
-                        <p-panel header="Select Country" [toggleable]="true">
+                        <!-- <p-panel header="Select Country" [toggleable]="true">
                             <p-dropdown appendTo="body" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
                                     <div class="flex align-items-center gap-2" *ngIf="selectedCountry" style="display: flex;">
@@ -37,7 +37,7 @@
                                     </div>
                                 </ng-template>
                             </p-dropdown>
-                        </p-panel>
+                        </p-panel> -->
                         <p-panel header="Select Last Country" [toggleable]="true">
                             <p-dropdown appendTo="body" [options]="countries" [(ngModel)]="selectedLastCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
@@ -90,8 +90,12 @@
                             <p-button *ngIf="!selectedCountry && !selectedLastCountry &&!selectedCategory" icon="pi pi-check" (click)="visible = false;" label="Apply" styleClass="p-button-text"></p-button> -->
                         </ng-template>
                     </p-dialog>
+                    <!-- Exclude country NOT Arabs -->
+                    <button *ngIf="isfilterArabResearch" [ngClass] = "{'stylefilterArabResearch': isfilterArabResearch}" pButton label="{{'home_table_arab_only' | translate}}" class="p-button-outlined" icon="pi pi-eye-slash" (click)="filterArabResearch()" style="margin-inline: 30px;"></button>
+                    <button *ngIf="!isfilterArabResearch" [ngClass] = "{'stylefilterArabResearch': isfilterArabResearch}" pButton label="{{'home_table_arab_only' | translate}}" class="p-button-outlined" icon="pi pi-eye" (click)="filterArabResearch()" style="margin-inline: 30px;"></button>
                     <!-- End filter modal -->
                     <button pButton label="{{'home_table_clear' | translate}}" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)" style="margin-inline: 30px;"></button>
+                    
                 </div>
                 <div class="line"></div>
                 <div class="flex head">
@@ -130,11 +134,6 @@
                     <th style="min-width:8rem;">
                         <div class="flex align-items-center">
                             {{'home_table_rank_subcategory' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem; text-align: center;" title="Country of main institution in first year of publication">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_country' | translate}}
                         </div>
                     </th>
                     <th style="min-width:5rem; text-align: center;" title="Country of main institution in last year of publication">
@@ -180,11 +179,6 @@
                     </td>
                     <td>
                         {{rankingTest.subcategory}}
-                    </td>
-                    <td style="text-align: center; ">
-                        <span  [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="font-size: 2rem; border-style: ridge ; border-width: 0px 0.1px; border-color: rgb(175, 175, 175);"
-                            [title]="rankingTest.country"></span>
-                        <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.country }}</span>
                     </td>
                     <td style="text-align: center; ">
                         <span  [class]="'fi fi-' + rankingTest.codeWorking | lowercase" style="font-size: 2rem; border-style: ridge ; border-width: 0px 0.1px; border-color: rgb(175, 175, 175);"

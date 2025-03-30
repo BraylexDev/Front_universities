@@ -88,6 +88,16 @@ a {
     text-decoration: none;
 }
 
+.stylefilterArabResearch{
+    background-color: #3271f8;
+    color: #ffffff;
+}
+
+.stylefilterArabResearch:hover{
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+}
+
 /* table Rankings  */
 /*:host ::ng-deep {*/
 .p-progressbar {

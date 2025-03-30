@@ -56,11 +56,6 @@
                             {{'home_table_rank_subcategory' | translate}}
                         </div>
                     </th>
-                    <th style="min-width:5rem; text-align: center;" title="Country of main institution in first year of publication">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_country' | translate}}
-                        </div>
-                    </th>
                     <th style="min-width:5rem; text-align: center;" title="Country of main institution in last year of publication">
                         <div class="flex align-items-center">
                             {{'home_table_rank_country_work' | translate}}
@@ -79,46 +74,42 @@
                     </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-rankingTest>
+            <ng-template pTemplate="body" let-test>
                 <tr>
                     <td style="text-align: center; border-right: 1px solid currentColor;">
-                        <img [ngClass] = "{'gold': rankingTest.position == '1'}" src=""
+                        <img [ngClass] = "{'gold': test.position == '1'}" src=""
                             alt="">  
-                        <img [ngClass] = "{'plate': rankingTest.position == '2'}" src=""
+                        <img [ngClass] = "{'plate': test.position == '2'}" src=""
                             alt="">  
-                        <img [ngClass] = "{'bronze': rankingTest.position == '3'}" src=""
+                        <img [ngClass] = "{'bronze': test.position == '3'}" src=""
                             alt="">  
-                        <span [ngClass] = "{'number': rankingTest.position == '1' || rankingTest.position == '2'
-                            || rankingTest.position == '3' }">
-                            {{rankingTest.position}}
+                        <span [ngClass] = "{'number': test.position == '1' || test.position == '2'
+                            || test.position == '3' }">
+                            {{test.position}}
                         </span>
                     </td>
                     <td>
-                        {{ rankingTest.name }}
+                        {{ test.name }}
                     </td>
                     <td class="name">
-                        {{ rankingTest.university }}
+                        {{ test.university }}
                     </td>
                     <td>
-                        {{rankingTest.category}}
+                        {{test.category}}
                     </td>
                     <td>
-                        {{rankingTest.subcategory}}
-                    </td>
-                    <td style="text-align: center;">
-                        <span [class]="'fi fi-' + rankingTest.codeCountry | lowercase" style="font-size: 2rem"></span>
-                        <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.country }}</span>
+                        {{test.subcategory}}
                     </td>
                     <td style="text-align: center; ">
-                        <span  [class]="'fi fi-' + rankingTest.codeWorking | lowercase" style="font-size: 2rem; border-style: ridge ; border-width: 0px 0.1px; border-color: rgb(175, 175, 175);"
-                            [title]="rankingTest.working"></span>
-                        <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.working }}</span>
+                        <span  [class]="'fi fi-' + test.codeWorking | lowercase" style="font-size: 2rem; border-style: ridge ; border-width: 0px 0.1px; border-color: rgb(175, 175, 175);"
+                            [title]="test.working"></span>
+                        <span hidden class="ml-1 vertical-align-middle">{{ test.working }}</span>
                     </td>
                     <td style="text-align: center;">
-                        {{ rankingTest.score }}
+                        {{ test.score }}
                     </td>
                     <td>
-                        <a target="_blank" href= {{rankingTest.profile}}>View Profile</a>
+                        <a target="_blank" href= {{test.profile}}>View Profile</a>
                     </td>
                 </tr>
             </ng-template>

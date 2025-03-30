@@ -7,7 +7,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 //table
-import { Customer, Representative } from '../domain/customer';
+import { CodeCountry, Customer, Representative } from '../domain/customer';
 import { CustomerserviceService } from '../service/customer/customerservice.service';
 import { Table } from 'primeng/table';
 import { RankingserviceService } from '../service/ranking/rankingservice.service';
@@ -94,6 +94,7 @@ export class RankingComponent implements OnInit {
   selectedCategory: Category | undefined;
   selectedSubcategory: string = '';
   visible!: boolean;
+  isfilterArabResearch:boolean = false;
 
   showDialog() {
     this.visible = true;
@@ -106,9 +107,12 @@ export class RankingComponent implements OnInit {
   }
 
   test: RankingTest[] = [];
+  testAux: RankingTest[] = [];
   cats: any[] = [];
   categories: Category[] = [];
   countries: Country[] = [];
+  codesCountries: CodeCountry[] = [];
+  arabCountries: string[] = [];
   /* cols: Colm[] = []; */
   cols: string[] = [];
   selectedCol: string = "";
@@ -157,6 +161,9 @@ export class RankingComponent implements OnInit {
           next: (test2: any) => {
 
             this.test = test2.slice(0, 1000);
+            this.changeCodeCountry();
+            this.specifyNameCountry();
+            this.testAux=this.test;
             /* console.log(this.test) */
             this.loading = false;
           },
@@ -198,6 +205,28 @@ export class RankingComponent implements OnInit {
       { name: 'Psychology & Cognitive Sciences', subcategory: ['Business & Management', 'Human Factors', 'Psychiatry', 'Social Psychology'] },
       { name: 'Public Health & Health Services', subcategory: ['General & Internal Medicine', 'Health Policy & Services', 'Nursing', 'Public Health', 'Rehabilitation', 'Substance Abuse'] },
       { name: 'Social Sciences', subcategory: ['Business & Management', 'Education', 'Information & Library Sciences', 'Law', 'Social Sciences Methods'] }
+    ]
+
+    this.arabCountries = [
+      "Algeria",
+      "Egypt",
+      "Iraq",
+      "Jordan",
+      "Kuwait",
+      "Lebanon",
+      "Libya",
+      "Mauritania",
+      "Morocco",
+      "Oman",
+      "Palestine",
+      "Qatar",
+      "Saudi Arabia",
+      "Somalia",
+      "Sudan",
+      "Syria",
+      "Tunisia",
+      "United Arab Emirates",
+      "Yemen",
     ]
 
     this.countries = [
@@ -260,6 +289,66 @@ export class RankingComponent implements OnInit {
       {name:"Yemen",code:"ye"}
     ]
 
+    this.codesCountries = [
+      {code2:"dza",code:"dz"},
+      {code2:"aus",code:"au"},
+      {code2:"aut",code:"at"},
+      {code2:"bgd",code:"bd"},
+      {code2:"blr",code:"by"},
+      {code2:"bel",code:"be"},
+      {code2:"bih",code:"ba"},
+      {code2:"bra",code:"br"},
+      {code2:"bgr",code:"bg"},
+      {code2:"can",code:"ca"},
+      {code2:"chn",code:"cn"},
+      {code2:"cyp",code:"cy"},
+      {code2:"cze",code:"cz"},
+      {code2:"egy",code:"eg"},
+      {code2:"fin",code:"fi"},
+      {code2:"fra",code:"fr"},
+      {code2:"deu",code:"de"},
+      {code2:"grc",code:"gr"},
+      {code2:"hun",code:"hu"},
+      {code2:"ind",code:"in"},
+      {code2:"irn",code:"ir"},
+      {code2:"irq",code:"iq"},
+      {code2:"irl",code:"ie"},
+      {code2:"ita",code:"it"},
+      {code2:"jpn",code:"jp"},
+      {code2:"jor",code:"jo"},
+      {code2:"kaz",code:"kz"},
+      {code2:"kwt",code:"kw"},
+      {code2:"lbn",code:"lb"},
+      {code2:"lby",code:"ly"},
+      {code2:"mys",code:"my"},
+      {code2:"mrt",code:"mr"},
+      {code2:"mar",code:"ma"},
+      {code2:"nld",code:"nl"},
+      {code2:"nzl",code:"nz"},
+      {code2:"omn",code:"om"},
+      {code2:"pak",code:"pk"},
+      {code2:"pse",code:"ps"},
+      {code2:"prt",code:"pt"},
+      {code2:"qat",code:"qa"},
+      {code2:"sau",code:"sa"},
+      {code2:"sgp",code:"sg"},
+      {code2:"som",code:"so"},
+      {code2:"zaf",code:"za"},
+      {code2:"kor",code:"kr"},
+      {code2:"esp",code:"es"},
+      {code2:"sdn",code:"sd"},
+      {code2:"swe",code:"se"},
+      {code2:"che",code:"ch"},
+      {code2:"syr",code:"sy"},
+      {code2:"tha",code:"th"},
+      {code2:"tun",code:"tn"},
+      {code2:"tur",code:"tr"},
+      {code2:"are",code:"ae"},
+      {code2:"gbr",code:"gb"},
+      {code2:"usa",code:"us"},
+      {code2:"yem",code:"ye"}
+    ]
+
     /* this.countries = [
       { name: 'Algeria', code: 'DZ' },
       { name: 'Egypt', code: 'EG' },
@@ -290,6 +379,8 @@ export class RankingComponent implements OnInit {
 
   clear(table: Table) {
     table.clear();
+    this.isfilterArabResearch=false;
+    table.value = this.testAux;
     table.filter('', 'working', 'equals');
     table.filter('', 'country', 'equals');
     table.filter('', 'category', 'equals');
@@ -299,5 +390,44 @@ export class RankingComponent implements OnInit {
     this.selectedCategory = undefined;
     this.selectedSubcategory = '';
     this.clearField2 = '';
+  }
+
+  filterArabResearch(){
+    if(this.isfilterArabResearch)
+    {
+      this.test = this.testAux;
+    }
+    else{
+      this.test = this.test.filter(item => this.arabCountries.includes(item.country!));
+    }
+    this.isfilterArabResearch = !this.isfilterArabResearch;
+  }
+
+  changeCodeCountry(){
+    this.test = this.test.map(
+      item => {
+        const matchingCountry = this.codesCountries.find(c => c.code2 === item.codeCountry);
+        const matchingWorking = this.codesCountries.find(c => c.code2 === item.codeWorking);
+
+        return {
+          ...item,
+          codeCountry: matchingCountry ? matchingCountry.code: item.codeCountry,
+          codeWorking: matchingWorking ? matchingWorking.code: item.codeWorking
+        };
+      });
+  }
+  specifyNameCountry(){
+    this.test = this.test.map(
+      item => {
+        const matchingCountry = this.countries.find(c => c.code === item.codeCountry);
+        const matchingWorking = this.countries.find(c => c.code === item.codeWorking);
+
+        return {
+          ...item,
+          country: matchingCountry ? matchingCountry.name: item.country,
+          working: matchingWorking ? matchingWorking.name: item.working
+        };
+      });
+      /* console.log("this log method specifyNameCountry :" + JSON.stringify(this.test[0])) */
   }
 }
