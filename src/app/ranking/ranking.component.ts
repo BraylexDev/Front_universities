@@ -31,6 +31,9 @@ interface Country {
   name: string;
   code: string;
 }
+interface University {
+  name: string;
+}
 
 /* info tabla */
 export interface PeriodicElement {
@@ -90,7 +93,7 @@ export class RankingComponent implements OnInit {
   @Input() filters: { [s: string]: FilterMetadata | FilterMetadata[] | undefined } = {};
 
   selectedLastCountry: Country | undefined;
-  selectedCountry: Country | undefined;
+  selectedCountry: University | undefined;
   selectedCategory: Category | undefined;
   selectedSubcategory: string = '';
   visible!: boolean;
@@ -113,6 +116,7 @@ export class RankingComponent implements OnInit {
   countries: Country[] = [];
   codesCountries: CodeCountry[] = [];
   arabCountries: string[] = [];
+  universities: University[] = [];
   /* cols: Colm[] = []; */
   cols: string[] = [];
   selectedCol: string = "";
@@ -205,6 +209,846 @@ export class RankingComponent implements OnInit {
       { name: 'Psychology & Cognitive Sciences', subcategory: ['Business & Management', 'Human Factors', 'Psychiatry', 'Social Psychology'] },
       { name: 'Public Health & Health Services', subcategory: ['General & Internal Medicine', 'Health Policy & Services', 'Nursing', 'Public Health', 'Rehabilitation', 'Substance Abuse'] },
       { name: 'Social Sciences', subcategory: ['Business & Management', 'Education', 'Information & Library Sciences', 'Law', 'Social Sciences Methods'] }
+    ]
+
+    this.universities = [
+      {
+        name: "A’Sharqiyah University"
+      },
+      {
+          name: "Abu Dhabi University"
+      },
+      {
+          name: "Ain Shams University"
+      },
+      {
+          name: "Ajman University"
+      },
+      {
+          name: "Al Ain University"
+      },
+      {
+          name: "Al Akhawayn University"
+      },
+      {
+          name: "Al Hikma University College"
+      },
+      {
+          name: "Al Yamamah University"
+      },
+      {
+          name: "Al-Ahliyya Amman University"
+      },
+      {
+          name: "Al-Aqsa University"
+      },
+      {
+          name: "Al-Ayen Iraqi University, AUIQ"
+      },
+      {
+          name: "Al-Azhar University"
+      },
+      {
+          name: "Al-Balqa Applied University"
+      },
+      {
+          name: "Al-Bayan University"
+      },
+      {
+          name: "Al-Esraa University"
+      },
+      {
+          name: "Alexandria University"
+      },
+      {
+          name: "Alfaisal University"
+      },
+      {
+          name: "Al-Furat Al-Awsat Technical University"
+      },
+      {
+          name: "Al-Hadi University College"
+      },
+      {
+          name: "Al-Hussein Bin Talal University"
+      },
+      {
+          name: "Al-Imam Muhammad Ibn Saud Islamic University"
+      },
+      {
+          name: "Al-Iraqia University"
+      },
+      {
+          name: "Almaaqal University"
+      },
+      {
+          name: "Al-Mamoon University College"
+      },
+      {
+          name: "Al-Mustaqbal University"
+      },
+      {
+          name: "Al-Muthanna University"
+      },
+      {
+          name: "Al-Nahrain University"
+      },
+      {
+          name: "Al-Qasim Green University"
+      },
+      {
+          name: "Al-Rafidain University College"
+      },
+      {
+          name: "Al-Zahrawi University College"
+      },
+      {
+          name: "Alzaiem Alazhari University"
+      },
+      {
+          name: "Al-Zaytoonah University of Jordan"
+      },
+      {
+          name: "American University of Beirut"
+      },
+      {
+          name: "American University of Sharjah"
+      },
+      {
+          name: "American University of the Middle East"
+      },
+      {
+          name: "Amman Arab University"
+      },
+      {
+          name: "An-Najah National University"
+      },
+      {
+          name: "Applied Science Private University"
+      },
+      {
+          name: "Arab Academy for Science, Technology and Maritime Transport"
+      },
+      {
+          name: "Arish University"
+      },
+      {
+          name: "Aspire Academy"
+      },
+      {
+          name: "Assiut University"
+      },
+      {
+          name: "Aswan University"
+      },
+      {
+          name: "Australian University"
+      },
+      {
+          name: "Badr University in Cairo"
+      },
+      {
+          name: "Beirut Arab University"
+      },
+      {
+          name: "Benha University"
+      },
+      {
+          name: "Beni-Suef University"
+      },
+      {
+          name: "Bilad Alrafidain University College"
+      },
+      {
+          name: "Birzeit University"
+      },
+      {
+          name: "British University in Dubai"
+      },
+      {
+          name: "Cairo University"
+      },
+      {
+          name: "Centre Universitaire Amin Eloukkal El Hadj Moussa Ag Akhamouk Tamanrasset"
+      },
+      {
+          name: "Centre Universitaire Salhi Ahmed -Naama"
+      },
+      {
+          name: "Charmo University"
+      },
+      {
+          name: "Cihan University– Sulaymania"
+      },
+      {
+          name: "Damanhour University"
+      },
+      {
+          name: "Damascus University"
+      },
+      {
+          name: "Damietta University"
+      },
+      {
+          name: "Delta University for Science and Technology"
+      },
+      {
+          name: "Dhofar University"
+      },
+      {
+          name: "Dijlah University College"
+      },
+      {
+          name: "Duhok Polytechnic University"
+      },
+      {
+          name: "École Militaire Polytechnique"
+      },
+      {
+          name: "Ecole Nationale d'Agriculture"
+      },
+      {
+          name: "Ecole Nationale Polytechnique"
+      },
+      {
+          name: "École Nationale Supérieure Agronomique – Kasdi Merbah"
+      },
+      {
+          name: "École Nationale Supérieure des Télécommunications et des Technologies de l'Information et de la Communication"
+      },
+      {
+          name: "École Supérieure des Sciences de l’Aliment et des Industries Agroalimentaires"
+      },
+      {
+          name: "Effat University, Saudi Arabia"
+      },
+      {
+          name: "Egyptian Russian University"
+      },
+      {
+          name: "Egypt-Japan University of Science and Technology"
+      },
+      {
+          name: "Erbil Polytechnic University"
+      },
+      {
+          name: "European University College, Dubai"
+      },
+      {
+          name: "Fahad Bin Sultan University"
+      },
+      {
+          name: "Fayoum University"
+      },
+      {
+          name: "Future University in Egypt"
+      },
+      {
+          name: "Galala University"
+      },
+      {
+          name: "German Jordanian University"
+      },
+      {
+          name: "German University in Cairo"
+      },
+      {
+          name: "Gulf College, Muscat"
+      },
+      {
+          name: "Hashemite University"
+      },
+      {
+          name: "Hassan II University of Casablanca"
+      },
+      {
+          name: "Hawler Medical University"
+      },
+      {
+          name: "Helwan University"
+      },
+      {
+          name: "Higher Colleges of Technology"
+      },
+      {
+          name: "Hodeida University"
+      },
+      {
+          name: "Holy Spirit University of Kaslik (USEK)"
+      },
+      {
+          name: "Horus University - Egypt"
+      },
+      {
+          name: "Imam Abdulrahman Bin Faisal University"
+      },
+      {
+          name: "Imam Ja'afar Al-Sadiq University"
+      },
+      {
+          name: "International University of Rabat"
+      },
+      {
+          name: "Iraq University College"
+      },
+      {
+          name: "Islamic University of Gaza"
+      },
+      {
+          name: "Isra University"
+      },
+      {
+          name: "Jadara University"
+      },
+      {
+          name: "Jazan University"
+      },
+      {
+          name: "Jordan University of Science and Technology"
+      },
+      {
+          name: "Jouf University"
+      },
+      {
+          name: "Kafrelsheikh University"
+      },
+      {
+          name: "Khalifa University of Science and Technology"
+      },
+      {
+          name: "Khartoum University"
+      },
+      {
+          name: "King Abdulaziz University"
+      },
+      {
+          name: "King Abdullah Petroleum Studies and Research Center"
+      },
+      {
+          name: "King Abdullah University of Science and Technology"
+      },
+      {
+          name: "King Fahd University of Petroleum and Minerals"
+      },
+      {
+          name: "King Faisal University"
+      },
+      {
+          name: "King Khalid University"
+      },
+      {
+          name: "King Saud bin Abdulaziz University for Health Sciences"
+      },
+      {
+          name: "King Saud University"
+      },
+      {
+          name: "Knowledge University"
+      },
+      {
+          name: "Komar University of Science and Technology"
+      },
+      {
+          name: "Koya University"
+      },
+      {
+          name: "Kuwait College of Science & Technology"
+      },
+      {
+          name: "Kuwait University"
+      },
+      {
+          name: "Lebanese American University"
+      },
+      {
+          name: "Lebanese French University"
+      },
+      {
+          name: "Majmaah University"
+      },
+      {
+          name: "Mansoura University"
+      },
+      {
+          name: "Menoufia University"
+      },
+      {
+          name: "Middle East College"
+      },
+      {
+          name: "Middle East University, Jordan"
+      },
+      {
+          name: "Middle Technical University"
+      },
+      {
+          name: "Minia University"
+      },
+      {
+          name: "Misr International University"
+      },
+      {
+          name: "Misr University for Science and Technology"
+      },
+      {
+          name: "Mohamed Bin Zayed University of Artificial Intelligence"
+      },
+      {
+          name: "Mohammed V University in Rabat"
+      },
+      {
+          name: "Mohammed VI Polytechnic University"
+      },
+      {
+          name: "Mohammed VI University of Sciences and Health - UM6SS"
+      },
+      {
+          name: "MSA University"
+      },
+      {
+          name: "Mustansiriyah University"
+      },
+      {
+          name: "Mutah University"
+      },
+      {
+          name: "Nahda University in Beni Suef"
+      },
+      {
+          name: "Najran University"
+      },
+      {
+          name: "National Council for Scientific Research, Beirut"
+      },
+      {
+          name: "New Valley University"
+      },
+      {
+          name: "Nile University"
+      },
+      {
+          name: "Ninevah University"
+      },
+      {
+          name: "Northern Technical University"
+      },
+      {
+          name: "Omar Al-Mukhtar University"
+      },
+      {
+          name: "Palestine Technical University - Kadoorie"
+      },
+      {
+          name: "Philadelphia University"
+      },
+      {
+          name: "Port Said University"
+      },
+      {
+          name: "Prince Mohammad Bin Fahd University"
+      },
+      {
+          name: "Prince Sattam Bin Abdulaziz University"
+      },
+      {
+          name: "Prince Sultan University"
+      },
+      {
+          name: "Princess Nourah Bint Abdulrahman University"
+      },
+      {
+          name: "Princess Sumaya University"
+      },
+      {
+          name: "Qassim University"
+      },
+      {
+          name: "Qatar University"
+      },
+      {
+          name: "S P Jain School of Global Management"
+      },
+      {
+          name: "Salahaddin University-Erbil"
+      },
+      {
+          name: "Saudi Electronic University"
+      },
+      {
+          name: "Shaqra University"
+      },
+      {
+          name: "Skyline University College"
+      },
+      {
+          name: "Sohag University"
+      },
+      {
+          name: "Sohar University"
+      },
+      {
+          name: "Soran University"
+      },
+      {
+          name: "South Valley University"
+      },
+      {
+          name: "Southern Technical University, Iraq"
+      },
+      {
+          name: "Suez Canal University"
+      },
+      {
+          name: "Suez University"
+      },
+      {
+          name: "Sulaimani Polytechnic University"
+      },
+      {
+          name: "Sultan Qaboos University"
+      },
+      {
+          name: "Tabbin Institute for Metallurgical Studies"
+      },
+      {
+          name: "Tafila Technical University"
+      },
+      {
+          name: "Taibah University"
+      },
+      {
+          name: "Taif University"
+      },
+      {
+          name: "Tanta University"
+      },
+      {
+          name: "The American University in Cairo"
+      },
+      {
+          name: "The British University in Egypt"
+      },
+      {
+          name: "The International University of Beirut"
+      },
+      {
+          name: "The Islamic University, Najaf"
+      },
+      {
+          name: "The University of Jordan"
+      },
+      {
+          name: "Tikrit University"
+      },
+      {
+          name: "Tishk International University"
+      },
+      {
+          name: "Umm Al-Qura University"
+      },
+      {
+          name: "United Arab Emirates University"
+      },
+      {
+          name: "Université 20 Août 1955-Skikda"
+      },
+      {
+          name: "Université 8 Mai 1945 Guelma"
+      },
+      {
+          name: "Université Abbes Laghrour Khenchela"
+      },
+      {
+          name: "Université Abdelhamid Ibn Badis Mostaganem"
+      },
+      {
+          name: "Université Abdelmalek Essaadi"
+      },
+      {
+          name: "Université Abderrahmane Mira - Béjaïa"
+      },
+      {
+          name: "Université Abou Bekr Belkaid Tlemcen"
+      },
+      {
+          name: "Université Ahmed Draia - Adrar"
+      },
+      {
+          name: "Université Ahmed Zabana de Relizane"
+      },
+      {
+          name: "Université Akli Mouhand Oulhadj-Bouira"
+      },
+      {
+          name: "Université Amar Telidji Laghouat"
+      },
+      {
+          name: "Université Badji Mokhtar - Annaba"
+      },
+      {
+          name: "Université Blida 1"
+      },
+      {
+          name: "Université Cadi Ayyad"
+      },
+      {
+          name: "Université Chouaib Doukkali"
+      },
+      {
+          name: "Université Constantine 1"
+      },
+      {
+          name: "Université Constantine 3"
+      },
+      {
+          name: "Université d’Echahid Hamma Lakhdar – El-oued"
+      },
+      {
+          name: "Université de Gabès"
+      },
+      {
+          name: "Université de Gafsa"
+      },
+      {
+          name: "Université de Ghardaia"
+      },
+      {
+          name: "Université de Jendouba"
+      },
+      {
+          name: "Université de Jijel"
+      },
+      {
+          name: "Université de la Manouba"
+      },
+      {
+          name: "Université de Monastir"
+      },
+      {
+          name: "Université de Sousse"
+      },
+      {
+          name: "Université de Tunis"
+      },
+      {
+          name: "Université de Tunis El Manar"
+      },
+      {
+          name: "Université des Sciences et de la Technologie d’Oran Mohamed-Boudiaf"
+      },
+      {
+          name: "Université des Sciences et de la Technologie Houari Boumediene"
+      },
+      {
+          name: "Université Djilali Bounaama Khemis Miliana"
+      },
+      {
+          name: "Université Djillali Liabes de Sidi Bel Abbes"
+      },
+      {
+          name: "Université Dr Taher Moulay Saida - Algeria"
+      },
+      {
+          name: "Université Ferhat Abbas Sétif 1"
+      },
+      {
+          name: "Université Hassan 1er"
+      },
+      {
+          name: "Université Ibn Tofail"
+      },
+      {
+          name: "Université Ibn Zohr"
+      },
+      {
+          name: "Université Ibn-Khaldoun Tiaret"
+      },
+      {
+          name: "Université Kasdi Merbah Ouargla"
+      },
+      {
+          name: "Université Larbi Tébessi - Tébessa"
+      },
+      {
+          name: "Université Libanaise"
+      },
+      {
+          name: "Université Mohamed Boudiaf - M'sila"
+      },
+      {
+          name: "Université Mohamed El Bachir El Ibrahimi de Bordj Bou Arréridj"
+      },
+      {
+          name: "Université Mohamed Khider Biskra"
+      },
+      {
+          name: "Université Mohammed Premier Oujda"
+      },
+      {
+          name: "Université Moulay Ismaïl"
+      },
+      {
+          name: "Université Mouloud Mammeri de Tizi Ouzou"
+      },
+      {
+          name: "Université Mustapha Stambouli de Mascara"
+      },
+      {
+          name: "Université Oran 1"
+      },
+      {
+          name: "Université Oum El Bouaghi"
+      },
+      {
+          name: "Université Saint-Joseph de Beyrouth"
+      },
+      {
+          name: "Université Sidi Mohamed Ben Abdellah"
+      },
+      {
+          name: "Université Sultan Moulay Slimane"
+      },
+      {
+          name: "Université Yahia Farès de Médéa"
+      },
+      {
+          name: "Université Ziane Achour De Djelfa"
+      },
+      {
+          name: "Université Batna 2"
+      },
+      {
+          name: "University Hassiba Benbouali - Chlef"
+      },
+      {
+          name: "University of Al-Ameed"
+      },
+      {
+          name: "University of Al-Qadisiyah"
+      },
+      {
+          name: "University of Anbar"
+      },
+      {
+          name: "University of Babylon"
+      },
+      {
+          name: "University of Baghdad"
+      },
+      {
+          name: "University of Balamand"
+      },
+      {
+          name: "University of Basrah"
+      },
+      {
+          name: "University of Bisha"
+      },
+      {
+          name: "University of Carthage"
+      },
+      {
+          name: "University Of Diyala"
+      },
+      {
+          name: "University of Duhok"
+      },
+      {
+          name: "University of Fallujah"
+      },
+      {
+          name: "University of Garmian"
+      },
+      {
+          name: "University of Hafr Al-Batin"
+      },
+      {
+          name: "University of Ha'il"
+      },
+      {
+          name: "University of Halabja"
+      },
+      {
+          name: "University of Human Development"
+      },
+      {
+          name: "University of Information Technology and Communications"
+      },
+      {
+          name: "University of Jeddah"
+      },
+      {
+          name: "University of Kerbala"
+      },
+      {
+          name: "University of Kirkuk"
+      },
+      {
+          name: "University of Kufa"
+      },
+      {
+          name: "University of Kurdistan Hewlêr"
+      },
+      {
+          name: "University of Misan"
+      },
+      {
+          name: "University of Mosul"
+      },
+      {
+          name: "University of Nizwa"
+      },
+      {
+          name: "University of Petra"
+      },
+      {
+          name: "University of Prince Mugrin"
+      },
+      {
+          name: "University of Raparin"
+      },
+      {
+          name: "University of Sadat City"
+      },
+      {
+          name: "University of Sfax"
+      },
+      {
+          name: "University of Sharjah"
+      },
+      {
+          name: "University of Sulaimani"
+      },
+      {
+          name: "University of Sumer"
+      },
+      {
+          name: "University of Tabuk"
+      },
+      {
+          name: "University of Technology- Iraq"
+      },
+      {
+          name: "University of Thi-Qar"
+      },
+      {
+          name: "University of Zakho"
+      },
+      {
+          name: "Wasit University"
+      },
+      {
+          name: "Yarmouk University"
+      },
+      {
+          name: "Zagazig University"
+      },
+      {
+          name: "Zarqa University"
+      },
+      {
+          name: "Zayed University"
+      }
     ]
 
     this.arabCountries = [
@@ -382,7 +1226,7 @@ export class RankingComponent implements OnInit {
     this.isfilterArabResearch=false;
     table.value = this.testAux;
     table.filter('', 'working', 'equals');
-    table.filter('', 'country', 'equals');
+    table.filter('', 'university', 'equals');
     table.filter('', 'category', 'equals');
     table.filter('', 'subcategory', 'equals');
     this.selectedLastCountry = undefined;

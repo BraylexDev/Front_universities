@@ -65,7 +65,12 @@
 .head2 {
     display: flex;
     flex-direction: row;
-    
+    flex-wrap: wrap;    
+}
+
+.head2 > button, p-button{
+    margin-inline: 5px !important;
+    margin-block: 5px;
 }
 
 .methodology {
@@ -191,10 +196,16 @@ th{
     .s {
         width: 300px;
     }
+    .textUniv{
+        width: 80vw !important;
+    }
 }
 
 @media screen and (max-width:600px) {
     .text_search {
         display: none;
+    }
+    .textUniv{
+        width: 80vw !important;
     }
 }

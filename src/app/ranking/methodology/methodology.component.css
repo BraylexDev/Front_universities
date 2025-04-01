@@ -72,10 +72,15 @@ a{
     background-color: white;
 }
 
-.title{
+/* .title{
     font-size: 2rem;
     color: #f9532d;
     text-align: center;
+} */
+
+.title h1{
+    font-size: 3rem;
+    color: #f9532d;
 }
 
 ol li {
@@ -90,12 +95,18 @@ ol li {
 }
 
 @media screen and (max-width: 1024px) {
+    .detail {
+        padding: 0 4.4rem;
+    }
     .container{
         padding: 0 4.4rem;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .detail {
+        padding: 0 1.6rem;
+    }
     .container{
         padding: 0 1.6rem;
     }

@@ -22,28 +22,26 @@
                     <!-- filter modal -->
                     <p-button (click)="showDialog()" icon="pi pi-external-link" label="Filters"></p-button>
                     <p-dialog header="Filter" [(visible)]="visible" [modal]="true" [closeOnEscape]="true" [breakpoints]="{ '960px': '90vw' }" [style]="{ width: '50vw'}" [draggable]="false" [resizable]="false">
-                        <!-- <p-panel header="Select Country" [toggleable]="true">
-                            <p-dropdown appendTo="body" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
+                        <p-panel header="Select Institution" [toggleable]="true">
+                            <p-dropdown appendTo="body" [options]="universities" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
-                                    <div class="flex align-items-center gap-2" *ngIf="selectedCountry" style="display: flex;">
-                                        <span [class]="'fi fi-' + selectedCountry.code | lowercase" style="width: 18px; margin-inline: 10px;"></span>
-                                        <div>{{ selectedCountry.name }}</div>
+                                    <div class="flex align-items-center gap-2" *ngIf="selectedCountry" style="display: flex; ">
+                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCountry.name }}</div>
                                     </div>
                                 </ng-template>
-                                <ng-template let-country pTemplate="item">
+                                <ng-template let-university pTemplate="item">
                                     <div class="flex align-items-center gap-2" style="display: flex;">
-                                        <span [class]="'fi fi-' + country.code | lowercase" style="width: 18px; margin-inline: 10px;"></span>
-                                        <div>{{ country.name }}</div>
+                                        <div class="textUniv" style="text-overflow: ellipsis; overflow: hidden;">{{ university.name }}</div>
                                     </div>
                                 </ng-template>
                             </p-dropdown>
-                        </p-panel> -->
-                        <p-panel header="Select Last Country" [toggleable]="true">
+                        </p-panel>
+                        <p-panel header="Select Country" [toggleable]="true">
                             <p-dropdown appendTo="body" [options]="countries" [(ngModel)]="selectedLastCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
                                     <div class="flex align-items-center gap-2" *ngIf="selectedLastCountry" style="display: flex;">
                                         <span [class]="'fi fi-' + selectedLastCountry.code| lowercase" style="width: 18px; margin-inline: 10px;"></span>
-                                        <div>{{ selectedLastCountry.name }}</div>
+                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedLastCountry.name }}</div>
                                     </div>
                                 </ng-template>
                                 <ng-template let-working pTemplate="item">
@@ -58,7 +56,7 @@
                             <p-dropdown appendTo="body" [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
                                     <div *ngIf="selectedCategory" style="display: flex; ">
-                                        <div>{{ selectedCategory.name }}</div>
+                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCategory.name }}</div>
                                     </div>
                                 </ng-template>
                                 <ng-template let-category pTemplate="item">
@@ -72,7 +70,7 @@
                             <p-dropdown appendTo="body" [options]="selectedCategory.subcategory" [(ngModel)]="selectedSubcategory" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
                                     <div class="flex align-items-center gap-2" *ngIf="selectedSubcategory" style="display: flex; ">
-                                        <div>{{ selectedSubcategory }}</div>
+                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedSubcategory }}</div>
                                     </div>
                                 </ng-template>
                                 <ng-template let-subcategory pTemplate="item">
@@ -83,7 +81,7 @@
                             </p-dropdown>
                         </p-panel>
                         <ng-template pTemplate="footer">
-                            <p-button *ngIf="selectedCategory || selectedLastCountry || selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry?.name,'country','equals'); dt1.filter(selectedLastCountry?.name,'working','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>                            
+                            <p-button *ngIf="selectedCategory || selectedLastCountry || selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry?.name,'university','equals'); dt1.filter(selectedLastCountry?.name,'working','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>                            
                             <!-- <p-button *ngIf="selectedCountry && selectedLastCountry && !selectedCategory" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals'); dt1.filter(selectedLastCountry.name,'working','equals')" label="Apply" styleClass="p-button-text"></p-button>
                             <p-button *ngIf="!selectedCategory && !selectedLastCountry && selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals');" label="Apply" styleClass="p-button-text"></p-button>
                             <p-button *ngIf="!selectedCategory && selectedLastCountry && !selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedLastCountry.name,'working','equals');" label="Apply" styleClass="p-button-text"></p-button>
@@ -93,9 +91,8 @@
                     <!-- Exclude country NOT Arabs -->
                     <button *ngIf="isfilterArabResearch" [ngClass] = "{'stylefilterArabResearch': isfilterArabResearch}" pButton label="{{'home_table_arab_only' | translate}}" class="p-button-outlined" icon="pi pi-eye-slash" (click)="filterArabResearch()" style="margin-inline: 30px;"></button>
                     <button *ngIf="!isfilterArabResearch" [ngClass] = "{'stylefilterArabResearch': isfilterArabResearch}" pButton label="{{'home_table_arab_only' | translate}}" class="p-button-outlined" icon="pi pi-eye" (click)="filterArabResearch()" style="margin-inline: 30px;"></button>
-                    <!-- End filter modal -->
+                    <!-- Button clear filters -->
                     <button pButton label="{{'home_table_clear' | translate}}" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)" style="margin-inline: 30px;"></button>
-                    
                 </div>
                 <div class="line"></div>
                 <div class="flex head">
@@ -110,10 +107,15 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="position" style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
+                    <!-- <th pSortableColumn="position" style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
                         <div class="flex align-items-center">
                             {{'home_table_rank_position' | translate}}
                             <p-sortIcon field="position"></p-sortIcon>
+                        </div>
+                    </th> -->
+                    <th style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
+                        <div class="flex align-items-center">
+                            {{'home_table_rank_position' | translate}}
                         </div>
                     </th>
                     <th style="min-width:5rem;" title="Name of the author">
@@ -138,13 +140,12 @@
                     </th>
                     <th style="min-width:5rem; text-align: center;" title="Country of main institution in last year of publication">
                         <div class="flex align-items-center">
-                            {{'home_table_rank_country_work' | translate}}
+                            {{'home_table_rank_country' | translate}}
                         </div>
                     </th>
-                    <th pSortableColumn="score" style="min-width:5rem; text-align: center; padding-inline: 0;" title="Combined weighted author indicator">
+                    <th style="min-width:5rem; text-align: center; padding-inline: 0;" title="Combined weighted author indicator">
                         <div class="flex align-items-center">
                             {{'home_table_rank_score' | translate}}
-                            <p-sortIcon field="score"></p-sortIcon>
                         </div>
                     </th>
                     <th style="min-width:5rem; text-align: center; padding-inline: 0;">

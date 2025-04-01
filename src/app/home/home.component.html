@@ -30,10 +30,10 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="position" style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
+                    <th style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
                         <div class="flex align-items-center">
                             {{'home_table_rank_position' | translate}}
-                            <p-sortIcon field="position"></p-sortIcon>
+                            <!-- <p-sortIcon field="position"></p-sortIcon> -->
                         </div>
                     </th>
                     <th style="min-width:5rem;" title="Name of the author">
@@ -58,13 +58,13 @@
                     </th>
                     <th style="min-width:5rem; text-align: center;" title="Country of main institution in last year of publication">
                         <div class="flex align-items-center">
-                            {{'home_table_rank_country_work' | translate}}
+                            {{'home_table_rank_country' | translate}}
                         </div>
                     </th>
-                    <th pSortableColumn="score" style="min-width:5rem; text-align: center; padding-inline: 0;" title="Combined weighted author indicator">
+                    <th style="min-width:5rem; text-align: center; padding-inline: 0;" title="Combined weighted author indicator">
                         <div class="flex align-items-center">
                             {{'home_table_rank_score' | translate}}
-                            <p-sortIcon field="score"></p-sortIcon>
+                            <!-- <p-sortIcon field="score"></p-sortIcon> -->
                         </div>
                     </th>
                     <th style="min-width:5rem; text-align: center; padding-inline: 0;">
