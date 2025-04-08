@@ -27,6 +27,12 @@ interface Category {
   subcategory: string[];
 }
 
+interface CountryUniversity{
+    country: string;
+    code: string;
+    universities: string[];
+}
+
 interface Country {
   name: string;
   code: string;
@@ -94,8 +100,13 @@ export class RankingComponent implements OnInit {
 
   selectedLastCountry: Country | undefined;
   selectedCountry: University | undefined;
+
+  selectedCountryUniversity: CountryUniversity | undefined; 
+  selectedInstitucion: string = '';
+  
   selectedCategory: Category | undefined;
   selectedSubcategory: string = '';
+
   visible!: boolean;
   isfilterArabResearch:boolean = false;
 
@@ -114,9 +125,13 @@ export class RankingComponent implements OnInit {
   cats: any[] = [];
   categories: Category[] = [];
   countries: Country[] = [];
+  
+  countryUniversity: CountryUniversity[] = [];
+
   codesCountries: CodeCountry[] = [];
   arabCountries: string[] = [];
   universities: University[] = [];
+  universities2: string[] = [];
   /* cols: Colm[] = []; */
   cols: string[] = [];
   selectedCol: string = "";
@@ -190,7 +205,7 @@ export class RankingComponent implements OnInit {
       data => this.rankings = data
     ); */
 
-    this.categories = [
+    /* this.categories = [
       { name: 'Agriculture, Fisheries & Forestry', subcategory: ['Dairy & Animal Science', 'Fisheries', 'Food Science', 'Plant Biology & Botany', 'Agronomy & Agriculture', 'Veterinary Sciences', 'Environmental Engineering', 'Tropical Medicine', 'Forestry', 'Oncology & Carcinogenesis', 'Mycology & Parasitology'] },
       { name: 'Biology', subcategory: ['Plant Biology & Botany', 'Marine Biology & Hydrobiology', 'Polymers', 'Environmental Sciences', 'Developmental Biology', 'Entomology', 'Ecology', 'Microbiology', 'Oncology & Carcinogenesis', 'Zoology', 'Horticulture', 'Ornithology'] },
       { name: 'Biomedical Research', subcategory: ['Microbiology', 'Nutrition & Dietetics', 'Plant Biology & Botany', 'Toxicology', 'Biochemistry & Molecular Biology', 'Developmental Biology', 'Mycology & Parasitology', 'Biophysics', 'Surgery', 'Food Science', 'Applied Mathematics', 'General Clinical Medicine', 'Mycology & Parasitology', 'Environmental Sciences', 'Virology', 'Oncology & Carcinogenesis', 'Software Engineering', 'General Mathematics', 'Immunology', 'Pharmacology & Pharmacy', 'Bioinformatics', 'Veterinary Sciences', 'Tropical Medicine', 'Microscopy', 'Anatomy & Morphology', 'Physiology', 'Genetics & Heredity'], },
@@ -209,6 +224,28 @@ export class RankingComponent implements OnInit {
       { name: 'Psychology & Cognitive Sciences', subcategory: ['Business & Management', 'Human Factors', 'Psychiatry', 'Social Psychology'] },
       { name: 'Public Health & Health Services', subcategory: ['General & Internal Medicine', 'Health Policy & Services', 'Nursing', 'Public Health', 'Rehabilitation', 'Substance Abuse'] },
       { name: 'Social Sciences', subcategory: ['Business & Management', 'Education', 'Information & Library Sciences', 'Law', 'Social Sciences Methods'] }
+    ] */
+
+    /* VErsion archivo 2025 marzo 2 */  
+    this.categories = [
+        { name: "Agriculture, Fisheries & Forestry", subcategory: ["Food Science","Plant Biology & Botany","Nutrition & Dietetics","Dairy & Animal Science","Fisheries","Agronomy & Agriculture","Veterinary Sciences","Environmental Engineering","Toxicology","Microbiology"] },
+        { name: "Biology", subcategory: ["Plant Biology & Botany","Marine Biology & Hydrobiology","Entomology","Ecology","Zoology","Microbiology","Environmental Sciences","Agronomy & Agriculture"] },
+        { name: "Biomedical Research", subcategory: ["Microbiology","Biochemistry & Molecular Biology","Mycology & Parasitology","Veterinary Sciences","Pharmacology & Pharmacy","Microscopy","Immunology","Toxicology","Virology","Analytical Chemistry","Developmental Biology","Anatomy & Morphology","General & Internal Medicine","Nutrition & Dietetics","Organic Chemistry","Food Science","Plant Biology & Botany","Biophysics","Genetics & Heredity","Oncology & Carcinogenesis"] },
+        { name: "Built Environment & Design", subcategory: ["Building & Construction"] },
+        { name: "Chemistry", subcategory: ["Polymers","Medicinal & Biomolecular Chemistry","Organic Chemistry","Chemical Physics","Physical Chemistry","Materials","Inorganic & Nuclear Chemistry","Analytical Chemistry","Biotechnology","Dairy & Animal Science","Artificial Intelligence & Image Processing","Environmental Sciences","Microbiology","Nanoscience & Nanotechnology","General Chemistry","Biochemistry & Molecular Biology","Pharmacology & Pharmacy","Plant Biology & Botany","Applied Physics","Chemical Engineering","Food Science","Energy"] },
+        { name: "Clinical Medicine", subcategory: ["Immunology","Nutrition & Dietetics","Endocrinology & Metabolism","Neurology & Neurosurgery","Pharmacology & Pharmacy","Dentistry","Oncology & Carcinogenesis","Biochemistry & Molecular Biology","Chemical Physics","General & Internal Medicine","Microbiology","Environmental Sciences","Toxicology","Veterinary Sciences","Public Health","Organic Chemistry","Gastroenterology & Hepatology","Surgery","Dairy & Animal Science","Arthritis & Rheumatology","Rehabilitation","Nuclear Medicine & Medical Imaging","Anesthesiology","Pediatrics","Obstetrics & Reproductive Medicine","Urology & Nephrology","Ophthalmology & Optometry","Biomedical Engineering","Orthopedics","Cardiovascular System & Hematology","Developmental Biology","Psychiatry","Dermatology & Venereal Diseases","Virology","Respiratory System","Anatomy & Morphology","Otorhinolaryngology","Pathology","General Physics","Plant Biology & Botany","Emergency & Critical Care Medicine","Medicinal & Biomolecular Chemistry","Food Science","Sport Sciences","Medical Informatics","Biotechnology","Zoology","Nursing","Tropical Medicine","General Clinical Medicine"] },
+        { name: "Communication & Textual Studies", subcategory: ["Languages & Linguistics"] },
+        { name: "Earth & Environmental Sciences", subcategory: ["Geochemistry & Geophysics","Environmental Engineering","Environmental Sciences","Ecology","Geology","Paleontology","Civil Engineering","Energy","Meteorology & Atmospheric Sciences"] },
+        { name: "Economics & Business", subcategory: ["Business & Management","Finance","Economics","Agricultural Economics & Policy","Energy","Education"] },
+        { name: "Enabling & Strategic Technologies", subcategory: ["Energy","Materials","Nanoscience & Nanotechnology","Environmental Sciences","Applied Physics","Mechanical Engineering & Transports","Inorganic & Nuclear Chemistry","Industrial Engineering & Automation","Biotechnology","Optoelectronics & Photonics","Chemical Engineering","Polymers","Plant Biology & Botany","Nuclear & Particle Physics","Chemical Physics","General Physics","Building & Construction","Artificial Intelligence & Image Processing","Electrical & Electronic Engineering","Bioinformatics"] },
+        { name: "Engineering", subcategory: ["Mechanical Engineering & Transports","Chemical Engineering","Industrial Engineering & Automation","Electrical & Electronic Engineering","Environmental Engineering","Operations Research","Geological & Geomatics Engineering","Aerospace & Aeronautics","Civil Engineering","Materials","Building & Construction","Energy","Logistics & Transportation","Environmental Sciences","General Physics","Plant Biology & Botany","General Chemistry","Biomedical Engineering","Artificial Intelligence & Image Processing","Agronomy & Agriculture"] },
+        { name: "Historical Studies", subcategory: ["Archaeology"] },
+        { name: "Information & Communication Technologies", subcategory: ["Artificial Intelligence & Image Processing","Networking & Telecommunications","Education","Biomedical Engineering","Operations Research","Energy","Applied Mathematics","Nuclear Medicine & Medical Imaging","Toxicology","Nuclear & Particle Physics","Geological & Geomatics Engineering","Optoelectronics & Photonics","Electrical & Electronic Engineering","Computation Theory & Mathematics","Strategic, Defence & Security Studies","Information Systems","Statistics & Probability","Business & Management","Software Engineering"] },
+        { name: "Mathematics & Statistics", subcategory: ["Numerical & Computational Mathematics","General Mathematics","Applied Mathematics","Statistics & Probability","Operations Research","Fluids & Plasmas"] },
+        { name: "Physics & Astronomy", subcategory: ["Applied Physics","Optics","General Physics","Energy","Environmental Sciences","Materials","Fluids & Plasmas","Electrical & Electronic Engineering","Nuclear & Particle Physics","Applied Mathematics","Chemical Physics","Mechanical Engineering & Transports","Nuclear Medicine & Medical Imaging","Optoelectronics & Photonics","Analytical Chemistry","Astronomy & Astrophysics","Acoustics","Networking & Telecommunications","Geochemistry & Geophysics","Plant Biology & Botany","Artificial Intelligence & Image Processing","General Mathematics"] },
+        { name: 'Psychology & Cognitive Sciences', subcategory: ['Business & Management', 'Human Factors', 'Psychiatry', 'Social Psychology'] },
+        { name: "Public Health & Health Services", subcategory: ["Nursing","Public Health","General & Internal Medicine"] },
+        { name: "Social Sciences", subcategory: ["Education"] }
     ]
 
     this.universities = [
@@ -1050,6 +1087,288 @@ export class RankingComponent implements OnInit {
           name: "Zayed University"
       }
     ]
+    
+    this.universities2 =[
+        "A’Sharqiyah University",
+        "Abu Dhabi University",
+        "Ain Shams University",
+        "Ajman University",
+        "Al Ain University",
+        "Al Akhawayn University",
+        "Al Hikma University College",
+        "Al Yamamah University",
+        "Al-Ahliyya Amman University",
+        "Al-Aqsa University",
+        "Al-Ayen Iraqi University, AUIQ",
+        "Al-Azhar University",
+        "Al-Balqa Applied University",
+        "Al-Bayan University",
+        "Al-Esraa University",
+        "Alexandria University",
+        "Alfaisal University",
+        "Al-Furat Al-Awsat Technical University",
+        "Al-Hadi University College",
+        "Al-Hussein Bin Talal University",
+        "Al-Imam Muhammad Ibn Saud Islamic University",
+        "Al-Iraqia University",
+        "Almaaqal University",
+        "Al-Mamoon University College",
+        "Al-Mustaqbal University",
+        "Al-Muthanna University",
+        "Al-Nahrain University",
+        "Al-Qasim Green University",
+        "Al-Rafidain University College",
+        "Al-Zahrawi University College",
+        "Alzaiem Alazhari University",
+        "Al-Zaytoonah University of Jordan",
+        "American University of Beirut",
+        "American University of Sharjah",
+        "American University of the Middle East",
+        "Amman Arab University",
+        "An-Najah National University",
+        "Applied Science Private University",
+        "Arab Academy for Science, Technology and Maritime Transport",
+        "Arish University",
+        "Aspire Academy",
+        "Assiut University",
+        "Aswan University",
+        "Australian University",
+        "Badr University in Cairo",
+        "Beirut Arab University",
+        "Benha University",
+        "Beni-Suef University",
+        "Bilad Alrafidain University College",
+        "Birzeit University",
+        "British University in Dubai",
+        "Cairo University",
+        "Centre Universitaire Amin Eloukkal El Hadj Moussa Ag Akhamouk Tamanrasset",
+        "Centre Universitaire Salhi Ahmed -Naama",
+        "Charmo University",
+        "Cihan University– Sulaymania",
+        "Damanhour University",
+        "Damascus University",
+        "Damietta University",
+        "Delta University for Science and Technology",
+        "Dhofar University",
+        "Dijlah University College",
+        "Duhok Polytechnic University",
+        "École Militaire Polytechnique",
+        "Ecole Nationale d'Agriculture",
+        "Ecole Nationale Polytechnique",
+        "École Nationale Supérieure Agronomique – Kasdi Merbah",
+        "École Nationale Supérieure des Télécommunications et des Technologies de l'Information et de la Communication",
+        "École Supérieure des Sciences de l’Aliment et des Industries Agroalimentaires",
+        "Effat University, Saudi Arabia",
+        "Egyptian Russian University",
+        "Egypt-Japan University of Science and Technology",
+        "Erbil Polytechnic University",
+        "European University College, Dubai",
+        "Fahad Bin Sultan University",
+        "Fayoum University",
+        "Future University in Egypt",
+        "Galala University",
+        "German Jordanian University",
+        "German University in Cairo",
+        "Gulf College, Muscat",
+        "Hashemite University",
+        "Hassan II University of Casablanca",
+        "Hawler Medical University",
+        "Helwan University",
+        "Higher Colleges of Technology",
+        "Hodeida University",
+        "Holy Spirit University of Kaslik (USEK)",
+        "Horus University - Egypt",
+        "Imam Abdulrahman Bin Faisal University",
+        "Imam Ja'afar Al-Sadiq University",
+        "International University of Rabat",
+        "Iraq University College",
+        "Islamic University of Gaza",
+        "Isra University",
+        "Jadara University",
+        "Jazan University",
+        "Jordan University of Science and Technology",
+        "Jouf University",
+        "Kafrelsheikh University",
+        "Khalifa University of Science and Technology",
+        "Khartoum University",
+        "King Abdulaziz University",
+        "King Abdullah Petroleum Studies and Research Center",
+        "King Abdullah University of Science and Technology",
+        "King Fahd University of Petroleum and Minerals",
+        "King Faisal University",
+        "King Khalid University",
+        "King Saud bin Abdulaziz University for Health Sciences",
+        "King Saud University",
+        "Knowledge University",
+        "Komar University of Science and Technology",
+        "Koya University",
+        "Kuwait College of Science & Technology",
+        "Kuwait University",
+        "Lebanese American University",
+        "Lebanese French University",
+        "Majmaah University",
+        "Mansoura University",
+        "Menoufia University",
+        "Middle East College",
+        "Middle East University, Jordan",
+        "Middle Technical University",
+        "Minia University",
+        "Misr International University",
+        "Misr University for Science and Technology",
+        "Mohamed Bin Zayed University of Artificial Intelligence",
+        "Mohammed V University in Rabat",
+        "Mohammed VI Polytechnic University",
+        "Mohammed VI University of Sciences and Health - UM6SS",
+        "MSA University",
+        "Mustansiriyah University",
+        "Mutah University",
+        "Nahda University in Beni Suef",
+        "Najran University",
+        "National Council for Scientific Research, Beirut",
+        "New Valley University",
+        "Nile University",
+        "Ninevah University",
+        "Northern Technical University",
+        "Omar Al-Mukhtar University",
+        "Palestine Technical University - Kadoorie",
+        "Philadelphia University",
+        "Port Said University",
+        "Prince Mohammad Bin Fahd University",
+        "Prince Sattam Bin Abdulaziz University",
+        "Prince Sultan University",
+        "Princess Nourah Bint Abdulrahman University",
+        "Princess Sumaya University",
+        "Qassim University",
+        "Qatar University",
+        "S P Jain School of Global Management",
+        "Salahaddin University-Erbil",
+        "Saudi Electronic University",
+        "Shaqra University",
+        "Skyline University College",
+        "Sohag University",
+        "Sohar University",
+        "Soran University",
+        "South Valley University",
+        "Southern Technical University, Iraq",
+        "Suez Canal University",
+        "Suez University",
+        "Sulaimani Polytechnic University",
+        "Sultan Qaboos University",
+        "Tabbin Institute for Metallurgical Studies",
+        "Tafila Technical University",
+        "Taibah University",
+        "Taif University",
+        "Tanta University",
+        "The American University in Cairo",
+        "The British University in Egypt",
+        "The International University of Beirut",
+        "The Islamic University, Najaf",
+        "The University of Jordan",
+        "Tikrit University",
+        "Tishk International University",
+        "Umm Al-Qura University",
+        "United Arab Emirates University",
+        "Université 20 Août 1955-Skikda",
+        "Université 8 Mai 1945 Guelma",
+        "Université Abbes Laghrour Khenchela",
+        "Université Abdelhamid Ibn Badis Mostaganem",
+        "Université Abdelmalek Essaadi",
+        "Université Abderrahmane Mira - Béjaïa",
+        "Université Abou Bekr Belkaid Tlemcen",
+        "Université Ahmed Draia - Adrar",
+        "Université Ahmed Zabana de Relizane",
+        "Université Akli Mouhand Oulhadj-Bouira",
+        "Université Amar Telidji Laghouat",
+        "Université Badji Mokhtar - Annaba",
+        "Université Blida 1",
+        "Université Cadi Ayyad",
+        "Université Chouaib Doukkali",
+        "Université Constantine 1",
+        "Université Constantine 3",
+        "Université d’Echahid Hamma Lakhdar – El-oued",
+        "Université de Gabès",
+        "Université de Gafsa",
+        "Université de Ghardaia",
+        "Université de Jendouba",
+        "Université de Jijel",
+        "Université de la Manouba",
+        "Université de Monastir",
+        "Université de Sousse",
+        "Université de Tunis",
+        "Université de Tunis El Manar",
+        "Université des Sciences et de la Technologie d’Oran Mohamed-Boudiaf",
+        "Université des Sciences et de la Technologie Houari Boumediene",
+        "Université Djilali Bounaama Khemis Miliana",
+        "Université Djillali Liabes de Sidi Bel Abbes",
+        "Université Dr Taher Moulay Saida - Algeria",
+        "Université Ferhat Abbas Sétif 1",
+        "Université Hassan 1er",
+        "Université Ibn Tofail",
+        "Université Ibn Zohr",
+        "Université Ibn-Khaldoun Tiaret",
+        "Université Kasdi Merbah Ouargla",
+        "Université Larbi Tébessi - Tébessa",
+        "Université Libanaise",
+        "Université Mohamed Boudiaf - M'sila",
+        "Université Mohamed El Bachir El Ibrahimi de Bordj Bou Arréridj",
+        "Université Mohamed Khider Biskra",
+        "Université Mohammed Premier Oujda",
+        "Université Moulay Ismaïl",
+        "Université Mouloud Mammeri de Tizi Ouzou",
+        "Université Mustapha Stambouli de Mascara",
+        "Université Oran 1",
+        "Université Oum El Bouaghi",
+        "Université Saint-Joseph de Beyrouth",
+        "Université Sidi Mohamed Ben Abdellah",
+        "Université Sultan Moulay Slimane",
+        "Université Yahia Farès de Médéa",
+        "Université Ziane Achour De Djelfa",
+        "Université Batna 2",
+        "University Hassiba Benbouali - Chlef",
+        "University of Al-Ameed",
+        "University of Al-Qadisiyah",
+        "University of Anbar",
+        "University of Babylon",
+        "University of Baghdad",
+        "University of Balamand",
+        "University of Basrah",
+        "University of Bisha",
+        "University of Carthage",
+        "University Of Diyala",
+        "University of Duhok",
+        "University of Fallujah",
+        "University of Garmian",
+        "University of Hafr Al-Batin",
+        "University of Ha'il",
+        "University of Halabja",
+        "University of Human Development",
+        "University of Information Technology and Communications",
+        "University of Jeddah",
+        "University of Kerbala",
+        "University of Kirkuk",
+        "University of Kufa",
+        "University of Kurdistan Hewlêr",
+        "University of Misan",
+        "University of Mosul",
+        "University of Nizwa",
+        "University of Petra",
+        "University of Prince Mugrin",
+        "University of Raparin",
+        "University of Sadat City",
+        "University of Sfax",
+        "University of Sharjah",
+        "University of Sulaimani",
+        "University of Sumer",
+        "University of Tabuk",
+        "University of Technology- Iraq",
+        "University of Thi-Qar",
+        "University of Zakho",
+        "Wasit University",
+        "Yarmouk University",
+        "Zagazig University",
+        "Zarqa University",
+        "Zayed University"
+    ]
 
     this.arabCountries = [
       "Algeria",
@@ -1193,6 +1512,26 @@ export class RankingComponent implements OnInit {
       {code2:"yem",code:"ye"}
     ]
 
+    this.countryUniversity = [      
+        { country: "Algeria", code: "dz", universities: [ "Centre Universitaire Amin Eloukkal El Hadj Moussa Ag Akhamouk Tamanrasset", "Centre Universitaire Salhi Ahmed -Naama", "Ecole Nationale Polytechnique", "University Hassiba Benbouali - Chlef", "Université 20 Août 1955-Skikda", "Université 8 Mai 1945 Guelma", "Université Abbes Laghrour Khenchela", "Université Abdelhamid Ibn Badis Mostaganem", "Université Abderrahmane Mira - Béjaïa", "Université Abou Bekr Belkaid Tlemcen", "Université Ahmed Draia - Adrar", "Université Ahmed Zabana de Relizane", "Université Akli Mouhand Oulhadj-Bouira", "Université Amar Telidji Laghouat", "Université Badji Mokhtar - Annaba", "Université Blida 1", "Université Constantine 1", "Université Constantine 3", "Université Djilali Bounaama Khemis Miliana", "Université Djillali Liabes de Sidi Bel Abbes", "Université Dr Taher Moulay Saida - Algeria", "Université Ferhat Abbas Sétif 1", "Université Ibn-Khaldoun Tiaret", "Université Kasdi Merbah Ouargla", "Université Larbi Tébessi - Tébessa", "Université Mohamed Boudiaf - M'sila", "Université Mohamed El Bachir El Ibrahimi de Bordj Bou Arréridj", "Université Mohamed Khider Biskra", "Université Mouloud Mammeri de Tizi Ouzou", "Université Mustapha Stambouli de Mascara", "Université Oran 1", "Université Oum El Bouaghi", "Université Yahia Farès de Médéa", "Université Ziane Achour De Djelfa", "Université de Ghardaia", "Université de Jijel", "Université des Sciences et de la Technologie Houari Boumediene", "Université des Sciences et de la Technologie d’Oran Mohamed-Boudiaf", "Université d’Echahid Hamma Lakhdar – El-oued", "Université Batna 2", "École Militaire Polytechnique", "École Nationale Supérieure Agronomique – Kasdi Merbah", "École Nationale Supérieure des Télécommunications et des Technologies de l'Information et de la Communication", "École Supérieure des Sciences de l’Aliment et des Industries Agroalimentaires" ] },
+        { country: "Egypt", code: "eg", universities: [ "Ain Shams University", "Al-Azhar University", "Alexandria University", "Arab Academy for Science, Technology and Maritime Transport", "Arish University", "Assiut University", "Aswan University", "Badr University in Cairo", "Benha University", "Beni-Suef University", "Cairo University", "Damanhour University", "Damietta University", "Delta University for Science and Technology", "Egypt-Japan University of Science and Technology", "Egyptian Russian University", "Fayoum University", "Future University in Egypt", "Galala University", "German University in Cairo", "Helwan University", "Horus University - Egypt", "Kafrelsheikh University", "MSA University", "Mansoura University", "Menoufia University", "Minia University", "Misr International University", "Misr University for Science and Technology", "Nahda University in Beni Suef", "New Valley University", "Nile University", "Port Said University", "Sohag University", "South Valley University", "Suez Canal University", "Suez University", "Tabbin Institute for Metallurgical Studies", "Tanta University", "The American University in Cairo", "The British University in Egypt", "University of Sadat City", "Zagazig University" ] },
+        { country: "Iraq", code: "iq", universities: [ "Al-Ayen Iraqi University, AUIQ", "Al-Furat Al-Awsat Technical University", "Al-Hadi University College", "Al-Muthanna University", "Al-Nahrain University", "Dijlah University College", "Erbil Polytechnic University", "Middle Technical University", "Salahaddin University-Erbil", "Soran University", "Southern Technical University, Iraq", "Sulaimani Polytechnic University", "The Islamic University, Najaf", "Tikrit University", "University Of Diyala", "University of Al-Ameed", "University of Al-Qadisiyah", "University of Anbar", "University of Babylon", "University of Baghdad", "University of Basrah", "University of Garmian", "University of Human Development", "University of Information Technology and Communications", "University of Kufa", "University of Kurdistan Hewlêr", "University of Misan", "University of Sulaimani", "University of Technology- Iraq", "Wasit University" ] },
+        { country: "Jordan", code: "jo", universities: [ "Al-Balqa Applied University", "Al-Hussein Bin Talal University", "Amman Arab University", "Applied Science Private University", "German Jordanian University", "Hashemite University", "Isra University", "Jordan University of Science and Technology", "Philadelphia University", "The University of Jordan", "Yarmouk University" ] }, 
+        { country: "Kuwait", code: "kw", universities: [ "Australian University","Kuwait College of Science & Technology" ] }, 
+        { country: "Lebanon", code: "lb", universities: [ "American University of Beirut", "Beirut Arab University", "Holy Spirit University of Kaslik (USEK)", "Lebanese American University", "The International University of Beirut", "Université Libanaise", "Université Saint-Joseph de Beyrouth" ] }, 
+        { country: "Libya", code: "ly", universities: [ "Omar Al-Mukhtar University" ] }, 
+        { country: "Morocco", code: "ma", universities: [ "Ecole Nationale d'Agriculture", "Hassan II University of Casablanca", "International University of Rabat", "Mohammed V University in Rabat", "Mohammed VI Polytechnic University", "Université Cadi Ayyad", "Université Chouaib Doukkali", "Université Ibn Tofail", "Université Ibn Zohr", "Université Mohammed Premier Oujda", "Université Moulay Ismaïl", "Université Sidi Mohamed Ben Abdellah" ] }, 
+        { country: "Oman", code: "om", universities: [ "A’Sharqiyah University", "Dhofar University", "Sohar University", "Sultan Qaboos University", "University of Nizwa" ] }, 
+        { country: "Palestine", code: "ps", universities: [ "An-Najah National University","Birzeit University" ] }, 
+        { country: "Qatar", code: "qa", universities: [ "Qatar University" ] },
+        { country: "Saudi Arabia", code: "sa", universities: [ "Al Yamamah University", "Al-Imam Muhammad Ibn Saud Islamic University", "Alfaisal University", "Cairo University", "Effat University, Saudi Arabia", "Fahad Bin Sultan University", "Imam Abdulrahman Bin Faisal University", "Jazan University", "Jouf University", "King Abdulaziz University", "King Abdullah Petroleum Studies and Research Center", "King Abdullah University of Science and Technology", "King Fahd University of Petroleum and Minerals", "King Faisal University", "King Khalid University", "King Saud University", "King Saud bin Abdulaziz University for Health Sciences", "Majmaah University", "Najran University", "Prince Mohammad Bin Fahd University", "Prince Sattam Bin Abdulaziz University", "Prince Sultan University", "Princess Nourah Bint Abdulrahman University", "Qassim University", "Shaqra University", "Taibah University", "Taif University", "Umm Al-Qura University", "University of Bisha", "University of Ha'il", "University of Hafr Al-Batin", "University of Jeddah", "University of Tabuk" ] },
+        { country: "Sudan", code: "sd", universities: [ "Alzaiem Alazhari University","Khartoum University" ] }, 
+        { country: "Syria", code: "sy", universities: [ "Damascus University" ] }, 
+        { country: "Tunisia", code: "tn", universities: [ "University of Carthage", "University of Sfax", "Université de Gabès", "Université de Jendouba", "Université de Monastir", "Université de Sousse", "Université de Tunis El Manar", "Université de la Manouba" ] },
+        { country: "United Arab Emirates", code: "ae", universities: [ "Abu Dhabi University", "Ajman University", "Al Ain University", "American University of Sharjah", "British University in Dubai", "European University College, Dubai", "Higher Colleges of Technology", "Khalifa University of Science and Technology", "Mohamed Bin Zayed University of Artificial Intelligence", "S P Jain School of Global Management", "Skyline University College", "United Arab Emirates University", "University of Sharjah", "Zayed University" ] },
+        { country: "Yemen", code: "ye", universities: [ "Hodeida University" ] }
+    ]
+
     /* this.countries = [
       { name: 'Algeria', code: 'DZ' },
       { name: 'Egypt', code: 'EG' },
@@ -1229,6 +1568,10 @@ export class RankingComponent implements OnInit {
     table.filter('', 'university', 'equals');
     table.filter('', 'category', 'equals');
     table.filter('', 'subcategory', 'equals');
+
+    this.selectedCountryUniversity = undefined;
+    this.selectedInstitucion = "";
+
     this.selectedLastCountry = undefined;
     this.selectedCountry = undefined;
     this.selectedCategory = undefined;
@@ -1242,7 +1585,10 @@ export class RankingComponent implements OnInit {
       this.test = this.testAux;
     }
     else{
-      this.test = this.test.filter(item => this.arabCountries.includes(item.country!));
+      this.test = this.test.filter(item => this.arabCountries.includes(item.country!))
+      .map((item, index) => ({...item,
+        position: (index + 1)
+      }));
     }
     this.isfilterArabResearch = !this.isfilterArabResearch;
   }

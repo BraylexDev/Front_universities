@@ -22,32 +22,46 @@
                     <!-- filter modal -->
                     <p-button (click)="showDialog()" icon="pi pi-external-link" label="Filters"></p-button>
                     <p-dialog header="Filter" [(visible)]="visible" [modal]="true" [closeOnEscape]="true" [breakpoints]="{ '960px': '90vw' }" [style]="{ width: '50vw'}" [draggable]="false" [resizable]="false">
-                        <p-panel header="Select Institution" [toggleable]="true">
-                            <p-dropdown appendTo="body" [options]="universities" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
-                                <ng-template pTemplate="selectedItem">
-                                    <div class="flex align-items-center gap-2" *ngIf="selectedCountry" style="display: flex; ">
-                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCountry.name }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-university pTemplate="item">
-                                    <div class="flex align-items-center gap-2" style="display: flex;">
-                                        <div class="textUniv" style="text-overflow: ellipsis; overflow: hidden;">{{ university.name }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </p-panel>
                         <p-panel header="Select Country" [toggleable]="true">
-                            <p-dropdown appendTo="body" [options]="countries" [(ngModel)]="selectedLastCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
+                            <p-dropdown appendTo="body" [options]="countryUniversity" [(ngModel)]="selectedCountryUniversity" optionLabel="country" [filter]="true" filterBy="country" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
-                                    <div class="flex align-items-center gap-2" *ngIf="selectedLastCountry" style="display: flex;">
-                                        <span [class]="'fi fi-' + selectedLastCountry.code| lowercase" style="width: 18px; margin-inline: 10px;"></span>
-                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedLastCountry.name }}</div>
+                                    <div class="flex align-items-center gap-2" style="display: flex;">
+                                        <span [class]="'fi fi-' + selectedCountryUniversity?.code| lowercase" style="width: 18px; margin-inline: 10px;"></span>
+                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCountryUniversity?.country }}</div>
                                     </div>
                                 </ng-template>
                                 <ng-template let-working pTemplate="item">
                                     <div class="flex align-items-center gap-2" style="display: flex;">
                                         <span [class]="'fi fi-' + working.code | lowercase" style="width: 18px; margin-inline: 10px;"></span>
-                                        <div>{{ working.name }}</div>
+                                        <div>{{ working.country }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </p-panel>
+                        <p-panel header="Select Institution" [toggleable]="true" *ngIf="selectedCountryUniversity">
+                            <p-dropdown appendTo="body" [options]="selectedCountryUniversity.universities" [(ngModel)]="selectedInstitucion" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
+                                <ng-template pTemplate="selectedItem" >
+                                    <div class="flex align-items-center gap-2" *ngIf="selectedCountryUniversity" style="display: flex; ">
+                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedInstitucion }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-university pTemplate="item">
+                                    <div class="flex align-items-center gap-2" style="display: flex;">
+                                        <div class="textUniv" style="text-overflow: ellipsis; overflow: hidden;">{{ university }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </p-panel>
+                        <p-panel header="Select Institution" [toggleable]="true" *ngIf="!selectedCountryUniversity">
+                            <p-dropdown appendTo="body" [options]="universities" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
+                                <ng-template pTemplate="selectedItem" >
+                                    <div class="flex align-items-center gap-2" style="display: flex; ">
+                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCountry?.name }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-university pTemplate="item">
+                                    <div class="flex align-items-center gap-2" style="display: flex;">
+                                        <div class="textUniv" style="text-overflow: ellipsis; overflow: hidden;">{{ university.name }}</div>
                                     </div>
                                 </ng-template>
                             </p-dropdown>
@@ -69,7 +83,7 @@
                         <p-panel header="Select SubCategory" [toggleable]="true" *ngIf="selectedCategory">
                             <p-dropdown appendTo="body" [options]="selectedCategory.subcategory" [(ngModel)]="selectedSubcategory" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
                                 <ng-template pTemplate="selectedItem">
-                                    <div class="flex align-items-center gap-2" *ngIf="selectedSubcategory" style="display: flex; ">
+                                    <div class="flex align-items-center gap-2" style="display: flex; ">
                                         <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedSubcategory }}</div>
                                     </div>
                                 </ng-template>
@@ -81,7 +95,11 @@
                             </p-dropdown>
                         </p-panel>
                         <ng-template pTemplate="footer">
-                            <p-button *ngIf="selectedCategory || selectedLastCountry || selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry?.name,'university','equals'); dt1.filter(selectedLastCountry?.name,'working','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>                            
+                            <p-button *ngIf="(!selectedCategory && !selectedCountry) && !selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedLastCountry,'working','equals')" label="Apply" styleClass="p-button-text"></p-button>
+                            <p-button *ngIf="(!selectedCategory && !selectedInstitucion) && selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedInstitucion,'university','equals'); dt1.filter(selectedCountryUniversity.country,'working','equals')" label="Apply" styleClass="p-button-text"></p-button>
+                            <p-button *ngIf="(selectedCategory || selectedCountry) && !selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry?.name,'university','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>
+                            <p-button *ngIf="(selectedCategory || selectedInstitucion) && selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountryUniversity.country,'working','equals'); dt1.filter(selectedInstitucion,'university','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>
+                            <!-- <p-button *ngIf="selectedCategory || selectedLastCountry || selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry?.name,'university','equals'); dt1.filter(selectedLastCountry?.name,'working','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>-->
                             <!-- <p-button *ngIf="selectedCountry && selectedLastCountry && !selectedCategory" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals'); dt1.filter(selectedLastCountry.name,'working','equals')" label="Apply" styleClass="p-button-text"></p-button>
                             <p-button *ngIf="!selectedCategory && !selectedLastCountry && selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals');" label="Apply" styleClass="p-button-text"></p-button>
                             <p-button *ngIf="!selectedCategory && selectedLastCountry && !selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedLastCountry.name,'working','equals');" label="Apply" styleClass="p-button-text"></p-button>

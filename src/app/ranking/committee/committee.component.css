@@ -139,6 +139,10 @@ a {
     height: 10rem;
     padding-inline: 1rem;
 }
+.image img {
+    height: 10rem;
+    padding-inline: 1rem;
+}
 
 /* Redes Sociales */
 
@@ -226,6 +230,9 @@ a {
     }
 
     .image svg {
+        height: 5rem;
+    }
+    .image img {
         height: 5rem;
     }
 
