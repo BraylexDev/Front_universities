@@ -14,6 +14,7 @@ export class TestServiceService {
   constructor( private http: HttpClient) {  }
 
   getRanking(): Observable<RankingTest[]> {
-    return this.http.get<RankingTest[]>(`${this.ApiUrl}`);
+    return this.http.get<RankingTest[]>(`${this.ApiUrl}/api/excel/datas`);
+    
   }
 }

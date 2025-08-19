@@ -11,6 +11,8 @@ import { Scroller } from 'primeng/scroller';
 import { TestServiceService } from '../service/testRanking/test-service.service';
 import { RankingTest } from '../domain/rankingTest';
 import { CodeCountry, Country } from '../domain/customer';
+import { FileService } from '../service/file/file.service';
+import { Datas } from '../domain/datas';
 
 export interface State {
   flag: string;
@@ -206,6 +208,9 @@ export class HomeComponent implements OnInit{
 /* Info tabla  */
 
   test: RankingTest[] = [];
+
+  datas: Datas[] = [];
+
   loading: boolean = true;
 
   rankings: Ranking[] = [];
@@ -215,7 +220,7 @@ export class HomeComponent implements OnInit{
   clickedRows = new Set<PeriodicElement>();
 
   currentLanguage = 'en';
-  constructor( private productService: ProductService, private rankingService: RankingserviceService,  public translate: TranslateService, private testService: TestServiceService) {
+  constructor( private productService: ProductService, private rankingService: RankingserviceService,  public translate: TranslateService, private testService: TestServiceService, private fileService: FileService) {
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
       startWith(''),
       map(state => (state ? this._filterStates(state) : this.states.slice())),
@@ -247,13 +252,21 @@ export class HomeComponent implements OnInit{
   ngOnInit() {
     this.onScrollToTop();
 
+    /* this.fileService.getData()
+      .subscribe(res => {
+        this.datas = Object.values(res).slice(0, 10);
+        this.changeCodeCountry();
+        this.specifyNameCountry();
+
+        this.loading = false;
+    }) */
     //test
     this.testService.getRanking()
       .subscribe(res => {
         this.test = Object.values(res).slice(0,10);
         this.changeCodeCountry();
         this.specifyNameCountry();
-        /* console.log(this.test); */
+        
         this.loading = false;
       })
 

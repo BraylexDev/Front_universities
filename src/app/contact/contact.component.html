@@ -1,39 +1,41 @@
 <div class="all">
   <section dir="auto" class="info1">
     <div class="title">
-      <h1  >{{'contact_title'|translate}}</h1>
+      <h1>{{ "contact_title" | translate }}</h1>
     </div>
   </section>
   <section class="detail">
     <div class="detailInfo">
-      <h3>{{'contact_subtitle_get'|translate}}</h3>
-      <p>{{'contact_parag'|translate}}
-      </p>
+      <h3>{{ "contact_subtitle_get" | translate }}</h3>
+      <p>{{ "contact_parag" | translate }}</p>
     </div>
   </section>
   <section class="container">
     <div dir="auto" class="row">
-      <!-- Send message -->
       <div dir="auto" class="contact-form">
         <form action="" id="contact-form">
-          <h2>{{'contact_send_message'|translate}}</h2>
+          <h2>{{ "contact_send_message" | translate }}</h2>
           <div class="input-box">
-            <input type="text" required="true" name="">
-            <span>{{'contact_full_name'|translate}}</span>
+            <input type="text" required="true" name="" />
+            <span>{{ "contact_full_name" | translate }}</span>
           </div>
 
           <div class="input-box">
-            <input type="email" required="true" name="">
-            <span>{{'contact_email'|translate}}</span>
+            <input type="email" required="true" name="" />
+            <span>{{ "contact_email" | translate }}</span>
           </div>
 
           <div class="input-box">
             <textarea class="txta" required="true" name=""></textarea>
-            <span>{{'contact_type'|translate}}</span>
+            <span>{{ "contact_type" | translate }}</span>
           </div>
 
           <div class="input-box">
-            <input type="submit" value="{{'contact_send'|translate}}" name="">
+            <input
+              type="submit"
+              value="{{ 'contact_send' | translate }}"
+              name=""
+            />
           </div>
         </form>
       </div>
@@ -43,11 +45,11 @@
           <div class="contact-info-icon ci">
             <!-- <i class="fas fa-home"></i> -->
             <!-- <i class="pi pi-envelope"></i> -->
-            <mat-icon fontIcon="mail" style="color: white;"></mat-icon>
+            <mat-icon fontIcon="mail" style="color: white"></mat-icon>
           </div>
 
           <div class="contact-info-content">
-            <h4>{{'contact_address'|translate}}</h4>
+            <h4>{{ "contact_address" | translate }}</h4>
             <!-- <p>4671 Sugar Camp Road,<br /> Owatonna, Minnesota, <br />55060</p> -->
             <p>info@toparabresearchers.org</p>
           </div>
@@ -61,7 +63,7 @@
           </div>
 
           <div class="contact-info-content">
-            <h4>{{'contact_phone'|translate}}</h4>
+            <h4>{{ "contact_phone" | translate }}</h4>
             <p>support@toparabresearchers.org</p>
           </div>
         </div>
@@ -73,7 +75,7 @@
           </div>
 
           <div class="contact-info-content">
-            <h4>{{'contact_email'|translate}}</h4>
+            <h4>{{ "contact_email" | translate }}</h4>
             <p>collab@toparabresearchers.org</p>
           </div>
         </div>
@@ -85,7 +87,7 @@
           </div>
 
           <div class="contact-info-content">
-            <h4>{{'contact_press'|translate}}</h4>
+            <h4>{{ "contact_press" | translate }}</h4>
             <p>press@toparabresearchers.org</p>
           </div>
         </div>

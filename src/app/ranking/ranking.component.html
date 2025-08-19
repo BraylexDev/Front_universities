@@ -1,222 +1,493 @@
 <section dir="auto" class="detail">
-    <div class="title">
-        <h1>{{'ranking_title' | translate}}</h1>
-    </div>
+  <div class="title">
+    <h1>{{ "ranking_title" | translate }}</h1>
+  </div>
 </section>
 <section dir="auto" class="rankings">
-    <div>
-        <p>{{'ranking_parag' | translate}}</p>
-    </div>
-    <div  class="methodology">
-        <a class="goMethodology" routerLink="/methodology"> {{'ranking_methodology' | translate}}</a>
-        <span style="padding-inline: 1rem;">></span>
-    </div>
-    <div class="card">
-        <p-table #dt1 [value]="test" dataKey="id" [rows]="20" [showCurrentPageReport]="true"
-            [rowsPerPageOptions]="[20, 50, 100]" [loading]="loading" [paginator]="true"
-            currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}"
-            [globalFilterFields]="['position', 'name','university', 'category', 'subcategory', 'country', 'working', 'score']">
-            <ng-template pTemplate="paginatorleft" let-state>  </ng-template> 
-            <ng-template pTemplate="caption" let-state>
-                <div class="flex head2">
-                    <!-- filter modal -->
-                    <p-button (click)="showDialog()" icon="pi pi-external-link" label="Filters"></p-button>
-                    <p-dialog header="Filter" [(visible)]="visible" [modal]="true" [closeOnEscape]="true" [breakpoints]="{ '960px': '90vw' }" [style]="{ width: '50vw'}" [draggable]="false" [resizable]="false">
-                        <p-panel header="Select Country" [toggleable]="true">
-                            <p-dropdown appendTo="body" [options]="countryUniversity" [(ngModel)]="selectedCountryUniversity" optionLabel="country" [filter]="true" filterBy="country" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
-                                <ng-template pTemplate="selectedItem">
-                                    <div class="flex align-items-center gap-2" style="display: flex;">
-                                        <span [class]="'fi fi-' + selectedCountryUniversity?.code| lowercase" style="width: 18px; margin-inline: 10px;"></span>
-                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCountryUniversity?.country }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-working pTemplate="item">
-                                    <div class="flex align-items-center gap-2" style="display: flex;">
-                                        <span [class]="'fi fi-' + working.code | lowercase" style="width: 18px; margin-inline: 10px;"></span>
-                                        <div>{{ working.country }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </p-panel>
-                        <p-panel header="Select Institution" [toggleable]="true" *ngIf="selectedCountryUniversity">
-                            <p-dropdown appendTo="body" [options]="selectedCountryUniversity.universities" [(ngModel)]="selectedInstitucion" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
-                                <ng-template pTemplate="selectedItem" >
-                                    <div class="flex align-items-center gap-2" *ngIf="selectedCountryUniversity" style="display: flex; ">
-                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedInstitucion }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-university pTemplate="item">
-                                    <div class="flex align-items-center gap-2" style="display: flex;">
-                                        <div class="textUniv" style="text-overflow: ellipsis; overflow: hidden;">{{ university }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </p-panel>
-                        <p-panel header="Select Institution" [toggleable]="true" *ngIf="!selectedCountryUniversity">
-                            <p-dropdown appendTo="body" [options]="universities" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
-                                <ng-template pTemplate="selectedItem" >
-                                    <div class="flex align-items-center gap-2" style="display: flex; ">
-                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCountry?.name }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-university pTemplate="item">
-                                    <div class="flex align-items-center gap-2" style="display: flex;">
-                                        <div class="textUniv" style="text-overflow: ellipsis; overflow: hidden;">{{ university.name }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </p-panel>
-                        <p-panel header="Select Category" [toggleable]="true">
-                            <p-dropdown appendTo="body" [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
-                                <ng-template pTemplate="selectedItem">
-                                    <div *ngIf="selectedCategory" style="display: flex; ">
-                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedCategory.name }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-category pTemplate="item">
-                                    <div style="display: flex;">
-                                        <div>{{ category.name }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </p-panel>
-                        <p-panel header="Select SubCategory" [toggleable]="true" *ngIf="selectedCategory">
-                            <p-dropdown appendTo="body" [options]="selectedCategory.subcategory" [(ngModel)]="selectedSubcategory" [showClear]="true" placeholder="Any" [style]="{ width: '80%' }">
-                                <ng-template pTemplate="selectedItem">
-                                    <div class="flex align-items-center gap-2" style="display: flex; ">
-                                        <div style="text-overflow: ellipsis; overflow: hidden;">{{ selectedSubcategory }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-subcategory pTemplate="item">
-                                    <div class="flex align-items-center gap-2" style="display: flex;">
-                                        <div>{{ subcategory }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </p-panel>
-                        <ng-template pTemplate="footer">
-                            <p-button *ngIf="(!selectedCategory && !selectedCountry) && !selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedLastCountry,'working','equals')" label="Apply" styleClass="p-button-text"></p-button>
-                            <p-button *ngIf="(!selectedCategory && !selectedInstitucion) && selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedInstitucion,'university','equals'); dt1.filter(selectedCountryUniversity.country,'working','equals')" label="Apply" styleClass="p-button-text"></p-button>
-                            <p-button *ngIf="(selectedCategory || selectedCountry) && !selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry?.name,'university','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>
-                            <p-button *ngIf="(selectedCategory || selectedInstitucion) && selectedCountryUniversity" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountryUniversity.country,'working','equals'); dt1.filter(selectedInstitucion,'university','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>
-                            <!-- <p-button *ngIf="selectedCategory || selectedLastCountry || selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry?.name,'university','equals'); dt1.filter(selectedLastCountry?.name,'working','equals'); dt1.filter(selectedCategory?.name,'category','equals');  dt1.filter(selectedSubcategory,'subcategory','equals')" label="Apply" styleClass="p-button-text"></p-button>-->
-                            <!-- <p-button *ngIf="selectedCountry && selectedLastCountry && !selectedCategory" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals'); dt1.filter(selectedLastCountry.name,'working','equals')" label="Apply" styleClass="p-button-text"></p-button>
-                            <p-button *ngIf="!selectedCategory && !selectedLastCountry && selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedCountry.name,'country','equals');" label="Apply" styleClass="p-button-text"></p-button>
-                            <p-button *ngIf="!selectedCategory && selectedLastCountry && !selectedCountry" icon="pi pi-check" (click)="visible = false; dt1.filter(selectedLastCountry.name,'working','equals');" label="Apply" styleClass="p-button-text"></p-button>
-                            <p-button *ngIf="!selectedCountry && !selectedLastCountry &&!selectedCategory" icon="pi pi-check" (click)="visible = false;" label="Apply" styleClass="p-button-text"></p-button> -->
-                        </ng-template>
-                    </p-dialog>
-                    <!-- Exclude country NOT Arabs -->
-                    <button *ngIf="isfilterArabResearch" [ngClass] = "{'stylefilterArabResearch': isfilterArabResearch}" pButton label="{{'home_table_arab_only' | translate}}" class="p-button-outlined" icon="pi pi-eye-slash" (click)="filterArabResearch()" style="margin-inline: 30px;"></button>
-                    <button *ngIf="!isfilterArabResearch" [ngClass] = "{'stylefilterArabResearch': isfilterArabResearch}" pButton label="{{'home_table_arab_only' | translate}}" class="p-button-outlined" icon="pi pi-eye" (click)="filterArabResearch()" style="margin-inline: 30px;"></button>
-                    <!-- Button clear filters -->
-                    <button pButton label="{{'home_table_clear' | translate}}" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)" style="margin-inline: 30px;"></button>
-                </div>
-                <div class="line"></div>
-                <div class="flex head">
-                    <span class="text_search">{{'ranking_table_description' | translate}}</span>
-                    <span class="p-input-icon-right ml-auto">
-                        <i class="pi pi-search"></i>
-                        <input class="s" pInputText type="text" [(ngModel)]="clearField2"
-                            (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                            placeholder="{{'ranking_table_search2' | translate}}" />
-                    </span>
-                </div>
+  <div>
+    <p>{{ "ranking_parag" | translate }}</p>
+  </div>
+  <div class="methodology">
+    <a class="goMethodology" routerLink="/methodology">
+      {{ "ranking_methodology" | translate }}</a
+    >
+    <span style="padding-inline: 1rem">></span>
+  </div>
+  <div class="card">
+    <p-table
+      #dt1
+      [value]="test"
+      dataKey="id"
+      [rows]="20"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[20, 50, 100]"
+      [loading]="loading"
+      [paginator]="true"
+      currentPageReportTemplate="{{
+        'ranking_table_pagination_showing' | translate
+      }} {first} {{ 'ranking_table_pagination_to' | translate }} {last} {{
+        'ranking_table_pagination_of' | translate
+      }} {totalRecords} {{ 'ranking_table_pagination_entries' | translate }}"
+      [globalFilterFields]="[
+        'position',
+        'name',
+        'university',
+        'category',
+        'subcategory',
+        'country',
+        'working',
+        'score'
+      ]"
+    >
+      <ng-template pTemplate="paginatorleft" let-state> </ng-template>
+      <ng-template pTemplate="caption" let-state>
+        <div class="flex head2">
+          <!-- filter modal -->
+          <p-button
+            (click)="showDialog()"
+            icon="pi pi-external-link"
+            label="Filters"
+          ></p-button>
+          <p-dialog
+            header="Filter"
+            [(visible)]="visible"
+            [modal]="true"
+            [closeOnEscape]="true"
+            [breakpoints]="{ '960px': '90vw' }"
+            [style]="{ width: '50vw' }"
+            [draggable]="false"
+            [resizable]="false"
+          >
+            <p-panel header="Select Country" [toggleable]="true">
+              <p-dropdown
+                appendTo="body"
+                [options]="countryUniversity"
+                [(ngModel)]="selectedCountryUniversity"
+                optionLabel="country"
+                [filter]="true"
+                filterBy="country"
+                [showClear]="true"
+                placeholder="Any"
+                [style]="{ width: '80%' }"
+              >
+                <ng-template pTemplate="selectedItem">
+                  <div
+                    class="flex align-items-center gap-2"
+                    style="display: flex"
+                  >
+                    <span
+                      [class]="
+                        'fi fi-' + selectedCountryUniversity?.code | lowercase
+                      "
+                      style="width: 18px; margin-inline: 10px"
+                    ></span>
+                    <div style="text-overflow: ellipsis; overflow: hidden">
+                      {{ selectedCountryUniversity?.country }}
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template let-working pTemplate="item">
+                  <div
+                    class="flex align-items-center gap-2"
+                    style="display: flex"
+                  >
+                    <span
+                      [class]="'fi fi-' + working.code | lowercase"
+                      style="width: 18px; margin-inline: 10px"
+                    ></span>
+                    <div>{{ working.country }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </p-panel>
+            <p-panel
+              header="Select Institution"
+              [toggleable]="true"
+              *ngIf="selectedCountryUniversity"
+            >
+              <p-dropdown
+                appendTo="body"
+                [options]="selectedCountryUniversity.universities"
+                [(ngModel)]="selectedInstitucion"
+                [showClear]="true"
+                placeholder="Any"
+                [style]="{ width: '80%' }"
+              >
+                <ng-template pTemplate="selectedItem">
+                  <div
+                    class="flex align-items-center gap-2"
+                    *ngIf="selectedCountryUniversity"
+                    style="display: flex"
+                  >
+                    <div style="text-overflow: ellipsis; overflow: hidden">
+                      {{ selectedInstitucion }}
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template let-university pTemplate="item">
+                  <div
+                    class="flex align-items-center gap-2"
+                    style="display: flex"
+                  >
+                    <div
+                      class="textUniv"
+                      style="text-overflow: ellipsis; overflow: hidden"
+                    >
+                      {{ university }}
+                    </div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </p-panel>
+            <p-panel
+              header="Select Institution"
+              [toggleable]="true"
+              *ngIf="!selectedCountryUniversity"
+            >
+              <p-dropdown
+                appendTo="body"
+                [options]="universities"
+                [(ngModel)]="selectedCountry"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Any"
+                [style]="{ width: '80%' }"
+              >
+                <ng-template pTemplate="selectedItem">
+                  <div
+                    class="flex align-items-center gap-2"
+                    style="display: flex"
+                  >
+                    <div style="text-overflow: ellipsis; overflow: hidden">
+                      {{ selectedCountry?.name }}
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template let-university pTemplate="item">
+                  <div
+                    class="flex align-items-center gap-2"
+                    style="display: flex"
+                  >
+                    <div
+                      class="textUniv"
+                      style="text-overflow: ellipsis; overflow: hidden"
+                    >
+                      {{ university.name }}
+                    </div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </p-panel>
+            <p-panel header="Select Category" [toggleable]="true">
+              <p-dropdown
+                appendTo="body"
+                [options]="categories"
+                [(ngModel)]="selectedCategory"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Any"
+                [style]="{ width: '80%' }"
+              >
+                <ng-template pTemplate="selectedItem">
+                  <div *ngIf="selectedCategory" style="display: flex">
+                    <div style="text-overflow: ellipsis; overflow: hidden">
+                      {{ selectedCategory.name }}
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template let-category pTemplate="item">
+                  <div style="display: flex">
+                    <div>{{ category.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </p-panel>
+            <p-panel
+              header="Select SubCategory"
+              [toggleable]="true"
+              *ngIf="selectedCategory"
+            >
+              <p-dropdown
+                appendTo="body"
+                [options]="selectedCategory.subcategory"
+                [(ngModel)]="selectedSubcategory"
+                [showClear]="true"
+                placeholder="Any"
+                [style]="{ width: '80%' }"
+              >
+                <ng-template pTemplate="selectedItem">
+                  <div
+                    class="flex align-items-center gap-2"
+                    style="display: flex"
+                  >
+                    <div style="text-overflow: ellipsis; overflow: hidden">
+                      {{ selectedSubcategory }}
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template let-subcategory pTemplate="item">
+                  <div
+                    class="flex align-items-center gap-2"
+                    style="display: flex"
+                  >
+                    <div>{{ subcategory }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </p-panel>
+            <ng-template pTemplate="footer">
+              <p-button
+                *ngIf="
+                  !selectedCategory &&
+                  !selectedCountry &&
+                  !selectedCountryUniversity
+                "
+                icon="pi pi-check"
+                (click)="
+                  visible = false;
+                  dt1.filter(selectedLastCountry, 'working', 'equals')
+                "
+                label="Apply"
+                styleClass="p-button-text"
+              ></p-button>
+              <p-button
+                *ngIf="
+                  !selectedCategory &&
+                  !selectedInstitucion &&
+                  selectedCountryUniversity
+                "
+                icon="pi pi-check"
+                (click)="
+                  visible = false;
+                  dt1.filter(selectedInstitucion, 'university', 'equals');
+                  dt1.filter(
+                    selectedCountryUniversity.country,
+                    'working',
+                    'equals'
+                  )
+                "
+                label="Apply"
+                styleClass="p-button-text"
+              ></p-button>
+              <p-button
+                *ngIf="
+                  (selectedCategory || selectedCountry) &&
+                  !selectedCountryUniversity
+                "
+                icon="pi pi-check"
+                (click)="
+                  visible = false;
+                  dt1.filter(selectedCountry?.name, 'university', 'equals');
+                  dt1.filter(selectedCategory?.name, 'category', 'equals');
+                  dt1.filter(selectedSubcategory, 'subcategory', 'equals')
+                "
+                label="Apply"
+                styleClass="p-button-text"
+              ></p-button>
+              <p-button
+                *ngIf="
+                  (selectedCategory || selectedInstitucion) &&
+                  selectedCountryUniversity
+                "
+                icon="pi pi-check"
+                (click)="
+                  visible = false;
+                  dt1.filter(
+                    selectedCountryUniversity.country,
+                    'working',
+                    'equals'
+                  );
+                  dt1.filter(selectedInstitucion, 'university', 'equals');
+                  dt1.filter(selectedCategory?.name, 'category', 'equals');
+                  dt1.filter(selectedSubcategory, 'subcategory', 'equals')
+                "
+                label="Apply"
+                styleClass="p-button-text"
+              ></p-button>
             </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <!-- <th pSortableColumn="position" style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_position' | translate}}
-                            <p-sortIcon field="position"></p-sortIcon>
-                        </div>
-                    </th> -->
-                    <th style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_position' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem;" title="Name of the author">
-                        <div class="flex align-items-center">   
-                            {{'home_table_rank_name' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem;" title="Main institution in first year of publication">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_institution' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:8rem;" >
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_category' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:8rem;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_subcategory' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem; text-align: center;" title="Country of main institution in last year of publication">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_country' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem; text-align: center; padding-inline: 0;" title="Combined weighted author indicator">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_score' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem; text-align: center; padding-inline: 0;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_profile' | translate}}
-                        </div>
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rankingTest>
-                <tr>
-                    <td style="text-align: center; border-right: 1px solid currentColor;">
-                        <img [ngClass] = "{'gold': rankingTest.position == '1'}" src=""
-                            alt="">  
-                        <img [ngClass] = "{'plate': rankingTest.position == '2'}" src=""
-                            alt="">  
-                        <img [ngClass] = "{'bronze': rankingTest.position == '3'}" src=""
-                            alt="">  
-                        <span [ngClass] = "{'number': rankingTest.position == '1' || rankingTest.position == '2'
-                            || rankingTest.position == '3' }">
-                            {{rankingTest.position}}
-                        </span>
-                    </td>
-                    <td>
-                        {{ rankingTest.name }}
-                    </td>
-                    <td class="name">
-                        {{ rankingTest.university }}
-                    </td>
-                    <td>
-                        {{rankingTest.category}}
-                    </td>
-                    <td>
-                        {{rankingTest.subcategory}}
-                    </td>
-                    <td style="text-align: center; ">
-                        <span  [class]="'fi fi-' + rankingTest.codeWorking | lowercase" style="font-size: 2rem; border-style: ridge ; border-width: 0px 0.1px; border-color: rgb(175, 175, 175);"
-                            [title]="rankingTest.working"></span>
-                        <span hidden class="ml-1 vertical-align-middle">{{ rankingTest.working }}</span>
-                    </td>
-                    <td style="text-align: center;">
-                        {{ rankingTest.score }}
-                    </td>
-                    <td>
-                        <a target="_blank" href= {{rankingTest.profile}}>View Profile</a>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="7">{{'ranking_no_found' | translate}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
+          </p-dialog>
+          <!-- Exclude country NOT Arabs -->
+          <button
+            *ngIf="isfilterArabResearch"
+            [ngClass]="{ stylefilterArabResearch: isfilterArabResearch }"
+            pButton
+            label="{{ 'home_table_arab_only' | translate }}"
+            class="p-button-outlined"
+            icon="pi pi-eye-slash"
+            (click)="filterArabResearch()"
+            style="margin-inline: 30px"
+          ></button>
+          <button
+            *ngIf="!isfilterArabResearch"
+            [ngClass]="{ stylefilterArabResearch: isfilterArabResearch }"
+            pButton
+            label="{{ 'home_table_arab_only' | translate }}"
+            class="p-button-outlined"
+            icon="pi pi-eye"
+            (click)="filterArabResearch()"
+            style="margin-inline: 30px"
+          ></button>
+          <!-- Button clear filters -->
+          <button
+            pButton
+            label="{{ 'home_table_clear' | translate }}"
+            class="p-button-outlined"
+            icon="pi pi-filter-slash"
+            (click)="clear(dt1)"
+            style="margin-inline: 30px"
+          ></button>
+        </div>
+        <div class="line"></div>
+        <div class="flex head">
+          <span class="text_search">{{
+            "ranking_table_description" | translate
+          }}</span>
+          <span class="p-input-icon-right ml-auto">
+            <i class="pi pi-search"></i>
+            <input
+              class="s"
+              pInputText
+              type="text"
+              [(ngModel)]="clearField2"
+              (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="{{ 'ranking_table_search2' | translate }}"
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th
+            style="
+              min-width: 5rem;
+              text-align: center;
+              border-right: 1px solid currentColor;
+              padding-inline: 0;
+            "
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_position" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 5rem" title="Name of the author">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_name" | translate }}
+            </div>
+          </th>
+          <th
+            style="min-width: 5rem"
+            title="Main institution in first year of publication"
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_institution" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_category" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_subcategory" | translate }}
+            </div>
+          </th>
+          <th
+            style="min-width: 5rem; text-align: center"
+            title="Country of main institution in last year of publication"
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_country" | translate }}
+            </div>
+          </th>
+          <th
+            style="min-width: 5rem; text-align: center; padding-inline: 0"
+            title="Combined weighted author indicator"
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_score" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 5rem; text-align: center; padding-inline: 0">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_profile" | translate }}
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rankingTest>
+        <tr>
+          <td style="text-align: center; border-right: 1px solid currentColor">
+            <img
+              [ngClass]="{ gold: rankingTest.position == '1' }"
+              src=""
+              alt=""
+            />
+            <img
+              [ngClass]="{ plate: rankingTest.position == '2' }"
+              src=""
+              alt=""
+            />
+            <img
+              [ngClass]="{ bronze: rankingTest.position == '3' }"
+              src=""
+              alt=""
+            />
+            <span
+              [ngClass]="{
+                number:
+                  rankingTest.position == '1' ||
+                  rankingTest.position == '2' ||
+                  rankingTest.position == '3'
+              }"
+            >
+              {{ rankingTest.position }}
+            </span>
+          </td>
+          <td>
+            {{ rankingTest.name }}
+          </td>
+          <td class="name">
+            {{ rankingTest.university }}
+          </td>
+          <td>
+            {{ rankingTest.category }}
+          </td>
+          <td>
+            {{ rankingTest.subcategory }}
+          </td>
+          <td style="text-align: center">
+            <span
+              [class]="'fi fi-' + rankingTest.codeWorking | lowercase"
+              style="
+                font-size: 2rem;
+                border-style: ridge;
+                border-width: 0px 0.1px;
+                border-color: rgb(175, 175, 175);
+              "
+              [title]="rankingTest.working"
+            ></span>
+            <span hidden class="ml-1 vertical-align-middle">{{
+              rankingTest.working
+            }}</span>
+          </td>
+          <td style="text-align: center">
+            {{ rankingTest.score }}
+          </td>
+          <td>
+            <a target="_blank" href="{{ rankingTest.profile }}">View Profile</a>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">{{ "ranking_no_found" | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </section>

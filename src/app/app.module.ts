@@ -85,9 +85,19 @@ import { MethodologyComponent } from './ranking/methodology/methodology.componen
 import { CommitteeComponent } from './ranking/committee/committee.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { NotfoundComponent } from './notFound/notfound/notfound.component';
+import { UploadFileComponent } from './admin/uploadFile/upload-file/upload-file.component';
+
+
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { LoginComponent } from './admin/login/login.component';
+import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
+    LoginComponent,
+    UploadFileComponent,
+    DashboardComponent,
     AppComponent,
     HeaderComponent,
     HomeComponent,
@@ -103,11 +113,15 @@ import { NotfoundComponent } from './notFound/notfound/notfound.component';
     MethodologyComponent,
     CommitteeComponent,
     FaqsComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    UploadFileComponent,
+    DashboardComponent
   ],
   imports: [
+    MatCardModule,
+    MatProgressBarModule,
     BrowserModule,
-   /*  AppRoutingModule, */
+    /* AppRoutingModule, */
     AdminRoutingModule,
     ClientRoutingModule,
     BrowserAnimationsModule,

@@ -1,171 +1,217 @@
-<section dir="auto" class="container">
-    <svg class="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e0e0e0" fill-opacity="1" d="M0,32L40,74.7C80,117,160,203,240,229.3C320,256,400,224,480,213.3C560,203,640,213,720,202.7C800,192,880,160,960,144C1040,128,1120,128,1200,154.7C1280,181,1360,235,1400,261.3L1440,288L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
-    <div class="main">
-        <div class="detail">
-            <h1><span class="first_word">{{'home_title1'|translate}} </span>{{'home_title2' | translate}}</h1>
-            <p>{{'home_parag' | translate}}</p>
-        </div>
-        <div class="img-sec">
-            <img src="../../assets/images/ranking.jpeg" alt="" class="img-w">
-            <!-- <div class="images">
-                <img src="../../assets/images/ranking.jpeg" alt="" class="img-w">
-            </div> -->
-        </div>
+<section dir="auto">
+  <svg class="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 360">
+    <path
+      fill="#e0e0e0"
+      fill-opacity="1"
+      d="M0,32L40,74.7C80,117,160,203,240,229.3C320,256,400,224,480,213.3C560,203,640,213,720,202.7C800,192,880,160,960,144C1040,128,1120,128,1200,154.7C1280,181,1360,235,1400,261.3L1440,288L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
+    ></path>
+  </svg>
+  <div class="main">
+    <div class="detail">
+      <h1>
+        <span class="first_word">{{ "home_title1" | translate }} </span
+        >{{ "home_title2" | translate }}
+      </h1>
+      <p>{{ "home_parag" | translate }}</p>
     </div>
+    <div class="img-sec">
+      <img src="../../assets/images/ranking.jpeg" alt="" class="img-w" />
+    </div>
+  </div>
 </section>
-<!-- <div class="line"></div> -->
 <div class="infoRankingMain">
-    <div class="title">
-        <span class="pre">{{'home_title_section_one' | translate}}</span>
-        <h1>{{'home_subtitle_section_one' | translate}}</h1>
-    </div>
+  <div class="title">
+    <span class="pre">{{ "home_title_section_one" | translate }}</span>
+    <h1>{{ "home_subtitle_section_one" | translate }}</h1>
+  </div>
 </div>
 <section dir="auto" class="infoRanking">
-    <div class="card2">
-        <p-table dir="auto" #dt1 [value]="test" dataKey="id" [showCurrentPageReport]="true"
-            [loading]="loading"
-            currentPageReportTemplate="{{'ranking_table_pagination_showing'|translate}} {first} {{'ranking_table_pagination_to'|translate}} {last} {{'ranking_table_pagination_of'|translate}} {totalRecords} {{'ranking_table_pagination_entries'|translate}}">
-            <ng-template pTemplate="caption" let-state>
-                <p>{{'home_parag_section_one' | translate}}</p>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="min-width: 5rem; text-align: center; border-right: 1px solid currentColor; padding-inline: 0;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_position' | translate}}
-                            <!-- <p-sortIcon field="position"></p-sortIcon> -->
-                        </div>
-                    </th>
-                    <th style="min-width:5rem;" title="Name of the author">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_name' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem;" title="Main institution in first year of publication">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_institution' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:8rem;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_category' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:8rem;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_subcategory' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem; text-align: center;" title="Country of main institution in last year of publication">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_country' | translate}}
-                        </div>
-                    </th>
-                    <th style="min-width:5rem; text-align: center; padding-inline: 0;" title="Combined weighted author indicator">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_score' | translate}}
-                            <!-- <p-sortIcon field="score"></p-sortIcon> -->
-                        </div>
-                    </th>
-                    <th style="min-width:5rem; text-align: center; padding-inline: 0;">
-                        <div class="flex align-items-center">
-                            {{'home_table_rank_profile' | translate}}
-                        </div>
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-test>
-                <tr>
-                    <td style="text-align: center; border-right: 1px solid currentColor;">
-                        <img [ngClass] = "{'gold': test.position == '1'}" src=""
-                            alt="">  
-                        <img [ngClass] = "{'plate': test.position == '2'}" src=""
-                            alt="">  
-                        <img [ngClass] = "{'bronze': test.position == '3'}" src=""
-                            alt="">  
-                        <span [ngClass] = "{'number': test.position == '1' || test.position == '2'
-                            || test.position == '3' }">
-                            {{test.position}}
-                        </span>
-                    </td>
-                    <td>
-                        {{ test.name }}
-                    </td>
-                    <td class="name">
-                        {{ test.university }}
-                    </td>
-                    <td>
-                        {{test.category}}
-                    </td>
-                    <td>
-                        {{test.subcategory}}
-                    </td>
-                    <td style="text-align: center; ">
-                        <span  [class]="'fi fi-' + test.codeWorking | lowercase" style="font-size: 2rem; border-style: ridge ; border-width: 0px 0.1px; border-color: rgb(175, 175, 175);"
-                            [title]="test.working"></span>
-                        <span hidden class="ml-1 vertical-align-middle">{{ test.working }}</span>
-                    </td>
-                    <td style="text-align: center;">
-                        {{ test.score }}
-                    </td>
-                    <td>
-                        <a target="_blank" href= {{test.profile}}>View Profile</a>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="7">{{'ranking_no_found' | translate}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-    <div class="moreRanking">
-        <a routerLink="/ranking">{{'home_table_rank_more' | translate}}</a>
-        <!-- 
-            {{'' | translate}} 
-        -->
-    </div>
+  <div class="card2">
+    <p-table
+      dir="auto"
+      #dt1
+      [value]="test"
+      dataKey="id"
+      [showCurrentPageReport]="true"
+      [loading]="loading"
+      currentPageReportTemplate="{{
+        'ranking_table_pagination_showing' | translate
+      }} {first} {{ 'ranking_table_pagination_to' | translate }} {last} {{
+        'ranking_table_pagination_of' | translate
+      }} {totalRecords} {{ 'ranking_table_pagination_entries' | translate }}"
+    >
+      <ng-template pTemplate="caption" let-state>
+        <p>{{ "home_parag_section_one" | translate }}</p>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th
+            style="
+              min-width: 5rem;
+              text-align: center;
+              border-right: 1px solid currentColor;
+              padding-inline: 0;
+            "
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_position" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 5rem" title="Name of the author">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_name" | translate }}
+            </div>
+          </th>
+          <th
+            style="min-width: 5rem"
+            title="Main institution in first year of publication"
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_institution" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_category" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_subcategory" | translate }}
+            </div>
+          </th>
+          <th
+            style="min-width: 5rem; text-align: center"
+            title="Country of main institution in last year of publication"
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_country" | translate }}
+            </div>
+          </th>
+          <th
+            style="min-width: 5rem; text-align: center; padding-inline: 0"
+            title="Combined weighted author indicator"
+          >
+            <div class="flex align-items-center">
+              {{ "home_table_rank_score" | translate }}
+            </div>
+          </th>
+          <th style="min-width: 5rem; text-align: center; padding-inline: 0">
+            <div class="flex align-items-center">
+              {{ "home_table_rank_profile" | translate }}
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-test>
+        <tr>
+          <td style="text-align: center; border-right: 1px solid currentColor">
+            <img [ngClass]="{ gold: test.position == '1' }" src="" alt="" />
+            <img [ngClass]="{ plate: test.position == '2' }" src="" alt="" />
+            <img [ngClass]="{ bronze: test.position == '3' }" src="" alt="" />
+            <span
+              [ngClass]="{
+                number:
+                  test.position == '1' ||
+                  test.position == '2' ||
+                  test.position == '3'
+              }"
+            >
+              {{ test.position }}
+            </span>
+          </td>
+          <td>
+            {{ test.name }}
+          </td>
+          <td class="name">
+            {{ test.university }}
+          </td>
+          <td>
+            {{ test.category }}
+          </td>
+          <td>
+            {{ test.subcategory }}
+          </td>
+          <td style="text-align: center">
+            <span
+              [class]="'fi fi-' + test.codeWorking | lowercase"
+              style="
+                font-size: 2rem;
+                border-style: ridge;
+                border-width: 0px 0.1px;
+                border-color: rgb(175, 175, 175);
+              "
+              [title]="test.working"
+            ></span>
+            <span hidden class="ml-1 vertical-align-middle">{{
+              test.working
+            }}</span>
+          </td>
+          <td style="text-align: center">
+            {{ test.score }}
+          </td>
+          <td>
+            <a target="_blank" href="{{ test.profile }}">View Profile</a>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">{{ "ranking_no_found" | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="moreRanking">
+    <a routerLink="/ranking">{{ "home_table_rank_more" | translate }}</a>
+  </div>
 </section>
-<!-- <div class="line"></div> -->
 <div>
-    <div class="title infonews">
-        <span class="pre">{{'home_title_section_two' | translate}} </span>
-    </div>
+  <div class="title infonews">
+    <span class="pre">{{ "home_title_section_two" | translate }} </span>
+  </div>
 </div>
-<section class=" news">
-    
-    <div class="card">
-        <p-carousel [value]="products" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions" [circular]="false">
-            <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                    <div class="product-item-content">
-                        <div class="mb-3" style="height: 50%;">
-                            <img src="../../assets/images/news/{{ product.image }}" [alt]="product.name" class="product-image" />
-                        </div>
-                        <div>
-                            <p class="mb-1">{{ product.name }}</p>
-                            <!-- <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6> -->
-                            <a routerLink="">
-                                <div>
-                                    {{'home_news_option_view_more' | translate}}
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+<section class="news">
+  <div class="card">
+    <p-carousel
+      [value]="products"
+      [numVisible]="3"
+      [numScroll]="1"
+      [responsiveOptions]="responsiveOptions"
+      [circular]="false"
+    >
+      <ng-template let-product pTemplate="item">
+        <div class="product-item">
+          <div class="product-item-content">
+            <div class="mb-3" style="height: 50%">
+              <img
+                src="../../assets/images/news/{{ product.image }}"
+                [alt]="product.name"
+                class="product-image"
+              />
+            </div>
+            <div>
+              <p class="mb-1">{{ product.name }}</p>
+              <a routerLink="">
+                <div>
+                  {{ "home_news_option_view_more" | translate }}
                 </div>
-            </ng-template>
-        </p-carousel>
-    </div>
-    <div></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+  <div></div>
 </section>
 <div>
-    <div class="title infonews">
-        <span class="pre">{{'home_collab' | translate}} </span>
-    </div>
+  <div class="title infonews">
+    <span class="pre">{{ "home_collab" | translate }} </span>
+  </div>
 </div>
 <section class="collab">
-    <div>
-        <img class="coll1" src="../../assets/images/elsevier.png" alt="">
-    </div>
+  <div>
+    <img class="coll1" src="../../assets/images/elsevier.png" alt="" />
+  </div>
 </section>

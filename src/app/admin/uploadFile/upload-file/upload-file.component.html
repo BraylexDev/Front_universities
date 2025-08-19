@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded">
+    <div class="card-header bg-primary text-white text-center fs-4 fw-bold">
+      File Upload
+    </div>
+    <div class="card-body">
+      <h5 class="card-title text-center">Upload your file it here</h5>
+      <form>
+        <div class="drag-area my-4">
+          <div>
+            <input
+              class="form-control form-control-lg"
+              id="formFileLg"
+              type="file"
+              (change)="onFileSelected($event)"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

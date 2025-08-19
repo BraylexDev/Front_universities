@@ -16,9 +16,7 @@
     font-family: 'Outfit', sans-serif;
     transition: background-color 0.3s, color 0.3s;
     padding: 0 8.4rem;
-    /* background: rgb(199, 199, 199); */
-    /* background: linear-gradient(0deg, white 7%, #e0e0e0 50%); */
-    
+    padding-top: 20px;    
     align-content: center;
 }
 
@@ -78,7 +76,6 @@
 }
 
 .img-sec{
-    /* padding-right: 10%; */
     align-self: center;
 }
 
@@ -103,12 +100,6 @@
     line-height: 1.5;
     font-size: 1.3rem;
 }
-
-/* .images {
-    margin-block: 5%;
-    width: 80%;
-    margin-left: auto;
-} */
 
 .detail {
     text-align: center;

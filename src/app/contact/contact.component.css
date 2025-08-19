@@ -10,8 +10,7 @@
   font-family: 'Outfit', sans-serif;
   transition: background-color 0.3s, color 0.3s;
   padding: 0 8.4rem;
-  /* background: rgb(199, 199, 199); */
-  /* background: linear-gradient(0deg, white 7%, #e0e0e0 100%); */
+  padding-top: 20px;
   align-content: center;
 }
 
@@ -52,8 +51,6 @@
 .txta{
   height: 120px;
 }
-
-/* info contact*/
 .img {
   width: 100%;
 }
@@ -62,6 +59,7 @@
   font-family: 'Outfit', sans-serif;
   transition: background-color 0.3s, color 0.3s;
   padding: 0 8.4rem;
+  padding-top: 20px;
   display: flex;
   text-align: center;
   justify-content: center;
