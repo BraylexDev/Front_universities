@@ -92,6 +92,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.component';
+import { EditProfileComponent } from './admin/editUser/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.compon
     FaqsComponent,
     NotfoundComponent,
     UploadFileComponent,
-    DashboardComponent
+    DashboardComponent,
+    EditProfileComponent
   ],
   imports: [
     MatCardModule,

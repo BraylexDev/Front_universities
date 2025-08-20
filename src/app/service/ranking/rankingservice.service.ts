@@ -2,27 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient, provideHttpClient  } from '@angular/common/http';
 import { Observable, catchError, filter, map, of } from 'rxjs';
 import { Ranking } from 'src/app/domain/ranking';
-
-const baseUrl = 'http://localhost:8081/ranking';
+import { apiServer } from '../apiServer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RankingserviceService {
   private newRanks!: Observable<Ranking[]>;
+
+  private apiUrl: string = apiServer.serverUrl+"/ranking";
+
   
   constructor(private http: HttpClient) { }
 
   getYear(year: any): Observable<Ranking[]> {
     
-    return this.http.get<Ranking[]>(baseUrl + "/table/" + year)
+    return this.http.get<Ranking[]>(this.apiUrl + "/table/" + year)
       .pipe(
         catchError(this.handleError<Ranking[]>('getYear', []))
       );
   }
 
   getTop(year: any): Observable<Ranking[]>{
-    return this.http.get<Ranking[]>(baseUrl+"/top/"+year)
+    return this.http.get<Ranking[]>(this.apiUrl+"/top/"+year)
       .pipe(
         catchError(this.handleError<Ranking[]>('getTop', []))
       );

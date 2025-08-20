@@ -1,16 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { apiServer } from '../apiServer';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { Login } from 'src/app/domain/login';
 import { LoginRequest, LoginResponse, RegisterRequest, User } from 'src/app/domain/user';
+import { apiServer } from '../apiServer';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
-  private apiUrl: string = apiServer.serverUrl;
+  private apiUrl: string = apiServer.serverUrl + '/api/auth';
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();

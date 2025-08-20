@@ -1,40 +1,97 @@
-<div class="loginBox">
-  <img class="user" src="assets/images/logo.png" height="100px" width="100px" />
-  <h3>Sign in here</h3>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="inputBox">
-      <input
-        id="userName"
-        type="text"
-        formControlName="userName"
-        placeholder="Username"
-      />
-      <div
-        *ngIf="
-          loginForm.get('userName')?.invalid &&
-          loginForm.get('userName')?.touched
-        "
-      >
-        Invalid User
-      </div>
-      <input
-        id="password"
-        type="password"
-        formControlName="password"
-        placeholder="Password"
-      />
-      <div
-        *ngIf="
-          loginForm.get('password')?.invalid &&
-          loginForm.get('password')?.touched
-        "
-      >
-        Password required
+<div
+  class="container-fluid vh-100 d-flex align-items-center justify-content-center"
+>
+  <div class="row w-100">
+    <div class="col-12 col-md-6 col-lg-4 mx-auto">
+      <div class="card card-custom">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">🎓 Universidad Ranking</h2>
+            <p class="text-muted">Inicia sesión en tu cuenta</p>
+          </div>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="userName" class="form-label fw-semibold">
+                <i class="bi bi-person-fill me-2"></i>Usuario
+              </label>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                [class.is-invalid]="isFieldInvalid('userName')"
+                id="userName"
+                formControlName="userName"
+                placeholder="Ingresa tu usuario"
+              />
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('userName')">
+                Usuario es requerido
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+              <label for="password" class="form-label fw-semibold">
+                <i class="bi bi-lock-fill me-2"></i>Contraseña
+              </label>
+              <div class="input-group">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="isFieldInvalid('password')"
+                  id="password"
+                  formControlName="password"
+                  placeholder="Ingresa tu contraseña"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="togglePassword()"
+                >
+                  <i
+                    [class]="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                  ></i>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('password')">
+                Contraseña es requerida
+              </div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger" *ngIf="errorMessage">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              {{ errorMessage }}
+            </div>
+
+            <!-- Login Button -->
+            <button
+              type="submit"
+              class="btn btn-gradient btn-lg w-100 mb-3"
+              [disabled]="isLoading || loginForm.invalid"
+            >
+              <span
+                *ngIf="isLoading"
+                class="spinner-border spinner-border-sm me-2"
+              ></span>
+              <i *ngIf="!isLoading" class="bi bi-box-arrow-in-right me-2"></i>
+              {{ isLoading ? "Iniciando sesión..." : "Iniciar Sesión" }}
+            </button>
+          </form>
+
+          <div class="text-center">
+            <p class="mb-0 text-muted">
+              ¿No tienes cuenta?
+              <a
+                routerLink="/register"
+                class="text-primary fw-semibold text-decoration-none"
+              >
+                Regístrate aquí
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <input type="submit" name="" value="Login" [disabled]="loginForm.invalid" />
-    <div *ngIf="errorMessage" style="color: red">
-      {{ errorMessage }}
-    </div>
-  </form>
+  </div>
 </div>

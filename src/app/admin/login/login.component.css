@@ -1,4 +1,4 @@
-
+/* 
 #particles-js {
     height: 100%
 }
@@ -97,4 +97,41 @@ a:hover {
 
 p {
     color: #0000ff
+} */
+
+.card-custom {
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.form-control-lg {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    transition: border-color 0.3s ease;
+}
+
+.form-control-lg:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.btn-gradient {
+    border-radius: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.alert {
+    border-radius: 10px;
+    border: none;
+}
+
+.input-group .btn {
+    border-radius: 0 10px 10px 0;
 }
