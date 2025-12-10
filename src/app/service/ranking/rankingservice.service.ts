@@ -10,7 +10,7 @@ import { apiServer } from '../apiServer';
 export class RankingserviceService {
   private newRanks!: Observable<Ranking[]>;
 
-  private baseUrl: string = apiServer.serverUrl+"/ranking";
+  private baseUrl: string = apiServer.serverUrl+"/api/ranking";
 
   
   constructor(private http: HttpClient) { }
