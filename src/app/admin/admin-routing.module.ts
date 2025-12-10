@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin.component';
 import { UploadFileComponent } from './uploadFile/upload-file/upload-file.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { NewsManagementComponent } from './news/news-management/news-management.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
       {
         path: 'dashboard', component: DashboardComponent,
         children: [
-          { path: 'ranking', component: UploadFileComponent }
+          { path: 'ranking', component: UploadFileComponent },
+          { path: 'news', component: NewsManagementComponent }
         ]
       }
     ]

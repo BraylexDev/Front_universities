@@ -2,17 +2,15 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 
-import { ProductService } from '../service/product.service';
 import { Product } from '../domain/product';
 import { Ranking } from '../domain/ranking';
 import { RankingserviceService } from '../service/ranking/rankingservice.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Scroller } from 'primeng/scroller';
-import { TestServiceService } from '../service/testRanking/test-service.service';
 import { RankingTest } from '../domain/rankingTest';
-import { CodeCountry, Country } from '../domain/customer';
-import { FileService } from '../service/file/file.service';
-import { Datas } from '../domain/datas';
+import { CodeCountry, Country } from '../domain/country';
+
+import { NoticeService } from '../service/Notice/notice.service';
+import { NoticeData } from '../domain/notice';
 
 export interface State {
   flag: string;
@@ -28,20 +26,6 @@ export interface PeriodicElement {
   country: string;
   score: number;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, university: 'Suspendisse Aliquet Institute', category: 'Information & Communication on Technologies',  subcategory:'Artificial Intelligence', country: 'Togo', score: 256},
-  {position: 2, university: 'Aenean Eget Metus Corp', category: 'Economics and Business',  subcategory:'', country: 'uzbekistán', score: 230},
-  {position: 3, university: 'Molestie Dapibus Ligula Foundation', category: 'Social Sciences',  subcategory:'',country: 'Irán', score: 222},
-  {position: 4, university: 'Non Luctus Sit Incorporated', category: 'Physics',  subcategory:'Applied Mathematics',country: 'Bulgaria', score: 210},
-  {position: 5, university: 'Ullamcorper Velit In Institute', category: 'Neuroscience',  subcategory:'',country: 'Bulgaria', score: 203},
-  {position: 6, university: 'Ut Odio LLC', category:'Geosciences',  subcategory:' ',country: 'Brunei', score: 170},
-  {position: 7, university: 'Cursus LLP', category: 'Clinical Medicine',  subcategory:' ',country: 'Laos', score: 156},
-  {position: 8, university: 'Ut Sem LLP', category: 'Physics',  subcategory:'Applied Mathematics',country: 'Togo', score: 106},
-  {position: 9, university: 'Scelerisque Consulting', category: 'Information & Communication on Technologies',  subcategory:'Artificial Intelligence',country: 'Togo', score: 96},
-  {position: 10, university: 'Morbi Metus Ltd', category: 'Information & Communication on Technologies',  subcategory:'Artificial Intelligence', country: 'Falkland Islands', score: 86},
-];
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -206,21 +190,20 @@ export class HomeComponent implements OnInit{
   ];
 
 /* Info tabla  */
-
+  lastYear: number = 0;
+  
   test: RankingTest[] = [];
-
-  datas: Datas[] = [];
+  
 
   loading: boolean = true;
 
   rankings: Ranking[] = [];
 
   displayedColumns: string[] = ['position', 'university', 'category', 'subcategory', 'country', 'score'];
-  dataSource = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
 
   currentLanguage = 'en';
-  constructor( private productService: ProductService, private rankingService: RankingserviceService,  public translate: TranslateService, private testService: TestServiceService, private fileService: FileService) {
+  constructor( private rankingService: RankingserviceService,  public translate: TranslateService, private noticeService : NoticeService) {
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
       startWith(''),
       map(state => (state ? this._filterStates(state) : this.states.slice())),
@@ -232,6 +215,12 @@ export class HomeComponent implements OnInit{
     translate.use(defaultLang);
     localStorage.setItem('language', defaultLang);
     this.currentLanguage = defaultLang;
+
+    this.rankingService.getLastYear().subscribe(
+            data => {
+                this.lastYear = data;
+            }   
+    );
   }
 
   private _filterStates(value: string): State[] {
@@ -244,39 +233,16 @@ export class HomeComponent implements OnInit{
 
   //for carousel of news
   products: Product[] = [];
+  notices: NoticeData[] = [];
 
   responsiveOptions: any[] = [];
   public stocklist: any;
 
 
   ngOnInit() {
-    this.onScrollToTop();
-
-    /* this.fileService.getData()
-      .subscribe(res => {
-        this.datas = Object.values(res).slice(0, 10);
-        this.changeCodeCountry();
-        this.specifyNameCountry();
-
-        this.loading = false;
-    }) */
-    //test
-    this.testService.getRanking()
-      .subscribe(res => {
-        this.test = Object.values(res).slice(0,10);
-        this.changeCodeCountry();
-        this.specifyNameCountry();
-        
-        this.loading = false;
-      })
-
-    /* this.rankingService.getTop(2023).subscribe(
-      data => this.rankings = data
-    ) */
-
-      this.productService.getProductsSmall().then((products) => {
-          this.products = products;
-      });
+    this.onScrollToTop();   
+    this.loadNews();
+    this.getLastYearData();
 
       this.responsiveOptions = [
           {
@@ -295,6 +261,49 @@ export class HomeComponent implements OnInit{
               numScroll: 1
           }
       ];
+  }
+
+  getLastYearData(): void {
+    this.rankingService.getLastYear().subscribe(
+      data => {
+        if (data && data > 0) {
+          this.lastYear = data;
+          console.log("last year in getLastYearData", this.lastYear);
+          this.loadRanking(this.lastYear);
+        } else {
+          console.warn('No se encontró un año válido');
+        }
+      },
+      error => {
+        console.error('Error al obtener el último año:', error);
+      }
+    );
+  }
+
+  loadRanking(lastyear: number): void {
+    this.rankingService.getTopRanking({ year: lastyear, size: 10 }).subscribe(
+      data => {
+        this.test = data.content;
+        this.changeCodeCountry();
+        this.specifyNameCountry();
+      },
+      error => {
+        console.error('Error fetching top rankings:', error);
+      }
+    );
+  }
+
+  loadNews(): void {
+    this.noticeService.getNewsAct().subscribe(
+        data => {
+          this.notices = data;
+          this.loading = false;
+        },
+        error => {
+          console.error('Error fetching news:', error);
+          this.loading = false;
+        }
+      );
   }
 
   changeCodeCountry(){

@@ -1,7 +1,7 @@
 <div class="card border-0 shadow-sm">
-  <div class="card-header bg-primary text-white">
+  <div class="card-header bg-secondary bg-gradient text-white">
     <h4 class="mb-0">
-      <i class="pi pi-person-gear me-2"></i>Información Personal
+      <i class="pi pi-person-gear me-2"></i>Personal Information
     </h4>
   </div>
   <div class="card-body p-4">
@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="name" class="form-label fw-semibold">
-            <i class="pi pi-person-badge me-2"></i>Nombre Completo
+            <i class="pi pi-person-badge me-2"></i>Full Name
           </label>
           <input
             type="text"
@@ -17,16 +17,16 @@
             [class.is-invalid]="isFieldInvalid('name')"
             id="name"
             formControlName="name"
-            placeholder="Tu nombre completo"
+            placeholder="Your full name"
           />
           <div class="invalid-feedback" *ngIf="isFieldInvalid('name')">
-            Nombre es requerido
+            Name is required
           </div>
         </div>
 
         <div class="col-md-6 mb-3">
           <label for="userName" class="form-label fw-semibold">
-            <i class="pi pi-at me-2"></i>Usuario
+            <i class="pi pi-at me-2"></i>User
           </label>
           <input
             type="text"
@@ -34,10 +34,10 @@
             [class.is-invalid]="isFieldInvalid('userName')"
             id="userName"
             formControlName="userName"
-            placeholder="Nombre de usuario"
+            placeholder="User name"
           />
           <div class="invalid-feedback" *ngIf="isFieldInvalid('userName')">
-            Usuario es requerido
+            User is required
           </div>
         </div>
 
@@ -54,40 +54,28 @@
             placeholder="tu@email.com"
           />
           <div class="invalid-feedback" *ngIf="isFieldInvalid('email')">
-            Email válido es requerido
+            Valid email is required
           </div>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label for="rol" class="form-label fw-semibold">
-            <i class="pi pi-shield-check me-2"></i>Rol
-          </label>
-          <input
-            type="text"
-            class="form-control form-control-lg"
-            id="rol"
-            formControlName="rol"
-            readonly
-          />
         </div>
       </div>
 
       <hr class="my-4" />
 
       <h5 class="text-secondary mb-3">
-        <i class="pi pi-key me-2"></i>Cambiar Contraseña (Opcional)
+        <i class="pi pi-key me-2"></i>Change Password (Optional)
       </h5>
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <label for="newPassword" class="form-label">Nueva Contraseña</label>
+          <label for="newPassword" class="form-label">New Password</label>
           <div class="input-group">
             <input
               [type]="showPassword ? 'text' : 'password'"
               class="form-control form-control-lg"
+              [class.is-invalid]="isFieldInvalid('password')"
               id="newPassword"
               formControlName="newPassword"
-              placeholder="Nueva contraseña"
+              placeholder="New Password"
             />
             <button
               class="btn btn-outline-secondary"
@@ -101,7 +89,7 @@
 
         <div class="col-md-6 mb-3">
           <label for="confirmPassword" class="form-label"
-            >Confirmar Contraseña</label
+            >Confirm Password</label
           >
           <input
             type="password"
@@ -109,10 +97,10 @@
             [class.is-invalid]="passwordMismatch"
             id="confirmPassword"
             formControlName="confirmPassword"
-            placeholder="Confirmar nueva contraseña"
+            placeholder="Confirm new password"
           />
           <div class="invalid-feedback" *ngIf="passwordMismatch">
-            Las contraseñas no coinciden
+            Passwords do not match
           </div>
         </div>
       </div>
@@ -135,7 +123,7 @@
           class="btn btn-outline-secondary btn-lg me-md-2"
           (click)="resetForm()"
         >
-          <i class="pi pi-arrow-clockwise me-2"></i>Restablecer
+          <i class="pi pi-arrow-clockwise me-2"></i>Restore
         </button>
         <button
           type="submit"
@@ -147,7 +135,7 @@
             class="spinner-border spinner-border-sm me-2"
           ></span>
           <i *ngIf="!isLoading" class="pi pi-save me-2"></i>
-          {{ isLoading ? "Guardando..." : "Guardar Cambios" }}
+          {{ isLoading ? "Saving..." : "Save Changes" }}
         </button>
       </div>
     </form>

@@ -14,21 +14,28 @@ export class DashboardComponent {
   sidebarOpen = false;
 
   constructor(
-    private AuthService: AuthService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.currentUser = this.AuthService.getCurrentUser();
+    
+    this.currentUser = this.authService.getCurrentUser();
     
     if (!this.currentUser) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin']);
+    }
+
+    const savedTab = localStorage.getItem('activeTab');
+    if (savedTab) {
+      this.activeTab = savedTab;
     }
   }
 
   setActiveTab(tab: string): void {
     this.activeTab = tab;
     this.sidebarOpen = false;
+    localStorage.setItem('activeTab', tab);
   }
 
   toggleSidebar(): void {
@@ -36,9 +43,16 @@ export class DashboardComponent {
   }
 
   logout(): void {
-    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-      this.AuthService.logout();
+    if (confirm('¿Are you sure you want to log out?')) {
+      localStorage.removeItem('activeTab');
+      this.authService.logout();
       this.router.navigate(['/admin']);
+    }
+  }
+
+  onOverlayClick(): void {
+    if (this.sidebarOpen) {
+      this.sidebarOpen = false;
     }
   }
 }

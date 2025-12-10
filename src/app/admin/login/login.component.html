@@ -6,15 +6,15 @@
       <div class="card card-custom">
         <div class="card-body p-5">
           <div class="text-center mb-4">
-            <h2 class="fw-bold text-primary">🎓 Universidad Ranking</h2>
-            <p class="text-muted">Inicia sesión en tu cuenta</p>
+            <h2 class="fw-bold text-primary">TOP Arab Researchers</h2>
+            <p class="text-muted">Log in to your account</p>
           </div>
 
           <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
             <!-- Username -->
             <div class="mb-3">
               <label for="userName" class="form-label fw-semibold">
-                <i class="bi bi-person-fill me-2"></i>Usuario
+                <i class="bi bi-person-fill me-2"></i>User
               </label>
               <input
                 type="text"
@@ -22,17 +22,17 @@
                 [class.is-invalid]="isFieldInvalid('userName')"
                 id="userName"
                 formControlName="userName"
-                placeholder="Ingresa tu usuario"
+                placeholder="Enter your username"
               />
               <div class="invalid-feedback" *ngIf="isFieldInvalid('userName')">
-                Usuario es requerido
+                User is required
               </div>
             </div>
 
             <!-- Password -->
             <div class="mb-4">
               <label for="password" class="form-label fw-semibold">
-                <i class="bi bi-lock-fill me-2"></i>Contraseña
+                <i class="bi bi-lock-fill me-2"></i>Password
               </label>
               <div class="input-group">
                 <input
@@ -41,7 +41,7 @@
                   [class.is-invalid]="isFieldInvalid('password')"
                   id="password"
                   formControlName="password"
-                  placeholder="Ingresa tu contraseña"
+                  placeholder="Enter your password"
                 />
                 <button
                   class="btn btn-outline-secondary"
@@ -54,7 +54,7 @@
                 </button>
               </div>
               <div class="invalid-feedback" *ngIf="isFieldInvalid('password')">
-                Contraseña es requerida
+                Password is required
               </div>
             </div>
 
@@ -75,21 +75,9 @@
                 class="spinner-border spinner-border-sm me-2"
               ></span>
               <i *ngIf="!isLoading" class="bi bi-box-arrow-in-right me-2"></i>
-              {{ isLoading ? "Iniciando sesión..." : "Iniciar Sesión" }}
+              {{ isLoading ? "Logging in..." : "Login" }}
             </button>
           </form>
-
-          <div class="text-center">
-            <p class="mb-0 text-muted">
-              ¿No tienes cuenta?
-              <a
-                routerLink="/register"
-                class="text-primary fw-semibold text-decoration-none"
-              >
-                Regístrate aquí
-              </a>
-            </p>
-          </div>
         </div>
       </div>
     </div>

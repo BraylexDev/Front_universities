@@ -24,9 +24,8 @@ export class LoginComponent {
   ) {}
 
   ngOnInit(): void {
-    // Redirigir si ya está autenticado
     if (this.AuthService.isAuthenticated()) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/admin/dashboard']);
     }
 
     this.initializeForm();
@@ -49,10 +48,8 @@ export class LoginComponent {
     this.errorMessage = '';
 
     const loginData: LoginRequest = this.loginForm.value;
-    console.log('Datos de login:', loginData);
     this.AuthService.login(loginData).subscribe({
       next: (response) => {
-        /* console.log('Login exitoso:', response); */
         this.router.navigate(['/admin/dashboard']);
       },
       error: (error) => {
@@ -60,11 +57,11 @@ export class LoginComponent {
         this.isLoading = false;
         
         if (error.status === 401) {
-          this.errorMessage = 'Usuario o contraseña incorrectos';
+          this.errorMessage = 'Incorrect username or password';
         } else if (error.status === 0) {
-          this.errorMessage = 'Error de conexión. Verifica que el servidor esté ejecutándose.';
+          this.errorMessage = 'Connection error. Please check that the server is running.';
         } else {
-          this.errorMessage = 'Error inesperado. Intenta nuevamente.';
+          this.errorMessage = 'Unexpected error. Please try again.';
         }
       },
       complete: () => {

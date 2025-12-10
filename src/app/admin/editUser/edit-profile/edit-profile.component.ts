@@ -30,11 +30,11 @@ export class EditProfileComponent implements OnInit {
 
   initializeForm(): void {
     this.profileForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required, Validators.minLength(4)]],
       userName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       rol: ['', Validators.required],
-      newPassword: [''],
+      newPassword: ['', Validators.minLength(5)],
       confirmPassword: ['']
     }, { validators: this.passwordMatchValidator });
   }
@@ -80,11 +80,11 @@ export class EditProfileComponent implements OnInit {
 
     const formData = this.profileForm.value;
     
-    // TODO: Implementar llamada al backend para actualizar perfil
-    // Por ahora simulamos la actualización
+    // TODO: actualizar perfil
+    
     setTimeout(() => {
       this.isLoading = false;
-      this.successMessage = 'Perfil actualizado correctamente';
+      this.successMessage = 'Profile updated successfully';
       
       // Actualizar datos locales
       if (this.currentUser) {

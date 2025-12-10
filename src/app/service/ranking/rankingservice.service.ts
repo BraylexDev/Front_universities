@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, provideHttpClient  } from '@angular/common/http';
+import { HttpClient, HttpParams, provideHttpClient  } from '@angular/common/http';
 import { Observable, catchError, filter, map, of } from 'rxjs';
-import { Ranking } from 'src/app/domain/ranking';
+import { PaginatedRankingResponseDto, Ranking, RankingFiltersDto, UploadInfoDto } from 'src/app/domain/ranking';
 import { apiServer } from '../apiServer';
 
 @Injectable({
@@ -10,42 +10,96 @@ import { apiServer } from '../apiServer';
 export class RankingserviceService {
   private newRanks!: Observable<Ranking[]>;
 
-  private apiUrl: string = apiServer.serverUrl+"/ranking";
+  private baseUrl: string = apiServer.serverUrl+"/ranking";
 
   
   constructor(private http: HttpClient) { }
 
-  getYear(year: any): Observable<Ranking[]> {
+  /* crearNoticia(noticia: { titulo: string; descripcion: string; url: string; }, file: File): Observable<any> {
+      const formData = new FormData();
+      formData.append('titulo', noticia.titulo);
+      formData.append('descripcion', noticia.descripcion);
+      formData.append('url', noticia.url);
+      formData.append('imagen', file, file.name);
+  
+      return this.http.post(this.baseUrl, formData);
+    }
+  
+    getNewsAct(): Observable<NoticeData[]> {
+      return this.http.get<any[]>(this.baseUrl+"/actives");
+    }
+  */
+  getYears(): Observable<any> {
+    return this.http.get<any[]>(this.baseUrl+"/years");
+  }
+
+  upload(year:number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('year', year.toString());
+    formData.append('file', file);
     
-    return this.http.get<Ranking[]>(this.apiUrl + "/table/" + year)
-      .pipe(
-        catchError(this.handleError<Ranking[]>('getYear', []))
-      );
+    return this.http.post(this.baseUrl+"/upload", formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 
-  getTop(year: any): Observable<Ranking[]>{
-    return this.http.get<Ranking[]>(this.apiUrl+"/top/"+year)
-      .pipe(
-        catchError(this.handleError<Ranking[]>('getTop', []))
-      );
-  }
-
-  getRankingLarge(year: any) {
-    /* return this.http.get */
-    return Promise.resolve(this.getYear(year));
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
-  
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+  getTopRanking(data: { year: number; size: number; }): Observable<PaginatedRankingResponseDto> {
+    const params = {
+      year: data.year.toString(),
+      size: data.size.toString()
     };
+    return this.http.get<PaginatedRankingResponseDto>(this.baseUrl, { params });
+  }
+
+  getFilterCountry(data: { year: number, country: string}): Observable<PaginatedRankingResponseDto> {
+    const params = {
+      year: data.year.toString(),
+      country: data.country
+    };
+    return this.http.get<PaginatedRankingResponseDto>(this.baseUrl, { params });
+  }
+
+  getFilterCountryUniversity(data: { year: number, country: string, university: string}): Observable<PaginatedRankingResponseDto> {
+    const params = {
+      year: data.year.toString(),
+      country: data.country,
+      institution: data.university
+    };
+    return this.http.get<PaginatedRankingResponseDto>(this.baseUrl, { params });
+  }
+
+  getFilterCountryUniversityCategory(data: { year: number, country: string, university: string, category: string}): Observable<PaginatedRankingResponseDto> {
+    const params = {
+      year: data.year.toString(),
+      country: data.country,
+      institution: data.university,
+      category: data.category
+    };
+    return this.http.get<PaginatedRankingResponseDto>(this.baseUrl, { params });
+  }
+  
+  getSubcategories(year: number, category: string): Observable<string[]> {
+    const params = {
+      year: year.toString(),
+      category: category
+    };
+    return this.http.get<string[]>(this.baseUrl + "/subcategories", { params });
+  }
+
+  getLastYear(): Observable<number> {
+    return this.http.get<number[]>(this.baseUrl + "/years").pipe(
+      map(years => years[0])
+    );
+  }
+
+  getFilters(year?: number): Observable<RankingFiltersDto> {
+    let params = new HttpParams();
+    
+    if (year) {
+      params = params.append('year', year.toString());
+    }
+    
+    return this.http.get<RankingFiltersDto>(this.baseUrl+"/filters", { params });
   }
 }

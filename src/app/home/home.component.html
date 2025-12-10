@@ -174,30 +174,41 @@
 <section class="news">
   <div class="card">
     <p-carousel
-      [value]="products"
+      [value]="notices"
       [numVisible]="3"
       [numScroll]="1"
       [responsiveOptions]="responsiveOptions"
       [circular]="false"
     >
-      <ng-template let-product pTemplate="item">
-        <div class="product-item">
-          <div class="product-item-content">
-            <div class="mb-3" style="height: 50%">
-              <img
-                src="../../assets/images/news/{{ product.image }}"
-                [alt]="product.name"
-                class="product-image"
-              />
-            </div>
-            <div>
-              <p class="mb-1">{{ product.name }}</p>
-              <a routerLink="">
-                <div>
-                  {{ "home_news_option_view_more" | translate }}
-                </div>
-              </a>
-            </div>
+      <ng-template let-notice pTemplate="item">
+        <div class="product-item-content">
+          <div class="mb-3" style="height: 50%">
+            <img
+              [src]="notice.image"
+              [alt]="notice.title"
+              class="product-image"
+            />
+          </div>
+          <div>
+            <p class="small mb-2" *ngIf="notice.title">
+              {{ notice.title | slice : 0 : 30
+              }}{{ notice.title.length > 30 ? "..." : "" }}
+            </p>
+            <br />
+            <p class="text-muted small mb-2" *ngIf="notice.description">
+              {{ notice.description | slice : 0 : 50
+              }}{{ notice.description.length > 50 ? "..." : "" }}
+            </p>
+
+            <a
+              [href]="notice.url"
+              target="_blank"
+              class="text-dark text-decoration-none small"
+            >
+              <div>
+                {{ "home_news_option_view_more" | translate }}
+              </div>
+            </a>
           </div>
         </div>
       </ng-template>

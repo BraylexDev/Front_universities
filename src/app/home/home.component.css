@@ -240,6 +240,24 @@ td {
   width: 400px;
 }
 
+
+.news-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.news-image-container img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.news-image-container:hover img {
+  transform: scale(1.05);
+}
+
 @media screen and (min-width: 1367px) {
 
 }

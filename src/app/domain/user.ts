@@ -13,6 +13,7 @@ export interface RegisterRequest {
 export interface LoginResponse {
   accessToken: string;
   tokenType: string;
+  name: string;
   username: string;
   email: string;
   rol: string;

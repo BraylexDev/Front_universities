@@ -28,7 +28,7 @@ export class AuthService {
           localStorage.setItem('tokenType', response.tokenType);
           
           const user: User = {
-            name: '', // El backend no retorna name en login
+            name: response.name,
             userName: response.username,
             email: response.email,
             rol: response.rol

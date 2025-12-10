@@ -7,16 +7,14 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 //table
-import { CodeCountry, Customer, Representative } from '../domain/customer';
-import { CustomerserviceService } from '../service/customer/customerservice.service';
+import { CodeCountry, Customer, Representative } from '../domain/country';
 import { Table } from 'primeng/table';
 import { RankingserviceService } from '../service/ranking/rankingservice.service';
 import { Ranking } from '../domain/ranking';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { RankingTest } from '../domain/rankingTest';
-import { TestServiceService } from '../service/testRanking/test-service.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { FilterMetadata } from 'primeng/api';
 
@@ -110,6 +108,9 @@ export class RankingComponent implements OnInit {
     visible!: boolean;
     isfilterArabResearch: boolean = false;
 
+    availableYears: number[] = [];
+    lastYear: number = 0;
+
     showDialog() {
         this.visible = true;
     }
@@ -125,6 +126,12 @@ export class RankingComponent implements OnInit {
     cats: any[] = [];
     categories: Category[] = [];
     countries: Country[] = [];
+
+
+    filterCategory: string[] = [];
+    filterUniversity: string[] = [];
+    filterCountry: string[] = [];
+
 
     countryUniversity: CountryUniversity[] = [];
 
@@ -152,81 +159,32 @@ export class RankingComponent implements OnInit {
     activityValues: number[] = [0, 100];
 
 
-    constructor(private breadcrumbService: BreadcrumbService, private customerService: CustomerserviceService, private rankingService: RankingserviceService, private translate: TranslateService, private testService: TestServiceService) {
+    constructor(private breadcrumbService: BreadcrumbService, private rankingService: RankingserviceService, private translate: TranslateService
+        ) {
     }
 
     /* modal filter */
     /* End modal filter */
 
     ngOnInit(): void {
-
         this.onScrollToTop();
-
+        this.getLastYearData();
         this.cols = ['Name', 'University', 'Category', 'SubCategory', 'Country', 'LastCountry'];
         this.cats = ['Agriculture, Fisheries & Forestry', 'Biology', 'Biomedical Research', 'Built Environment & Design', 'Chemistry', 'Clinical Medicine', 'Communication & Textual Studies', 'Earth & Environmental Sciences', 'Economics & Business', 'Enabling & Strategic Technologies', 'Engineering', 'Historical Studies', 'Information & Communication Technologies', 'Mathematics & Statistics', 'Physics & Astronomy', 'Psychology & Cognitive Sciences', 'Public Health & Health Services', 'Social Sciences'];
 
         this.selectedCol = 'Name'
 
-        //test
-        /* this.testService.getRanking()
-          .subscribe(
+        this.rankingService.getYears().subscribe(
             data => {
-              this.test = data.slice(0,1000);
-            }
-          ); */
-        this.testService.getRanking()
-            .subscribe(
-                {
-                    next: (test2: any) => {
-
-                        this.test = test2.slice(0, 1000);
-                        this.changeCodeCountry();
-                        this.specifyNameCountry();
-                        this.testAux = this.test;
-                        /* console.log(this.test) */
-                        this.loading = false;
-                    },
-                    error: (err: any) => {
-                        console.error(err);
-                    },
-                    complete: () => {
-                        /* console.log("Completed") */
-                    }
-                }
-            );
-
+                this.availableYears = data;
+                this.lastYear = Math.max(...this.availableYears);
+            }   
+        );
         //miga de pan
         this.breadcrumbs = this.breadcrumbService.breadcrumbs;
 
-        //table
-        /* this.getRankings(2023);
-    
-        this.rankingService.getYear(2023).subscribe(
-          data => this.rankings = data
-        ); */
-
-        /* this.categories = [
-          { name: 'Agriculture, Fisheries & Forestry', subcategory: ['Dairy & Animal Science', 'Fisheries', 'Food Science', 'Plant Biology & Botany', 'Agronomy & Agriculture', 'Veterinary Sciences', 'Environmental Engineering', 'Tropical Medicine', 'Forestry', 'Oncology & Carcinogenesis', 'Mycology & Parasitology'] },
-          { name: 'Biology', subcategory: ['Plant Biology & Botany', 'Marine Biology & Hydrobiology', 'Polymers', 'Environmental Sciences', 'Developmental Biology', 'Entomology', 'Ecology', 'Microbiology', 'Oncology & Carcinogenesis', 'Zoology', 'Horticulture', 'Ornithology'] },
-          { name: 'Biomedical Research', subcategory: ['Microbiology', 'Nutrition & Dietetics', 'Plant Biology & Botany', 'Toxicology', 'Biochemistry & Molecular Biology', 'Developmental Biology', 'Mycology & Parasitology', 'Biophysics', 'Surgery', 'Food Science', 'Applied Mathematics', 'General Clinical Medicine', 'Mycology & Parasitology', 'Environmental Sciences', 'Virology', 'Oncology & Carcinogenesis', 'Software Engineering', 'General Mathematics', 'Immunology', 'Pharmacology & Pharmacy', 'Bioinformatics', 'Veterinary Sciences', 'Tropical Medicine', 'Microscopy', 'Anatomy & Morphology', 'Physiology', 'Genetics & Heredity'], },
-          { name: 'Built Environment & Design', subcategory: ['Building & Construction', 'Design Practice & Management', 'Urban & Regional Planning'] },
-          { name: 'Chemistry', subcategory: ['Inorganic & Nuclear Chemistry', 'Analytical Chemistry', 'Polymers', 'Medicinal & Biomolecular Chemistry', 'Organic Chemistry', 'Chemical Physics', 'Materials', 'Applied Physics', 'Environmental Sciences', 'Physical Chemistry', 'Dairy & Animal Science', 'Plant Biology & Botany', 'Biotechnology', 'Microbiology', 'General Chemistry', 'Pharmacology & Pharmacy', 'Chemical Engineering', 'Biophysics', 'Food Science', 'Complementary & Alternative Medicine', 'Developmental Biology', 'Mycology & Parasitology', 'Biochemistry & Molecular Biology', 'General Physics'] },
-          { name: 'Clinical Medicine', subcategory: ['Allergy', 'Anatomy & Morphology', 'Anesthesiology', 'Arthritis & Rheumatology', 'Biochemistry & Molecular Biology', 'Biomedical Engineering', 'Biotechnology', 'Cardiovascular System & Hematology', 'Chemical Physics', 'Complementary & Alternative Medicine', 'Dairy & Animal Science', 'Dentistry', 'Dermatology & Venereal Diseases', 'Developmental & Child Psychology', 'Developmental Biology', 'Emergency & Critical Care Medicine', 'Endocrinology & Metabolism', 'Environmental Sciences', 'Food Science', 'Gastroenterology & Hepatology', 'General & Internal Medicine', 'General Clinical Medicine', 'General Physics', 'Genetics & Heredity', 'Health Policy & Services', 'Immunology', 'Legal & Forensic Medicine', 'Materials', 'Medical Informatics', 'Medicinal & Biomolecular Chemistry', 'Microbiology', 'Mycology & Parasitology', 'Neurology & Neurosurgery', 'Nuclear Medicine & Medical Imaging', 'Nursing', 'Nutrition & Dietetics', 'Obstetrics & Reproductive Medicine', 'Oncology & Carcinogenesis', 'Ophthalmology & Optometry', 'Organic Chemistry', 'Orthopedics', 'Otorhinolaryngology', 'Pathology', 'Pediatrics', 'Pharmacology & Pharmacy', 'Physiology', 'Plant Biology & Botany', 'Psychiatry', 'Public Health', 'Rehabilitation', 'Respiratory System', 'Sport Sciences', 'Strategic, Defence & Security Studies', 'Surgery', 'Toxicology', 'Tropical Medicine', 'Urology & Nephrology', 'Veterinary Sciences', 'Virology'] },
-          { name: 'Communication & Textual Studies', subcategory: ['Languages & Linguistics', 'Literary Studies'] },
-          { name: 'Earth & Environmental Sciences', subcategory: ['Aerospace & Aeronautics', 'Agronomy & Agriculture', 'Analytical Chemistry', 'Archaeology', 'Artificial Intelligence & Image Processing', 'Biotechnology', 'Business & Management', 'Chemical Engineering', 'Chemical Physics', 'Dairy & Animal Science', 'Economics', 'Endocrinology & Metabolism', 'Energy', 'Environmental Engineering', 'Environmental Sciences', 'Geochemistry & Geophysics', 'Geography', 'Geological & Geomatics Engineering', 'Geology', 'Marine Biology & Hydrobiology', 'Materials', 'Meteorology & Atmospheric Sciences', 'Networking & Telecommunications', 'Polymers', 'Sport, Leisure & Tourism', 'Strategic, Defence & Security Studies', 'Toxicology'] },
-          { name: 'Economics & Business', subcategory: ['Accounting', 'Agricultural Economics & Policy', 'Artificial Intelligence & Image Processing', 'Business & Management', 'Economics', 'Education', 'Energy', 'Finance', 'Logistics & Transportation', 'Marketing', 'Operations Research', 'Sport, Leisure & Tourism'] },
-          { name: 'Enabling & Strategic Technologies', subcategory: ['Applied Physics', 'Artificial Intelligence & Image Processing', 'Bioinformatics', 'Biotechnology', 'Building & Construction', 'Chemical Engineering', 'Chemical Physics', 'Electrical & Electronic Engineering', 'Energy', 'Environmental Sciences', 'Fluids & Plasmas', 'General Physics', 'Languages & Linguistics', 'Materials', 'Mechanical Engineering & Transports', 'Meteorology & Atmospheric Sciences', 'Mining & Metallurgy', 'Nanoscience & Nanotechnology', 'Networking & Telecommunications', 'Optoelectronics & Photonics', 'Plant Biology & Botany', 'Polymers', 'Strategic, Defence & Security Studies'] },
-          { name: 'Engineering', subcategory: ['Aerospace & Aeronautics', 'Archaeology', 'Artificial Intelligence & Image Processing', 'Biomedical Engineering', 'Building & Construction', 'Chemical Engineering', 'Civil Engineering', 'Ecology', 'Electrical & Electronic Engineering', 'Energy', 'Environmental Engineering', 'Environmental Sciences', 'Fluids & Plasmas', 'Geological & Geomatics Engineering', 'Industrial Engineering & Automation', 'Materials', 'Mechanical Engineering & Transports', 'Operations Research', 'Urban & Regional Planning'] },
-          { name: 'Historical Studies', subcategory: ['Archaeology'] },
-          { name: 'Information & Communication Technologies', subcategory: ['Analytical Chemistry', 'Applied Mathematics', 'Artificial Intelligence & Image Processing', 'Business & Management', 'Computation Theory & Mathematics', 'Computer Hardware & Architecture', 'Distributed Computing', 'Education', 'Electrical & Electronic Engineering', 'Energy', 'General & Internal Medicine', 'Industrial Engineering & Automation', 'Information Systems', 'Mechanical Engineering & Transports', 'Medical Informatics', 'Medicinal & Biomolecular Chemistry', 'Networking & Telecommunications', 'Neurology & Neurosurgery', 'Nuclear & Particle Physics', 'Nuclear Medicine & Medical Imaging', 'Operations Research', 'Optics', 'Software Engineering', 'Strategic, Defence & Security Studies', 'Toxicology'] },
-          { name: 'Mathematics & Statistics', subcategory: ['Applied Mathematics', 'Artificial Intelligence & Image Processing', 'Fluids & Plasmas', 'General Mathematics', 'General Physics', 'Nuclear & Particle Physics', 'Numerical & Computational Mathematics', 'Operations Research', 'Statistics & Probability'] },
-          { name: 'Physics & Astronomy', subcategory: ['Acoustics', 'Applied Mathematics', 'Applied Physics', 'Artificial Intelligence & Image Processing', 'Astronomy & Astrophysics', 'Bioinformatics', 'Chemical Engineering', 'Chemical Physics', 'Electrical & Electronic Engineering', 'Endocrinology & Metabolism', 'Energy', 'Environmental Sciences', 'Fluids & Plasmas', 'General Mathematics', 'General Physics', 'Geochemistry & Geophysics', 'Inorganic & Nuclear Chemistry', 'Materials', 'Mathematical Physics', 'Mechanical Engineering & Transports', 'Networking & Telecommunications', 'Nuclear & Particle Physics', 'Nuclear Medicine & Medical Imaging', 'Optics', 'Optoelectronics & Photonics', 'Polymers'] },
-          { name: 'Psychology & Cognitive Sciences', subcategory: ['Business & Management', 'Human Factors', 'Psychiatry', 'Social Psychology'] },
-          { name: 'Public Health & Health Services', subcategory: ['General & Internal Medicine', 'Health Policy & Services', 'Nursing', 'Public Health', 'Rehabilitation', 'Substance Abuse'] },
-          { name: 'Social Sciences', subcategory: ['Business & Management', 'Education', 'Information & Library Sciences', 'Law', 'Social Sciences Methods'] }
-        ] */
-
-        /* VErsion archivo 2025 marzo 2 */
+        
+        /* Version archivo 2025 marzo 2 */
         this.categories = [
             { name: "Agriculture, Fisheries & Forestry", subcategory: ["Food Science", "Plant Biology & Botany", "Nutrition & Dietetics", "Dairy & Animal Science", "Fisheries", "Agronomy & Agriculture", "Veterinary Sciences", "Environmental Engineering", "Toxicology", "Microbiology"] },
             { name: "Biology", subcategory: ["Plant Biology & Botany", "Marine Biology & Hydrobiology", "Entomology", "Ecology", "Zoology", "Microbiology", "Environmental Sciences", "Agronomy & Agriculture"] },
@@ -1531,30 +1489,76 @@ export class RankingComponent implements OnInit {
             { country: "United Arab Emirates", code: "ae", universities: ["Abu Dhabi University", "Ajman University", "Al Ain University", "American University of Sharjah", "British University in Dubai", "European University College, Dubai", "Higher Colleges of Technology", "Khalifa University of Science and Technology", "Mohamed Bin Zayed University of Artificial Intelligence", "S P Jain School of Global Management", "Skyline University College", "United Arab Emirates University", "University of Sharjah", "Zayed University"] },
             { country: "Yemen", code: "ye", universities: ["Hodeida University"] }
         ]
-
-        /* this.countries = [
-          { name: 'Algeria', code: 'DZ' },
-          { name: 'Egypt', code: 'EG' },
-          { name: 'Iraq', code: 'IQ' },
-          { name: 'Jordan', code: 'JO' },
-          { name: 'Kuwait', code: 'KW' },
-          { name: 'Lebanon', code: 'LB' },
-          { name: 'Libya', code: 'LY' },
-          { name: 'Mauritania', code: 'MR' },
-          { name: 'Morocco', code: 'MA' },
-          { name: 'Oman', code: 'OM' },
-          { name: 'Palestine', code: 'PS' },
-          { name: 'Qatar', code: 'QA' },
-          { name: 'Saudi Arabia', code: 'SA' },
-          { name: 'Sudan', code: 'SS' },
-          { name: 'Somalia', code: 'SO' },
-          { name: 'Syria', code: 'SY' },
-          { name: 'Tunisia', code: 'TN' },
-          { name: 'United Arab Emirates', code: 'AE' },
-          { name: 'Yemen', code: 'YE' }
-        ]; */
     }
 
+    
+    getLastYearData(): void {
+    this.rankingService.getLastYear().subscribe(
+      data => {
+        if (data && data > 0) {
+          this.lastYear = data;
+            this.loadRanking(this.lastYear);
+            this.loadFilters(this.lastYear);
+        } else {
+          console.warn('No se encontró un año válido');
+        }
+      },
+      error => {
+        console.error('Error al obtener el último año:', error);
+      }
+    );
+  }
+
+    loadRanking(lastyear: number): void {
+        this.rankingService.getTopRanking({ year: lastyear, size: 1000 }).subscribe(
+            data => {
+                this.test = data.content;
+                this.changeCodeCountry();
+                this.specifyNameCountry();
+                this.testAux = this.test;
+                this.loading = false;
+                console.log("Data loaded successfully:", this.test);
+            },
+            error => {
+                console.error('Error fetching top rankings:', error);
+            }
+        );
+    }
+
+    loadFilters(year: number): void {
+        this.rankingService.getFilters(year).subscribe(
+            data => { 
+                console.log("Filters loaded successfully:", data);
+                this.filterUniversity = data.institutions;
+                this.filterCategory = data.categories;
+            }
+        );
+    }
+    loadFilterCountries(year: number, country: string): void {
+        this.rankingService.getFilterCountry({year, country}).subscribe(
+            data => {
+                this.test = data.content;
+            }
+        );
+    }
+
+    loadFilterCountryUniversity(year: number, country: string, university: string): void {
+        this.rankingService.getFilterCountryUniversity({year, country, university}).subscribe(
+            data => {
+                this.test = data.content;
+            }
+        );
+    }
+
+    loadFilterCountryUniversityCategory(year: number, country: string, university: string, category: string): void {
+        this.rankingService.getFilterCountryUniversityCategory({year, country, university, category}).subscribe(
+            data => {
+                this.test = data.content;
+            }
+        );
+    }
+
+    
     /* getRankings(year: number): any{
       this.rankingService.getRankingLarge(year);
       this.loading = false;
@@ -1584,7 +1588,7 @@ export class RankingComponent implements OnInit {
             this.test = this.testAux;
         }
         else {
-            this.test = this.test.filter(item => this.arabCountries.includes(item.country!))
+            this.test = this.test.filter(item => this.arabCountries.includes(item.working!))
                 .map((item, index) => ({
                     ...item,
                     position: (index + 1)

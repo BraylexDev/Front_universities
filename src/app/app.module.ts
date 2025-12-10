@@ -33,7 +33,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Components created for dev
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { UniversitiesComponent } from './universities/universities.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { RankingComponent } from './ranking/ranking.component';
@@ -47,8 +46,6 @@ import { TagModule } from 'primeng/tag';
 
 import { ButtonModule } from 'primeng/button';
 import { RankingYearComponent } from './ranking/ranking-year/ranking-year.component';
-import { NewsComponent } from './news/news/news.component';
-import { DetailNewComponent } from './news/detail-new/detail-new.component';
 
 /* Table rankings*/
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -56,9 +53,7 @@ import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { SliderModule } from 'primeng/slider';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CustomerserviceService } from './service/customer/customerservice.service';
-import { ProductService } from './service/product.service';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 
 /* Scroll Top */
@@ -83,7 +78,6 @@ import { ClientRoutingModule } from './navigation/header/client-routing.module';
 import { SidebarModule } from 'primeng/sidebar';
 import { MethodologyComponent } from './ranking/methodology/methodology.component';
 import { CommitteeComponent } from './ranking/committee/committee.component';
-import { FaqsComponent } from './faqs/faqs.component';
 import { NotfoundComponent } from './notFound/notfound/notfound.component';
 import { UploadFileComponent } from './admin/uploadFile/upload-file/upload-file.component';
 
@@ -93,6 +87,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.component';
 import { EditProfileComponent } from './admin/editUser/edit-profile/edit-profile.component';
+import { NewsManagementComponent } from './admin/news/news-management/news-management.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -103,27 +99,23 @@ import { EditProfileComponent } from './admin/editUser/edit-profile/edit-profile
     HeaderComponent,
     HomeComponent,
     AboutComponent,
-    UniversitiesComponent,
     ContactComponent,
     FooterComponent,
     RankingComponent,
     RankingYearComponent,
-    NewsComponent,
-    DetailNewComponent,
     AdminComponent,
     MethodologyComponent,
     CommitteeComponent,
-    FaqsComponent,
     NotfoundComponent,
     UploadFileComponent,
     DashboardComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    NewsManagementComponent
   ],
   imports: [
     MatCardModule,
     MatProgressBarModule,
     BrowserModule,
-    /* AppRoutingModule, */
     AdminRoutingModule,
     ClientRoutingModule,
     BrowserAnimationsModule,
@@ -169,7 +161,7 @@ import { EditProfileComponent } from './admin/editUser/edit-profile/edit-profile
       },
     })
   ],
-  providers: [ CustomerserviceService, ProductService ],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

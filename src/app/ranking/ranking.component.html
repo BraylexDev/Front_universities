@@ -7,6 +7,18 @@
   <div>
     <p>{{ "ranking_parag" | translate }}</p>
   </div>
+  <div class="mb-3">
+    <select
+      class="form-select form-select-lg"
+      id="year"
+      [(ngModel)]="lastYear"
+      (ngModelChange)="loadRanking(lastYear)"
+    >
+      <option *ngFor="let year of availableYears" [value]="year">
+        {{ year }}
+      </option>
+    </select>
+  </div>
   <div class="methodology">
     <a class="goMethodology" routerLink="/methodology">
       {{ "ranking_methodology" | translate }}</a
