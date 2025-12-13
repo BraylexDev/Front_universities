@@ -1,0 +1,187 @@
+<mat-sidenav-container class="sidenav-container mat-app-background">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'over'"
+    [(opened)]="opened"
+  >
+    <mat-toolbar style="display: flex; justify-content: space-between">
+      <img
+        src="../../assets/images/logo.png"
+        alt="Logo"
+        height="30px"
+        width="80px"
+        style="cursor: hand"
+      />
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="close()"
+        *ngIf="(isHandset$ | async) === true"
+      >
+        <mat-icon aria-label="X">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list dir="auto" color="primary">
+      <mat-list-item
+        (click)="drawer.toggle()"
+        [routerLink]="['home']"
+        [routerLinkActive]="['act']"
+        ><i class="pi pi-home"></i
+        ><span>{{ "nav_home" | translate }}</span></mat-list-item
+      >
+      <mat-list-item
+        (click)="drawer.toggle()"
+        [routerLink]="['ranking']"
+        [routerLinkActive]="['act']"
+        ><i class="pi pi-chart-bar"></i
+        >{{ "nav_rankings" | translate }}</mat-list-item
+      >
+      <mat-expansion-panel
+        [class.mat-elevation-z0]="true"
+        dense
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header
+          (click)="drawer.toggle()"
+          [routerLink]="['methodology']"
+          [routerLinkActive]="['act']"
+        >
+          <i class="pi pi-box"></i>
+          {{ "nav_methodology" | translate }}
+        </mat-expansion-panel-header>
+        <mat-nav-list dense>
+          <a
+            mat-list-item
+            (click)="drawer.toggle()"
+            [routerLink]="['committee']"
+            [routerLinkActive]="['act']"
+            ><i class="pi pi-users"></i
+            >{{ "nav_methodology_advisory" | translate }}</a
+          >
+        </mat-nav-list>
+      </mat-expansion-panel>
+      <mat-list-item
+        (click)="drawer.toggle()"
+        [routerLink]="['about']"
+        [routerLinkActive]="['act']"
+        ><i class="pi pi-info-circle"></i
+        >{{ "nav_about" | translate }}</mat-list-item
+      >
+      <mat-list-item
+        (click)="drawer.toggle()"
+        [routerLink]="['contact']"
+        [routerLinkActive]="['act']"
+        ><i class="pi pi-phone"></i
+        >{{ "nav_contact" | translate }}</mat-list-item
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar dir="auto" class="n" color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="close()"
+        *ngIf="(isHandset$ | async) === true"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div class="uno">
+        <a routerLink="">
+          <img
+            src="../../assets/images/logo.png"
+            alt="Logo"
+            height="30px"
+            width="90px"
+            style="cursor: hand"
+          />
+        </a>
+      </div>
+      <div class="dos" *ngIf="!(isHandset$ | async)">
+        <ul class="menu">
+          <li>
+            <a class="navb" [routerLink]="['home']" routerLinkActive="active">
+              {{ "nav_home" | translate }}</a
+            >
+          </li>
+          <li>
+            <a
+              class="navb"
+              [routerLink]="['ranking']"
+              [routerLinkActive]="['active']"
+              >{{ "nav_rankings" | translate }}</a
+            >
+          </li>
+          <li>
+            <a
+              class="navb"
+              [routerLink]="['methodology']"
+              [routerLinkActive]="['active']"
+            >
+              {{ "nav_methodology" | translate }}</a
+            >
+            <i class="pi pi-angle-down"></i>
+            <ul class="dropdown">
+              <li class="dropdown-content">
+                <a [routerLink]="['committee']" [routerLinkActive]="['active']">
+                  {{ "nav_methodology_advisory" | translate }}</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              class="navb"
+              [routerLink]="['about']"
+              [routerLinkActive]="['active']"
+              >{{ "nav_about" | translate }}</a
+            >
+          </li>
+          <li>
+            <a
+              class="navb"
+              [routerLink]="['contact']"
+              [routerLinkActive]="['active']"
+              >{{ "nav_contact" | translate }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="tres">
+        <div class="line"></div>
+        <div class="container_lang" style="padding-inline: 20px">
+          <mat-icon aria-label="Change language">language</mat-icon>
+          <select
+            name=""
+            id=""
+            class="lang"
+            style="border: transparent; background-color: transparent"
+            #selectedLang
+            (change)="switchLanguage(selectedLang.value)"
+          >
+            <option
+              *ngFor="let language of translate.getLangs()"
+              [value]="language"
+              [selected]="language === translate.currentLang"
+            >
+              <span *ngIf="language == 'en'" style="font-size: 2rem"
+                >English</span
+              >
+              <span *ngIf="language == 'ar'">العربية</span>
+            </option>
+          </select>
+        </div>
+      </div>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+      <app-footer *ngIf="!(isHandset$ | async)"></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

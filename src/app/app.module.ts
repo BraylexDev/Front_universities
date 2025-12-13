@@ -1,170 +1,62 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 
+// Core Modules
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LayoutModule } from '@angular/cdk/layout';
 
-import { MatGridListModule } from '@angular/material/grid-list';
+// Only NotFound Component (others are lazy loaded)
+import { NotfoundComponent } from './notFound/notfound/notfound.component';
 
-//buscador
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
-import { MatInputModule } from '@angular/material/input';
-
-import { MatButtonModule } from '@angular/material/button';
-
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { HeaderComponent } from './navigation/header/header.component';
-import { MatTabsModule } from '@angular/material/tabs';
-
-//sidenav
-import {MatExpansionModule} from '@angular/material/expansion';
-
-//For Change Theme Dark/Light
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-//Components created for dev
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
-import { FooterComponent } from './navigation/footer/footer.component';
-import { RankingComponent } from './ranking/ranking.component';
-
-//for table ranking 
-import {MatTableModule} from '@angular/material/table';
-
-//for card of news
-import { CarouselModule } from 'primeng/carousel';
-import { TagModule } from 'primeng/tag';
-
-import { ButtonModule } from 'primeng/button';
-import { RankingYearComponent } from './ranking/ranking-year/ranking-year.component';
-
-/* Table rankings*/
-import { ProgressBarModule } from 'primeng/progressbar';
-import { TableModule } from 'primeng/table';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { DropdownModule } from 'primeng/dropdown';
-import { SliderModule } from 'primeng/slider';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { InputTextModule } from 'primeng/inputtext';
-
-/* Scroll Top */
+// Essential Modules Only
 import { ScrollTopModule } from 'primeng/scrolltop';
 
-/* Modal filter */
-import { DialogModule } from 'primeng/dialog';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { ToastModule } from 'primeng/toast';
-import { AccordionModule } from 'primeng/accordion';
-import { PanelModule } from 'primeng/panel';
-
-/* Translate */
+// Translation
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AdminComponent } from './admin/admin.component';
-import { AdminRoutingModule } from './admin/admin-routing.module';
-import { ClientRoutingModule } from './navigation/header/client-routing.module';
 
-
-/* admin */
-import { SidebarModule } from 'primeng/sidebar';
-import { MethodologyComponent } from './ranking/methodology/methodology.component';
-import { CommitteeComponent } from './ranking/committee/committee.component';
-import { NotfoundComponent } from './notFound/notfound/notfound.component';
-import { UploadFileComponent } from './admin/uploadFile/upload-file/upload-file.component';
-
-
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { LoginComponent } from './admin/login/login.component';
-import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.component';
-import { EditProfileComponent } from './admin/editUser/edit-profile/edit-profile.component';
-import { NewsManagementComponent } from './admin/news/news-management/news-management.component';
+// Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    UploadFileComponent,
-    DashboardComponent,
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    AboutComponent,
-    ContactComponent,
-    FooterComponent,
-    RankingComponent,
-    RankingYearComponent,
-    AdminComponent,
-    MethodologyComponent,
-    CommitteeComponent,
-    NotfoundComponent,
-    UploadFileComponent,
-    DashboardComponent,
-    EditProfileComponent,
-    NewsManagementComponent
-  ],
+  declarations: [AppComponent, NotfoundComponent],
   imports: [
-    MatCardModule,
-    MatProgressBarModule,
     BrowserModule,
-    AdminRoutingModule,
-    ClientRoutingModule,
     BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatTabsModule,
-    MatSlideToggleModule,
-    FormsModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatTableModule,
-    CarouselModule,
-    TagModule,
-    ButtonModule,
-    TableModule,
-    ProgressBarModule,
-    MultiSelectModule,
-    DropdownModule,
-    SliderModule,
     HttpClientModule,
-    InputTextModule,
+    AppRoutingModule,
+
+    // Only essential global modules
     ScrollTopModule,
-    SidebarModule,
-    MatExpansionModule,
-    DialogModule,
-    DynamicDialogModule,
-    ToastModule,
-    AccordionModule,
-    PanelModule,
-    
+
+    // Translation with lazy loading strategy
     TranslateModule.forRoot({
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-    })
+    }),
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
+
+// Translation Factory
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }

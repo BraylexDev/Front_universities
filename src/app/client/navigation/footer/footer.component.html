@@ -1,0 +1,135 @@
+<footer class="footer-modern" dir="auto">
+  <div class="footer-content">
+    <!-- Brand Section -->
+    <div class="footer-section brand-section">
+      <div class="brand-logo">
+        <img
+          src="../../assets/images/logo.png"
+          alt="Top Arab Researchers"
+          class="footer-logo"
+        />
+      </div>
+      <div class="social-links">
+        <a
+          href="https://linkedin.com/company/toparabresearchers"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="LinkedIn"
+        >
+          <i class="pi pi-linkedin"></i>
+        </a>
+        <a
+          href="https://twitter.com/toparabresearch"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Twitter"
+        >
+          <i class="pi pi-twitter"></i>
+        </a>
+        <a
+          href="https://facebook.com/toparabresearchers"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Facebook"
+        >
+          <i class="pi pi-facebook"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h3 class="footer-title">{{ "foot_site_map" | translate }}</h3>
+      <ul class="footer-links">
+        <li>
+          <a routerLink="/home">{{ "nav_home" | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="/ranking">{{ "nav_rankings" | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="/methodology">{{ "nav_methodology" | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="/about">{{ "nav_about" | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="/contact">{{ "nav_contact" | translate }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div class="footer-section">
+      <h3 class="footer-title">{{ "footer_resources" | translate }}</h3>
+      <ul class="footer-links">
+        <li>
+          <a routerLink="/committee">{{
+            "nav_methodology_advisory" | translate
+          }}</a>
+        </li>
+        <li>
+          <a href="#">{{ "foot_faqs" | translate }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section contact-section">
+      <h3 class="footer-title">{{ "nav_contact" | translate }}</h3>
+      <ul class="contact-info">
+        <li>
+          <i class="pi pi-envelope"></i>
+          <div>
+            <strong>{{ "contact_address" | translate }}</strong>
+            <a href="mailto:info@toparabresearchers.org"
+              >info@toparabresearchers.org</a
+            >
+          </div>
+        </li>
+        <li>
+          <i class="pi pi-users"></i>
+          <div>
+            <strong>{{ "contact_email" | translate }}</strong>
+            <a href="mailto:collab@toparabresearchers.org"
+              >collab@toparabresearchers.org</a
+            >
+          </div>
+        </li>
+        <li>
+          <i class="pi pi-phone"></i>
+          <div>
+            <strong>{{ "contact_phone" | translate }}</strong>
+            <a href="mailto:support@toparabresearchers.org"
+              >support@toparabresearchers.org</a
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <div class="footer-legal">
+        <a href="#">{{ "foot_terms" | translate }}</a>
+        <span class="separator">•</span>
+        <a href="#">{{ "foot_privacy" | translate }}</a>
+      </div>
+
+      <div class="footer-copyright">
+        <p>{{ "foot_copyright" | translate }}</p>
+      </div>
+
+      <div class="footer-language">
+        <i class="pi pi-globe"></i>
+        <span *ngIf="translate.currentLang == 'en'">English (EN)</span>
+        <span *ngIf="translate.currentLang == 'ar'">العربية (AR)</span>
+      </div>
+    </div>
+  </div>
+</footer>

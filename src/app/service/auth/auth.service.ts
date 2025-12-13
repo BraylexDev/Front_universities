@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { LoginRequest, LoginResponse, RegisterRequest, User } from 'src/app/domain/user';
+import {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  User,
+} from 'src/app/domain/user';
 import { apiServer } from '../apiServer';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private apiUrl: string = apiServer.serverUrl + '/api/auth';
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
@@ -20,29 +24,30 @@ export class AuthService {
   }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/signin`, credentials)
+    return this.http
+      .post<LoginResponse>(`${this.apiUrl}/signin`, credentials)
       .pipe(
-        tap(response => {
+        tap((response) => {
           // Guardar token y datos del usuario
           localStorage.setItem('token', response.accessToken);
           localStorage.setItem('tokenType', response.tokenType);
-          
+
           const user: User = {
             name: response.name,
             userName: response.username,
             email: response.email,
-            rol: response.rol
+            rol: response.rol,
           };
-          
+
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-        })
+        }),
       );
   }
 
   register(userData: RegisterRequest): Observable<string> {
-    return this.http.post(`${this.apiUrl}/signup`, userData, { 
-      responseType: 'text' 
+    return this.http.post(`${this.apiUrl}/signup`, userData, {
+      responseType: 'text',
     });
   }
 
@@ -56,7 +61,7 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return false;
-    
+
     // Verificar si el token está expirado
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
@@ -78,7 +83,7 @@ export class AuthService {
   private checkStoredToken(): void {
     const token = localStorage.getItem('token');
     const userStr = localStorage.getItem('currentUser');
-    
+
     if (token && userStr && this.isAuthenticated()) {
       const user = JSON.parse(userStr);
       this.currentUserSubject.next(user);

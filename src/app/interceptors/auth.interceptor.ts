@@ -4,30 +4,31 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth/auth.service';
 
-
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   constructor(
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     const token = this.AuthService.getToken();
-    
+
     // Añadir token a las requests si existe
     if (token) {
       req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
     }
 
@@ -38,7 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.router.navigate(['/admin']);
         } */
         return throwError(() => error);
-      })
+      }),
     );
   }
 }

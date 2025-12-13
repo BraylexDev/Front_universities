@@ -1,15 +1,35 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { NotfoundComponent } from './notFound/notfound/notfound.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./client/client.module').then((m) => m.ClientModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./administrador/administrador.module').then(
+        (m) => m.AdministradorModule,
+      ),
+  },
+  {
+    path: '**',
+    component: NotfoundComponent,
+  },
 ];
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      initialNavigation: 'enabledBlocking',
+    }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

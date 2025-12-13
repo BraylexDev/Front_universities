@@ -1,12 +1,10 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 COPY . .
-RUN npx @angular/cli@19 build --configuration production
+RUN npm run build --prod
 
 FROM nginx:stable-alpine
-COPY --from=build /app/dist/dev-universities/ /usr/share/nginx/html/
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/* /usr/share/nginx/html/
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]

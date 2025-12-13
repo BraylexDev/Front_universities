@@ -1,0 +1,292 @@
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
+
+import { Product } from 'src/app/domain/product';
+import { Ranking } from 'src/app/domain/ranking';
+import { TranslateService } from '@ngx-translate/core';
+import { CodeCountry, Country } from 'src/app/domain/country';
+import { RankingTest } from 'src/app/domain/rankingTest';
+import { RankingserviceService } from 'src/app/service/ranking/rankingservice.service';
+import { NoticeData } from 'src/app/domain/notice';
+import { NoticeService } from 'src/app/service/Notice/notice.service';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
+})
+export class HomeComponent implements OnInit {
+  countries: Country[] = [
+    { name: 'Algeria', code: 'dz' },
+    { name: 'Australia', code: 'au' },
+    { name: 'Austria', code: 'at' },
+    { name: 'Bangladesh', code: 'bd' },
+    { name: 'Belarus', code: 'by' },
+    { name: 'Belgium', code: 'be' },
+    { name: 'Bosnia and Herzegovina', code: 'ba' },
+    { name: 'Brazil', code: 'br' },
+    { name: 'Bulgaria', code: 'bg' },
+    { name: 'Canada', code: 'ca' },
+    { name: 'China', code: 'cn' },
+    { name: 'Cyprus', code: 'cy' },
+    { name: 'Czech Republic', code: 'cz' },
+    { name: 'Egypt', code: 'eg' },
+    { name: 'Finland', code: 'fi' },
+    { name: 'France', code: 'fr' },
+    { name: 'Germany', code: 'de' },
+    { name: 'Greece', code: 'gr' },
+    { name: 'Hungary', code: 'hu' },
+    { name: 'India', code: 'in' },
+    { name: 'Iran', code: 'ir' },
+    { name: 'Iraq', code: 'iq' },
+    { name: 'Ireland', code: 'ie' },
+    { name: 'Italy', code: 'it' },
+    { name: 'Japan', code: 'jp' },
+    { name: 'Jordan', code: 'jo' },
+    { name: 'Kazakhstan', code: 'kz' },
+    { name: 'Kuwait', code: 'kw' },
+    { name: 'Lebanon', code: 'lb' },
+    { name: 'Libya', code: 'ly' },
+    { name: 'Malaysia', code: 'my' },
+    { name: 'Mauritania', code: 'mr' },
+    { name: 'Morocco', code: 'ma' },
+    { name: 'Netherlands', code: 'nl' },
+    { name: 'New Zealand ', code: 'nz' },
+    { name: 'Oman', code: 'om' },
+    { name: 'Pakistan', code: 'pk' },
+    { name: 'Palestine', code: 'ps' },
+    { name: 'Portugal', code: 'pt' },
+    { name: 'Qatar', code: 'qa' },
+    { name: 'Saudi Arabia', code: 'sa' },
+    { name: 'Singapore', code: 'sg' },
+    { name: 'Somalia', code: 'so' },
+    { name: 'South Africa', code: 'za' },
+    { name: 'South Korea', code: 'kr' },
+    { name: 'Spain', code: 'es' },
+    { name: 'Sudan', code: 'sd' },
+    { name: 'Sweden', code: 'se' },
+    { name: 'Switzerland', code: 'ch' },
+    { name: 'Syria', code: 'sy' },
+    { name: 'Thailand', code: 'th' },
+    { name: 'Tunisia', code: 'tn' },
+    { name: 'Türkiye', code: 'tr' },
+    { name: 'United Arab Emirates', code: 'ae' },
+    { name: 'United Kingdom', code: 'gb' },
+    { name: 'United States of America', code: 'us' },
+    { name: 'Yemen', code: 'ye' },
+  ];
+  codesCountries: CodeCountry[] = [
+    { code2: 'dza', code: 'dz' },
+    { code2: 'aus', code: 'au' },
+    { code2: 'aut', code: 'at' },
+    { code2: 'bgd', code: 'bd' },
+    { code2: 'blr', code: 'by' },
+    { code2: 'bel', code: 'be' },
+    { code2: 'bih', code: 'ba' },
+    { code2: 'bra', code: 'br' },
+    { code2: 'bgr', code: 'bg' },
+    { code2: 'can', code: 'ca' },
+    { code2: 'chn', code: 'cn' },
+    { code2: 'cyp', code: 'cy' },
+    { code2: 'cze', code: 'cz' },
+    { code2: 'egy', code: 'eg' },
+    { code2: 'fin', code: 'fi' },
+    { code2: 'fra', code: 'fr' },
+    { code2: 'deu', code: 'de' },
+    { code2: 'grc', code: 'gr' },
+    { code2: 'hun', code: 'hu' },
+    { code2: 'ind', code: 'in' },
+    { code2: 'irn', code: 'ir' },
+    { code2: 'irq', code: 'iq' },
+    { code2: 'irl', code: 'ie' },
+    { code2: 'ita', code: 'it' },
+    { code2: 'jpn', code: 'jp' },
+    { code2: 'jor', code: 'jo' },
+    { code2: 'kaz', code: 'kz' },
+    { code2: 'kwt', code: 'kw' },
+    { code2: 'lbn', code: 'lb' },
+    { code2: 'lby', code: 'ly' },
+    { code2: 'mys', code: 'my' },
+    { code2: 'mrt', code: 'mr' },
+    { code2: 'mar', code: 'ma' },
+    { code2: 'nld', code: 'nl' },
+    { code2: 'nzl', code: 'nz' },
+    { code2: 'omn', code: 'om' },
+    { code2: 'pak', code: 'pk' },
+    { code2: 'pse', code: 'ps' },
+    { code2: 'prt', code: 'pt' },
+    { code2: 'qat', code: 'qa' },
+    { code2: 'sau', code: 'sa' },
+    { code2: 'sgp', code: 'sg' },
+    { code2: 'som', code: 'so' },
+    { code2: 'zaf', code: 'za' },
+    { code2: 'kor', code: 'kr' },
+    { code2: 'esp', code: 'es' },
+    { code2: 'sdn', code: 'sd' },
+    { code2: 'swe', code: 'se' },
+    { code2: 'che', code: 'ch' },
+    { code2: 'syr', code: 'sy' },
+    { code2: 'tha', code: 'th' },
+    { code2: 'tun', code: 'tn' },
+    { code2: 'tur', code: 'tr' },
+    { code2: 'are', code: 'ae' },
+    { code2: 'gbr', code: 'gb' },
+    { code2: 'usa', code: 'us' },
+    { code2: 'yem', code: 'ye' },
+  ];
+  /* Scroll to top */
+  @Output() scrollToTop = new EventEmitter<void>();
+
+  onScrollToTop(): void {
+    this.scrollToTop.emit();
+  }
+
+  /* Info tabla  */
+  lastYear: number = 0;
+
+  test: RankingTest[] = [];
+
+  loading: boolean = true;
+
+  rankings: Ranking[] = [];
+
+  displayedColumns: string[] = [
+    'position',
+    'university',
+    'category',
+    'subcategory',
+    'country',
+    'score',
+  ];
+
+  currentLanguage = 'en';
+  constructor(
+    private rankingService: RankingserviceService,
+    public translate: TranslateService,
+    private noticeService: NoticeService,
+  ) {
+    translate.addLangs(['en', 'ar']);
+    const storedLang = localStorage.getItem('language');
+    const defaultLang = storedLang || 'en';
+    translate.setDefaultLang(defaultLang);
+    translate.use(defaultLang);
+    localStorage.setItem('language', defaultLang);
+    this.currentLanguage = defaultLang;
+
+    this.rankingService.getLastYear().subscribe((data) => {
+      this.lastYear = data;
+    });
+  }
+
+  //for carousel of news
+  products: Product[] = [];
+  notices: NoticeData[] = [];
+
+  responsiveOptions: any[] = [];
+  public stocklist: any;
+
+  ngOnInit() {
+    this.onScrollToTop();
+    this.loadNews();
+    this.getLastYearData();
+
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 2,
+        numScroll: 2,
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 1,
+        numScroll: 2,
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
+  }
+
+  getLastYearData(): void {
+    this.rankingService.getLastYear().subscribe(
+      (data) => {
+        if (data && data > 0) {
+          this.lastYear = data;
+          this.loadRanking(this.lastYear);
+        }
+      },
+      (error) => {
+        console.error('Error al obtener el último año:', error);
+      },
+    );
+  }
+
+  loadRanking(lastyear: number): void {
+    this.rankingService.getTopRanking({ year: lastyear, size: 10 }).subscribe(
+      (data) => {
+        this.test = data.content;
+        this.changeCodeCountry();
+        this.specifyNameCountry();
+      },
+      (error) => {
+        console.error('Error fetching top rankings:', error);
+      },
+    );
+  }
+
+  loadNews(): void {
+    this.noticeService.getNewsAct().subscribe(
+      (data) => {
+        this.notices = data;
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching news:', error);
+        this.loading = false;
+      },
+    );
+  }
+
+  changeCodeCountry() {
+    this.test = this.test.map((item) => {
+      const matchingCountry = this.codesCountries.find(
+        (c) => c.code2 === item.codeCountry,
+      );
+      const matchingWorking = this.codesCountries.find(
+        (c) => c.code2 === item.codeWorking,
+      );
+
+      return {
+        ...item,
+        codeCountry: matchingCountry ? matchingCountry.code : item.codeCountry,
+        codeWorking: matchingWorking ? matchingWorking.code : item.codeWorking,
+      };
+    });
+  }
+  specifyNameCountry() {
+    this.test = this.test.map((item) => {
+      const matchingCountry = this.countries.find(
+        (c) => c.code === item.codeCountry,
+      );
+      const matchingWorking = this.countries.find(
+        (c) => c.code === item.codeWorking,
+      );
+
+      return {
+        ...item,
+        country: matchingCountry ? matchingCountry.name : item.country,
+        working: matchingWorking ? matchingWorking.name : item.working,
+      };
+    });
+    /* console.log("this log method specifyNameCountry :" + JSON.stringify(this.test[0])) */
+  }
+}

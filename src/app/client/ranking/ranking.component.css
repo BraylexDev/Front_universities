@@ -1,0 +1,206 @@
+.line {
+  border-top: 1px solid gray;
+  opacity: 0.3;
+  margin-block: 10px;
+}
+
+.p-dialog:no {
+  background: red;
+}
+
+.detail {
+  font-family: "Outfit", sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  padding: 0 8.4rem;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.detail {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(0, 0%, 88%) 0%,
+    hsl(0, 0%, 88.15%) 14.9%,
+    hsl(0, 0%, 88.58%) 27.3%,
+    hsl(0, 0%, 89.25%) 37.5%,
+    hsl(0, 0%, 90.1%) 45.8%,
+    hsl(0, 0%, 91.11%) 52.6%,
+    hsl(0, 0%, 92.22%) 58.1%,
+    hsl(0, 0%, 93.4%) 62.6%,
+    hsl(0, 0%, 94.6%) 66.5%,
+    hsl(0, 0%, 95.78%) 70%,
+    hsl(0, 0%, 96.89%) 73.4%,
+    hsl(0, 0%, 97.9%) 77.1%,
+    hsl(0, 0%, 98.75%) 81.2%,
+    hsl(0, 0%, 99.42%) 86.3%,
+    hsl(0, 0%, 99.85%) 92.4%,
+    hsl(0, 0%, 100%) 100%
+  );
+}
+
+.select {
+  margin-inline: 1rem;
+}
+
+.title h1 {
+  font-size: 3rem;
+  color: #f9532d;
+  margin-block: 2rem;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.head2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.head2 > button,
+p-button {
+  margin-inline: 5px !important;
+  margin-block: 5px;
+}
+
+.methodology {
+  background-color: white;
+  padding: 1rem;
+  text-align: right;
+  font-weight: bold;
+}
+
+.goMethodology:hover {
+  color: #f9532d;
+}
+
+a:link,
+a:visited {
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.stylefilterArabResearch {
+  background-color: #3271f8;
+  color: #ffffff;
+}
+
+.stylefilterArabResearch:hover {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* table Rankings  */
+.p-progressbar {
+  height: 0.5rem;
+  background-color: #d8dadc;
+}
+
+.p-progressbar-value {
+  background-color: #607d8b;
+}
+
+td {
+  color: black;
+  cursor: default;
+}
+
+th {
+  cursor: default;
+}
+
+.name:hover {
+  color: #f9532d;
+  cursor: pointer;
+}
+
+.rankings {
+  font-family: "Outfit", sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  padding: 0 8.4rem;
+  background: white;
+}
+
+.rankings p {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.s {
+  width: 500px;
+}
+
+.gold {
+  content: url("../../../assets/images/medals/gold.png");
+  height: 2rem;
+  width: 2rem;
+}
+
+.plate {
+  /* background-color: #d7d7d7; */
+  content: url("../../../assets/images/medals/plate.png");
+  height: 2rem;
+  width: 2rem;
+}
+
+.bronze {
+  content: url("../../../assets/images/medals/bronze.png");
+  height: 2rem;
+  width: 2rem;
+}
+
+.number {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .detail {
+    padding: 0 4.4rem;
+  }
+
+  .rankings {
+    padding: 0 4.4rem;
+  }
+
+  .s {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .detail {
+    padding: 0 1.6rem;
+  }
+
+  .rankings {
+    padding: 0 1.6rem;
+  }
+
+  .s {
+    width: 300px;
+  }
+  .textUniv {
+    width: 80vw !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .text_search {
+    display: none;
+  }
+  .textUniv {
+    width: 80vw !important;
+  }
+}
